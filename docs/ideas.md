@@ -9,7 +9,7 @@
 - Sarah Young
 	- GitHub Username: `@syoung20`
 - Nicholas Kon 
-	- Github Username: ``
+	- Github Username: `@Nikon-knon`
 
 ### Inovative Idea 
 Group Upsilon will be creating a recipe recommender called `APPetizer`. Users can input variables, such as ingredients they want to use or types of food they’d like to make, and receive recipe suggestions. This application will differ from existing recipe catalog web applications because it allows users to find recipes based on specific ingredients - a useful tool for those trying to use up ingredients in their fridge or pantry, or even just for homecooks who are trying to be a little more creative. 
@@ -23,3 +23,5 @@ Group Upsilon will be creating a recipe recommender called `APPetizer`. Users ca
 	- Users can also upload their own recipes, which will be stored in our database
 4. Pantry Log
 	- We will implement this component only if we first implement the others well and have time remaining. It gives users the ability to keep a log of food items they already have at home, which can assist the user by providing an inventory. More importantly, however, it will assist the search functionality of our application, allowing it to suggest recipes to users for which the required ingredient list most closely matches the items they have at home.
+5. Data
+	- We found some recipe libraries online that would be a good place to start, on which we would also have recipes added by users. We still have to figure out which format will serves us best, but we want to take into account the functions we want to implement in our application, and find recipe data that will help us in that way, without it becoming too much work nor too little. 
