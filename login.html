@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body background="background.jpg">
+    <h2> [ Account Log In ] </h2>
+    <form action="/action_page.php" method="get">
+        <div class="imgcontainer">
+            <img src="user-avatar.jpg" heigth=140 width=140 alt=Avatar class=avatar>
+        </div>
+        
+        <div class=container>
+            <label for=uname>Email</label>
+            <input type="text" placehodler="Enter Username" name=uname required>
+            <label for=pswd>Password</label>
+            <span class=psw><a href="">Recover password</a></span>
+            <input type="password" placehodler="Enter Password" name=pswd required>
+            <button type=submit>Login</button>
+        </div>
+
+        <div class=container>
+            <span>Don't have an account?  <a href="">Sign up</a></span>
+        </div>
+    </form>
+</body>
+</html>
