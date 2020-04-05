@@ -1,92 +1,96 @@
-.recipe-head {
-    position: relative; 
-    top: 5vh;
+section {
+    margin: 4% 0%;
 }
+h1 {
+    font-size: 32px;
+    padding: 2%;
+    text-align: center;
+}
+h2 {
+    font-size: 20px;
+    padding: 1%;
+}
+h4 {
+    font-size: 20px;
+}
+/*recipe header*/
 .recipe-img {
-    width:100%; 
     height: 60vmin; 
     background-image: url(img.jpg); 
     background-size: cover;
 }
-
-.recipe-title {
-    font-size: 32px;
-    padding: 2%; 
-    text-align: center;
-}
 .recipe-author {
-    font-size: 15px;
-    padding: 1%; 
-    text-align: right;
-    
-}
-.recipe-body {
-    margin: 8vh 0
-}
-.details {
-    color: gray;
-    margin: 6vh 10vw;
-    padding: 2vw;
-    width: 80vw;
-    background-color: rgb(245, 245, 245);
+    text-align: right;  
 }
 
-.details .row{
-    position: relative;
+/*recipe body*/
+.details {
+    background-color: rgb(245, 245, 245);
+    color: gray;
+    width: 80%;
     text-align: center;
-    left: 5vw;
-    width: 70vw;
+}
+.details .row {
+    padding-top: 3%;
 }
 .details h4 {
-    padding-top: 2vh;
     font-size: 20px;
+}
+.recipe-content {
+    margin: 5% auto;
+    padding: 1px;
+    width: 80%;
 }
 .ingredients {
     border: 1px solid rgb(128,0,0, 0.7);
-    margin: 0 5vw;
-    padding: 5vw;
-    width: 90vw;
+    padding: 5%;
 }
 .instructions {
-    padding: 5vw 5vw;
+    padding: 5% 0%;
 }
-.comments {
-    width: 90vw;
-    position: relative;
-    left: 5vw;
+.tags {
+    padding: 0% 10%;
+}
+.comments h3{
+    padding: 2% 5%;
 }
 .comments .form-group {
-    width: 80vw;
-    position: relative;
-    left: 5vw;
+    padding: 0% 10%;
 }
 @media only screen and (min-width: 768px) {
-    .recipe-img {
+    /*recipe head: all components sized and positioned based on recipe-head div*/
+    .recipe-head {
         position: relative;
-        top: 10vh;
-        width: 70vw;
-        height: 60vh;
+        height: 65vh;
+        width: 80vw;
     }
     .recipe-title {
         border: 2px solid maroon; 
-        background-color: rgba(255, 255, 255); 
+        background-color: rgb(255, 255, 255); 
+        max-width: 50%;
+        position: absolute;
+        top: 0%; 
+        left: 5%;
+        z-index: 3;
+    }
+    .recipe-img {
+        height: 90%;
+        width: 80%;
+        position: absolute;
+        top: 5%;
+        left: 10%;
         z-index: 1;
-        max-width: 50vw;
-        position:absolute;
-        top: 5vh; 
-        left: 10vw;
     }
     .recipe-author {
         border: 1px solid maroon; 
         background-color: rgb(255, 255, 255); 
-        max-width: 50vw; 
+        max-width: 50%; 
         position: absolute; 
-        right: 10vw;
-        top: 68vh;
+        right: 6%;
+        bottom: 2%;
+        z-index:2;
     }
-    .recipe-body {
-        position: absolute;
-        top: 75vh;
-        margin: none;
+    .instructions {
+        padding-left: 5%;
     }
 }

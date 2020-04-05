@@ -9,12 +9,14 @@
         <link rel="stylesheet" href="recipe.css">
     </head>
     <body>
-        <div class="recipe-head container-fluid">
-            <h1 class="recipe-title">Blackberry Lavender Cake with White Chocolate Buttercream</h1>
-            <div class="container-fluid recipe-img"></div>
-            <h2 class="recipe-author">Half-Baked Harvest</h2>
-        </div>
-        <div class="recipe-body">
+        <section>
+            <div class="recipe-head container-fluid">
+                <h1 class="recipe-title">Blackberry Lavender Cake with White Chocolate Buttercream</h1>
+                <div class="container-fluid recipe-img"></div>
+                <h2 class="recipe-author">Half-Baked Harvest</h2>
+            </div>
+        </section>
+        <section>
             <div class="details container">
                 <div class= "row">
                     <div class="col-3">
@@ -43,8 +45,11 @@
                     </div>
                 </div>
             </div>
-            <div class="container ingredients">
-                <h4>Ingredients</h4>
+        </section>
+        <section>
+            <div class="row container recipe-content">
+            <div class="container ingredients col-md-4">
+                <h3>Ingredients</h3>
                 <ul>
                     <li>1 cup canola oil</li>
                     <li>1/2 cup plain greek yogurt</li>
@@ -66,8 +71,8 @@
                 </ul>
                 <button type="button" class="btn btn-light">Add to grocery list</button>
             </div>
-            <div class="container instructions">
-                <h4>Instructions</h4>
+            <div class="container col-md-8 instructions">
+                <h3>Instructions</h3>
                 <ol>
                     <li>Preheat oven to 350 degrees F. Grease 2 (8-inch) round cake pans. Line with parchment paper, then butter/spray with cooking spray.</li>
                     <li>In the bowl of a stand mixer (or use a hand-held mixer) beat together the canola oil, yogurt, eggs, sugar, vanilla, and buttermilk. Add the flour, baking soda, baking powder, and salt and mix until just combined.</li>
@@ -77,20 +82,22 @@
                     <li>To assemble. Using a large serrated knife, carefully cut each cake in half horizontally. Place one cake layer on a serving plate. Spread 1/4 of the buttercream over the cake and layer with about 1/4 cup of jam. Repeat with the remaining 3 cake layers. Be careful not to over fill your layers or the cake will be hard to slice. Lightly frost the outside of the cake. Chill 30 minutes. Serve or store in the fridge for up to 3 days. </li>
                 </ol>
             </div>
-            <div class="details">
+            </div>
+        </section>
+        <section>
+            <div class="tags">
                 <h4>Tags</h4>
                 <p>cake, blackberries, white chocolate, lavender, layer-cake, medium-difficulty, baking</p>
             </div>
             <hr>
             <div class="comments">
-                <h4>Comments</h4>
+                <h3>Comments</h3>
                 <div class="form-group">
                     <label for="comment">Add a comment</label>
                     <textarea class="form-control" id="comment"></textarea>
                     <button type="button" class="btn btn-light"></button>
                 </div>
             </div>
-        </div>
-        
+        </section>
     </body>
 </html>
