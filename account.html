@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="account.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row d-flex flex-row justify-content-between">
+                <div id="user">
+                    <h1>Username</h1>
+                </div>
+                <div id="create">
+                    <button class="btn btn-secondary">Create a recipe</button>
+                </div>
+            </div>
+            <div class="row d-flex flex-row justify-content-center" id="account-nav">
+                <div class="mx-2 d-flex flex-column justify-content-center" id="recipe-tab">
+                    <div>
+                        <h2>Recipe Book</h2>
+                    </div>
+                    <div>
+                        <svg class="bi bi-caret-up-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 00.753-1.659l-4.796-5.48a1 1 0 00-1.506 0z"/>
+                          </svg>
+                    </div>
+                </div>
+                <div class="mx-2" id="pantry-tab">
+                    <h2>Pantry</h2>
+                </div>
+                <div class="mx-2" id="grocery-tab">
+                    <h2>Grocery List</h2>
+                </div>
+            </div>
+            <div class="row mx-3" id="recipe-book">
+                <div class="d-flex flex-row flex-wrap justify-content-center">
+                    <div id="all-recipes" class="mx-2">
+                        <h3>All Recipes</h3>
+                        <img src="img.jpg">
+                    </div>
+                    <div id="original-recipes" class="mx-2">
+                        <h3>Original Recipes</h3>
+                        <img src="test.jpg">
+                    </div>
+                    <div id="lunch" class="mx-2">
+                        <h3>Lunch</h3>
+                        <img src="img.jpg">
+                    </div>
+                    <div id="baking" class="mx-2">
+                        <h3>Baking</h3>
+                        <img src="test.jpg">
+                    </div>
+                    <div id="thanksgiving" class="mx-2">
+                        <h3>Thanksgiving</h3>
+                        <img src="img.jpg">
+                    </div>
+                    <div id="add-recipe-category" class="mx-2">
+                        <h4>Add a category</h4>
+                        <img style="visibility:hidden">
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="pantry">
+                <div class="d-flex justify-content-left flex-row flex-wrap">
+                    <div id="baking/dry-goods">
+                        <h3>Baking/Dry Goods <span class="edit"><svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/>
+                          </svg></span></h3>
+                        <ul>
+                            <li>All-purpose flour</li>
+                            <li>Granulated sugar</li>
+                            <li>Penne</li>
+                            <li>Rolled oats</li>
+                            <li>Peanuts</li>
+                            <li>Raisins</li>
+                        </ul>
+                    </div>
+                    <div id="condiments">
+                        <h3>Condiments <span class="edit"><svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/>
+                          </svg></span></h3>
+                        <ul>
+                            <li>Ketchup</li>
+                            <li>Soy sauce</li>
+                            <li>Peanut butter</li>
+                            <li>Rice vinegar</li>
+                        </ul>
+                    </div>
+                    <div id="dairy">
+                        <h3>Dairy <span class= "edit"><svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/>
+                          </svg></span></h3>
+                        <ul>
+                            <li>Eggs</li>
+                            <li>Almond milk</li>
+                            <li>Whole milk</li>
+                            <li>Unsalted butter</li>
+                        </ul>
+                    </div>
+                    <div id="meat">
+                        <h3>Meat <span class="edit"><svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/>
+                          </svg></span></h3>
+                        <ul>
+                            <li>Ground beef</li>
+                            <li>Salmon</li>
+                            <li>Chicken breasts</li>
+                        </ul>
+                    </div>
+                    <div id="produce">
+                        <h3>Produce <span class="edit"><svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/>
+                          </svg></span></h3>
+                        <ul>
+                            <li>Apples</li>
+                            <li>Cabbage</li>
+                            <li>Spinach</li>
+                            <li>Oranges</li>
+                            <li>Green Onions</li>
+                        </ul>
+                    </div>  
+                    <div id="spices">
+                        <h3>Spices <span class="edit"><svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/>
+                          </svg></span></h3>
+                        <ul>
+                            <li>Salt</li>
+                            <li>Pepper</li>
+                            <li>Paprika</li>
+                            <li>Red pepper flakes</li>
+                            <li>Cumin</li>
+                            <li>Tumeric</li>
+                            <li>Cinnamon</li>
+                            <li>Rosemary</li>
+                        </ul>
+                    </div>  
+                    <div id="add-pantry-category">
+                        <h4><span class="add"><svg class="bi bi-plus-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
+                          </svg></span> Add a category</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+
+h2 {
+    font-size: 15px;
+}
+h3 {
+    font-size: 18px;
+}
+
+h4 {
+    font-size: 15px;
+}
+
+img {
+    height: 200px;
+    width: 300px;
+    object-fit: cover;
+}
+img:hover {
+    opacity: 0.5;
+}
+.row {
+    margin: 5%;
+}
+
+#create button {
+    margin-top: 20px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+#account-nav {
+    margin: 5% 3%;
+    border-bottom: 1px solid lightgray;
+}
+#account-nav svg {
+    display: block;
+    margin: auto;
+}
+#pantry-tab, #grocery-tab {
+    color: lightgray;
+}
+#pantry-tab:hover, #grocery-tab:hover {
+    color: #212529;
+}
+#recipe-book {
+    
+}
+#pantry {
+    display: none;
+}
+#pantry div div {
+    width: 200px;
+    margin: 2%;
+}
