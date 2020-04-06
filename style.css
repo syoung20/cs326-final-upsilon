@@ -33,3 +33,12 @@
     width: 30em;
     height: 15m;
 }
+
+#account-nav svg {
+    display: block;
+    margin: auto;
+}
+
+.pages:hover {
+
+}
