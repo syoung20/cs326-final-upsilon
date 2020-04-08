@@ -4,7 +4,7 @@ Upsilon
 APPetizer
 # Team Overview
 1. Tinsae Erkailo 
-2. Nicholas Kon 
+2. Nicholas Koń 
 3. Sarah Young 
 
 # Data Interactions
@@ -20,6 +20,15 @@ Our idea remains the same as milestone 0.
 ![Account Pantry Wireframe](wireframes/pantry.png)
 The grocery list tab on the account page will be the same as the pantry tab, with only the data differing.
 
+##Wireframe for login page
+![Login-Page Wireframe](wireframes/Login-page.png)
+
+##Wireframe for signup page
+![Signup-Page Wireframe](wireframes/Signup-page.png)
+
+##Wireframe for results page
+![Results-Page Wireframe](wireframes/Results-page.png)
+
 # Mockups
 
 ## Mockups for recipe page
@@ -33,5 +42,14 @@ These are both the recipe-book and pantry tabs of the account page. It is a one 
 ![Account Recipe Book Mockup](mockups/recipe_book.png)
 ![Account Pantry Mockup](mockups/pantry.png)
 
+##Mockup for login page
+![Login Page Mockup](mockups/Login.png)
+
+##Mockup for signup page
+![Signup Page Mockup](mockups/Signup.png)
+
+##Mockup for results page
+![Results Page Mockup](mockups/Results.png)
+
 # Divison of Labor
-We divided labor by pages. Sarah worked on the recipe and account pages (recipe.html, recipe.css, account.html, account.css). Tinsae worked on the home page and recipe creation pages (index.html, style.css, create.html). Nick worked on the login and result pages (login.html, login.css, results.html, results.css).
+We divided labor by pages. Sarah worked on the recipe and account pages (recipe.html, recipe.css, account.html, account.css). Tinsae worked on the home page and recipe creation pages (index.html, style.css, create.html). Nick worked on the login, signup and result pages (login.html, signup.html, login.css, results.html, results.css).
