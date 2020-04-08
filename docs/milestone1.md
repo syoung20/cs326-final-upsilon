@@ -33,14 +33,14 @@ The grocery list is almost identical to the pantry list, except for in two detai
 ![Account Pantry Wireframe](wireframes/pantry.png)
 The grocery list tab on the account page will be the same as the pantry tab, with only the data differing.
 
-##Wireframe for login page
-![Login-Page Wireframe](wireframes/Login-page.png)
+## Wireframe for login page
+![Login-Page Wireframe](wireframes/Login-Page.png)
 
-##Wireframe for signup page
-![Signup-Page Wireframe](wireframes/Signup-page.png)
+## Wireframe for signup page
+![Signup-Page Wireframe](wireframes/Signup-Page.png)
 
-##Wireframe for results page
-![Results-Page Wireframe](wireframes/Results-page.png)
+## Wireframe for results page
+![Results-Page Wireframe](wireframes/Results-Page.png)
 
 # Mockups
 
@@ -55,13 +55,13 @@ These are both the recipe-book and pantry tabs of the account page. It is a one 
 ![Account Recipe Book Mockup](mockups/recipe_book.png)
 ![Account Pantry Mockup](mockups/pantry.png)
 
-##Mockup for login page
+## Mockup for login page
 ![Login Page Mockup](mockups/Login.png)
 
-##Mockup for signup page
+## Mockup for signup page
 ![Signup Page Mockup](mockups/Signup.png)
 
-##Mockup for results page
+## Mockup for results page
 ![Results Page Mockup](mockups/Results.png)
 
 # Divison of Labor
