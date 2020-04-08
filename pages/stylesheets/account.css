@@ -50,6 +50,7 @@ h4 {
 
 /*recipe book*/
 #recipe-book {
+
 }
 #recipe-book div {
     position: relative;
@@ -98,12 +99,7 @@ h4 {
 
 /*pantry and grocery list*/
 #pantry {
-<<<<<<< Updated upstream
-    display: ;
-=======
     display: none;
-
->>>>>>> Stashed changes
 }
 #grocery-list {
     display: none;
