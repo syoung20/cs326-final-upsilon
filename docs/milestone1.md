@@ -32,3 +32,6 @@ Below are the recipe header and recipe details. The contents of the second pictu
 These are both the recipe-book and pantry tabs of the account page. It is a one page HTML document, but the display will change in order to show contents of different tabs. The grocery list will look like the pantry tab.
 ![Account Recipe Book Mockup](mockups/recipe_book.png)
 ![Account Pantry Mockup](mockups/pantry.png)
+
+# Divison of Labor
+We divided labor by pages. Sarah worked on the recipe and account pages (recipe.html, recipe.css, account.html, account.css). Tinsae worked on the home page and recipe creation pages (index.html, style.css, create.html). Nick worked on the login and result pages (login.html, login.css, results.html, results.css).
