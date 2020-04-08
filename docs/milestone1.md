@@ -2,17 +2,15 @@
 Upsilon
 # Web Application Name 
 APPetizer
-# Tean Overview
+# Team Overview
 1. Tinsae Erkailo 
 2. Nicholas Kon 
 3. Sarah Young 
 
-#Innovative Idea
+#Data Interactions
 
-blah blah blah 
+#Wireframes
 
-#Important Data
-
-#User Interface
+#Mockups
 
 
