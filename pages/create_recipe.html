@@ -13,53 +13,59 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
     <link rel="stylesheet" href="stylesheets/create_r.css">
     <title>APPetizer</title>
 </head>
 
 <body>
+        
     <div class="container">
-        <div class="row d-flex flex-row justify-content-end" id="account-nav">
-            <div class="mx-2 d-flex flex-column justify-content-center" id="recipe-tab">
-                <div>
-                    <p class="grow"><a href="index.html">Home</a></p>
+            <div class="row d-flex flex-row justify-content-end" id="account-nav">
+                    <div class="mx-2 d-flex flex-column justify-content-center" id="recipe-tab">
+                        <div>
+                            <p class="grow"><a href="index.html">Home</a></p>
+                        </div>
+                        <!--<div>
+                            <svg class="bi bi-caret-up-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 00.753-1.659l-4.796-5.48a1 1 0 00-1.506 0z"/>
+                              </svg>
+                        </div>-->
+                    </div>
+                    <div class="mx-2" id="pantry-tab">
+                        <p class="grow"><a href="recipe.html">Recipes</a></p>
+                    </div>
+                    <div class="mx-2" id="grocery-tab">
+                        <p class="grow"><a href="create_recipe.html">Create recipe</a></p>
+                    </div>
+                    <div class="mx-2" id="login">
+                        <p class="grow"><a href="login.html">Login</a></p>
+                    </div>
                 </div>
-                <!--<div>
-                    <svg class="bi bi-caret-up-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 00.753-1.659l-4.796-5.48a1 1 0 00-1.506 0z"/>
-                      </svg>
-                </div>-->
-            </div>
-            <div class="mx-2" id="pantry-tab">
-                <p class="grow"><a href="recipe.html">Recipes</a></p>
-            </div>
-            <div class="mx-2" id="grocery-tab">
-                <p class="grow"><a href="#">Create recipe</a></p>
-            </div>
-            <div class="mx-2" id="login">
-                <p class="grow"><a href="login.html">Login</a></p>
-            </div>
-        </div>
     </div>
-    <div class="container">
+    <div class="container" id="content-area">
         <div class="row justify-content-start">
             <h2 id="user">Username</h2>
         </div>
-        <div class="row justify-content-center">
+        <div class="title row justify-content-center title">
             <h1>Recipe Title</h1>
         </div>
-        <div class="row justify-content-center">
+        <div class="title row justify-content-center" id="warnShow">
             <p>Type your title and hit enter</p>
         </div>
+        
+        <hr>
         <div class="row justify-content-center input-group mb-3">
-            <input type="text" class="form-control" placeholder="Recipe Title" aria-label="Recipe's Title" aria-describedby="button-addon2">
+            <input type="text" class="form-control" placeholder="Recipe Title" aria-label="Recipe's Title"
+                aria-describedby="button-addon2" id="bobo">
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
             </div>
-          </div>
+        </div>
     </div>
-   
+
+
 </body>
+<script src="js/create_recipe.js"></script>
 
 </html>
