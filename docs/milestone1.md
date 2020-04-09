@@ -90,4 +90,4 @@ Basic form validation - making sure there is content in the input bar
 
 
 # Divison of Labor
-We divided labor by pages. Sarah worked on the recipe and account pages (`recipe.html`, `recipe.css`, `account.html`, `account.css`). Tinsae worked on the home page and recipe creation pages (`index.html`, `style.css`, `create_recipe.html`, `create_r.css`, `create_recipe.js`). Nick worked on the login, signup and result pages (`login.html`, `signup.html`, `login.css`, `results.html`, `results.css`).
+We divided labor by pages. Sarah worked on the recipe and account pages (`recipe.html`, `recipe.css`, `account.html`, `account.css`). Tinsae worked on the home page and recipe creation pages (`index.html`, `style.css`, `home.js`, `create_recipe.html`, `create_r.css`, `create_recipe.js`). Nick worked on the login, signup and result pages (`login.html`, `signup.html`, `login.css`, `results.html`, `results.css`).
