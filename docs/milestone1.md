@@ -42,6 +42,18 @@ The grocery list tab on the account page will be the same as the pantry tab, wit
 ## Wireframe for results page
 ![Results-Page Wireframe](wireframes/Results-Page.png)
 
+## Wireframe for recipe creation page (multiple for different stages of receipe creation)
+![Recipe Creation-Page Wireframe](wireframes/rc1.png)
+![Recipe Creation-Page Wireframe](wireframes/rc2.png)
+![Recipe Creation-Page Wireframe](wireframes/rc3.png)
+![Recipe Creation-Page Wireframe](wireframes/rc4.png)
+
+The order of pages and the pages themselves might change, but this is the format of creating a recipe we want to follow.
+
+## Wireframe for the Home Page
+![Home-Page Wireframe](wireframes/h1.png)
+![Home-Page Wireframe](wireframes/h2.png)
+
 # Mockups
 
 ## Mockups for recipe page
@@ -64,5 +76,15 @@ These are both the recipe-book and pantry tabs of the account page. It is a one 
 ## Mockup for results page
 ![Results Page Mockup](mockups/Results.png)
 
+## Mockup for recipe creation page
+![Recipe Creation-Page Mockup](mockups/mockrc1.png)
+![Recipe Creation-Page Mockup](mockups/mockrc2.png)
+Basic form validation - making sure there is content in the input bar
+![Recipe Creation-Page Mockup](mockups/mockrc3.png)
+
+## Mockup for the Home Page
+![Home Page Mockup](mockups/mockrh1.png)
+
+
 # Divison of Labor
-We divided labor by pages. Sarah worked on the recipe and account pages (recipe.html, recipe.css, account.html, account.css). Tinsae worked on the home page and recipe creation pages (index.html, style.css, create.html). Nick worked on the login, signup and result pages (login.html, signup.html, login.css, results.html, results.css).
+We divided labor by pages. Sarah worked on the recipe and account pages (`recipe.html`, `recipe.css`, `account.html`, `account.css`). Tinsae worked on the home page and recipe creation pages (`index.html`, `style.css`, `create_recipe.html`, `create_r.css`, `create_recipe.js`). Nick worked on the login, signup and result pages (`login.html`, `signup.html`, `login.css`, `results.html`, `results.css`).
