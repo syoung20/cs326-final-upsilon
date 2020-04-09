@@ -83,7 +83,10 @@ Basic form validation - making sure there is content in the input bar
 ![Recipe Creation-Page Mockup](mockups/mockrc3.png)
 
 ## Mockup for the Home Page
-![Home Page Mockup](mockups/mockrh1.png)
+![Home Page Mockup](mockups/mockh1.png)
+![Home Page Mockup](mockups/mockh2.png)
+
+
 
 
 # Divison of Labor
