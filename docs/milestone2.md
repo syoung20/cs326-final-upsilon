@@ -23,7 +23,7 @@ Create a new user.
 
 ### /recipes/add
 Add a recipe. Requires user authentication.
-### /recipes/{recipe id}
+### /recipes/{recipe id}/read
 View a recipe corresponding to the recipe ID.
 ### /recipes/{recipe id}/edit
 Edit an existing recipe. Requires user authentication.
@@ -34,21 +34,21 @@ Delete an existing recipe. Requires user authentication.
 Edit grocery list (if user is logged in), by adding ingredients from recipe
 Parameters:
 - ingredients (list of strings) : ingredients to add
-### /recipes/addrecipe
+### /recipes/saverecipe
 Add recipe to a recipe book category (if user is logged in).
 Parameters:
 - category (string) : recipe book category to add recipe to
 
 ## Comment Endpoints
 
-### /recipes/{recipe id}/comment
+### /recipes/{recipe id}/comments/add
 Create a comment on a recipe.
 Parameters:
 - rating (number) : rating for recipe
 - comment (string) : text content of comment
-### /recipes/{recipe id}/comment/{comment id}/del
+### /recipes/{recipe id}/comments/{comment id}/del
 Delete a comment on a recipe. Requires user authentication - recipes can only be deleted by the user that created it.
-### /recipes/{recipe id}/comment/{comment id}/edit
+### /recipes/{recipe id}/comments/{comment id}/edit
 Edit a comment on a recipe. Requires user authentication.
 - rating (number) : updated rating
 - comment (string) : updated comment
@@ -56,13 +56,11 @@ Edit a comment on a recipe. Requires user authentication.
 # User Endpoints
 All require user authentication.
 
-### /users/{user id}
-View user dashboard.
+### /users/{user id}/account
+View user account.
 
 ## User Pantry List Endpoints
 
-### /users/{user id}/pantry
-View pantry.
 ### /users/{user id}/pantry/add
 Add a category to the pantry.
 Parameters:
@@ -71,15 +69,15 @@ Parameters:
 Delete a category.
 Parameters:
 - category (string) : name of category.
-### /users/{user id}/pantry/cat/{category id}/add
+### /users/{user id}/pantry/category id}/add
 Add an ingredient to a category.
 Parameters:
 - ingredient (string) : ingredient to add, must be unique.
-### /users/{user id}/pantry/cat/{category id}/del
+### /users/{user id}/pantry/{category id}/del
 Delete an ingredient from a category.
 Parameters:
 - ingredient (string) : ingredient to delete.
-### /users/{user id}/pantry/cat/{category id}/edit
+### /users/{user id}/pantry/category id}/edit
 Edit an ingredient in a category.
 Parameters:
 - ingredient (string) : ingredient to update.
@@ -87,8 +85,6 @@ Parameters:
 
 ## User Grocery List Endpoints
 
-### /users/{user id}/groceries
-View grocery list.
 ### /users/{user id}/groceries/add
 Add a category to the grocery list.
 Parameters:
@@ -97,15 +93,15 @@ Parameters:
 Delete a category.
 Parameters:
 - category (string) : name of category.
-### /users/{user id}/groceries/cat/{category id}/add
+### /users/{user id}/groceries/{category id}/add
 Add an ingredient to a category.
 Parameters:
 - ingredient (string) : ingredient to add, must be unique.
-### /users/{user id}/groceries/cat/{category id}/del
+### /users/{user id}/groceries/{category id}/del
 Delete an ingredient from a category.
 Parameters:
 - ingredient (string) : ingredient to delete.
-### /users/{user id}/groceries/cat/{category id}/edit
+### /users/{user id}/groceries/{category id}/edit
 Edit an ingredient in a category.
 Parameters:
 - ingredient (string) : ingredient to update.
@@ -113,8 +109,6 @@ Parameters:
 
 ## User Recipe Collection Endpoints
 
-### /users/{user id}/recipebook
-View recipe book.
 ### /users/{user id}/recipebook/add
 Add a category to the recipe book.
 Parameters:
@@ -123,7 +117,7 @@ Parameters:
 Delete a category.
 Parameters:
 - category (string) : name of category.
-### /users/{user id}/recipebook/cat/{category id}/del
+### /users/{user id}/recipebook/{category id}/del
 Delete a recipe from a category.
 Parameters:
 - ingredient (string) : recipe to delete.
