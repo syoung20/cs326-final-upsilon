@@ -3,8 +3,10 @@
 
 # General Endpoints
 
+
 ### /search
-View lists of recipes returned by search results.
+Once the user searches for something, we will make a POST request to this endpoint with the parameters below in the body of the post request.
+
 Parameters:
 - term (string): search term
 - limit (number): number of recipes returned
@@ -14,16 +16,26 @@ Parameters:
 - tags (list of strings): tags to search for
 Response:
 - the server will return a response formatted in JSON
+
+
+
 ### /login
 Sign into user account
 ### /signup
 Create a new user.
 
+### /logout
+Log out of current accout.
+### /recoverPassword
+Revover/ change password.
+
+
 # Recipe Endpoints
 
 ### /recipes/add
-Add a recipe. Requires user authentication.
-### /recipes/{recipe id}/read
+Add a recipe. Requires user authentication. Once authenticated, the user will fill out a form that includes all parts of the recipe, and then that will be sent to the server with a post request. 
+
+### /recipes/{recipe id}/read 
 View a recipe corresponding to the recipe ID.
 ### /recipes/{recipe id}/edit
 Edit an existing recipe. Requires user authentication.
