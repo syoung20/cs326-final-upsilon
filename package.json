@@ -1,0 +1,31 @@
+{
+  "name": "cs326-final-upsilon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syoung20/cs326-final-upsilon.git"
+  },
+  "keywords": [],
+  "author": "Tinsae Erkailo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/syoung20/cs326-final-upsilon/issues"
+  },
+  "homepage": "https://github.com/syoung20/cs326-final-upsilon#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
