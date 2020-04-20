@@ -68,68 +68,176 @@ Edit a comment on a recipe. Requires user authentication.
 # User Endpoints
 All require user authentication.
 
-### /users/{user id}/account
+### /users/read
 View user account.
+
+Parameters:
+- userId (String) : unique username of the user
+
+Response:
+- userId (String)
+- name (String) : name of user
+- categories (Array of objects) : an array of recipe book categories, which are objects made up of category id, category title, and category image
+- status (number) : status code
 
 ## User Pantry List Endpoints
 
-### /users/{user id}/pantry/add
+### /users/pantry/read
+Read the pantry data.
+
+Parameters:
+- userId (String) : unique username of the user
+
+Response:
+- userId (String) : userId from request
+- categories (Array of objects) : an array of pantry categories, where each category is an object made up of an id, a title, and an array of food items (Strings).
+- status (number) : status code
+
+### /users/pantry/cat/add
 Add a category to the pantry.
+
 Parameters:
-- category (string) : name of category, must be unique.
-### /users/{user id}/pantry/del
+- userId (String) : unique username
+- category (String) : name of category.
+Response:
+- userId (String) : userId from request
+- categoryId (number) : the unique category id
+- category (String) : name of category from request
+- status (number) : status code
+
+### /users/pantry/cat/del
 Delete a category.
+
 Parameters:
-- category (string) : name of category.
-### /users/{user id}/pantry/category id}/add
-Add an ingredient to a category.
+- userId (String) : unique username
+- categoryId (number) : the category id
+Response:
+- userId (String) : userId from request
+- categoryId (number) : categoryId from request
+- status (number) : status code
+
+### /users/pantry/cat/edit
+Edit a category. Compares the title and list of ingredients to any existing values, updating the values.
+
 Parameters:
-- ingredient (string) : ingredient to add, must be unique.
-### /users/{user id}/pantry/{category id}/del
-Delete an ingredient from a category.
-Parameters:
-- ingredient (string) : ingredient to delete.
-### /users/{user id}/pantry/category id}/edit
-Edit an ingredient in a category.
-Parameters:
-- ingredient (string) : ingredient to update.
-- new (string) : updated value
+- userId (String) : unique username
+- categoryId (number) : the category id
+- title (String) : name of category (if changed)
+- ingredients (Array of strings) : list of ingredient (if changed)
+Response:
+- userId (String) : userId from request
+- categoryId (number) : the category id from request
+- title (String) : the title from request (if changed)
+- ingredients (Array of strings) : the array from request (if changed)
+- status (number) : status code
 
 ## User Grocery List Endpoints
 
-### /users/{user id}/groceries/add
+### /users/grocery/read
+Read the grocery list data
+
+Parameters:
+- userId (String) : unique username of the user
+Response:
+- userId (String) : userId from request
+- categories (Array of objects) : an array of grocery categories, where each category is an object made up of an id, a title, and an array of food items (Strings).
+- status (number) : status code
+
+### /users/grocery/cat/add
 Add a category to the grocery list.
+
 Parameters:
-- category (string) : name of category, must be unique.
-### /users/{user id}/groceries/del
+- userId (String) : unique username
+- category (String) : name of category.
+Response:
+- userId (String) : userId from request
+- categoryId (number) : the unique category id
+- category (String) : name of category from request
+- status (number) : status code
+
+### /users/grocery/cat/del
 Delete a category.
+
 Parameters:
-- category (string) : name of category.
-### /users/{user id}/groceries/{category id}/add
-Add an ingredient to a category.
+- userId (String) : unique username
+- categoryId (number) : the category id
+Response:
+- userId (String) : userId from request
+- categoryId (number) : categoryId from request
+- status (number) : status code
+
+### /users/grocery/cat/edit
+Edit a category. Compares the title and list of ingredients to any existing values, updating the values.
+
 Parameters:
-- ingredient (string) : ingredient to add, must be unique.
-### /users/{user id}/groceries/{category id}/del
-Delete an ingredient from a category.
-Parameters:
-- ingredient (string) : ingredient to delete.
-### /users/{user id}/groceries/{category id}/edit
-Edit an ingredient in a category.
-Parameters:
-- ingredient (string) : ingredient to update.
-- new (string) : updated value
+- userId (String) : unique username
+- categoryId (number) : the category id
+- title (String) : name of category (if changed)
+- ingredients (Array of strings) : list of ingredient (if changed)
+Response:
+- userId (String) : userId from request
+- categoryId (number) : the category id from request
+- title (String) : the title from request (if changed)
+- ingredients (Array of strings) : the array from request (if changed)
+- status (number) : status code
 
 ## User Recipe Collection Endpoints
 
-### /users/{user id}/recipebook/add
+### /users/recipebook/read
+Read the recipe book data
+
+Parameters:
+- userId (String) : unique username of the user
+Response:
+- userId (String) : userId from request
+- categories (Array of objects) : an array of recipe book categories, which are objects made up of category id, category title, and category image
+- status (number) : status code
+
+### /users/recipebook/cat/add
 Add a category to the recipe book.
+
 Parameters:
-- category (string) : name of category, must be unique.
-### /users/{user id}/recipebook/del
+- userId (String) : unique username
+- category (String) : name of category.
+Response:
+- userId (String) : userId from request
+- categoryId (number) : the unique category id
+- category (String) : name of category from request
+- status (number) : status code
+
+### /users/recipebook/cat/del
 Delete a category.
+
 Parameters:
-- category (string) : name of category.
-### /users/{user id}/recipebook/{category id}/del
+- userId (String) : unique username
+- categoryId (number) : the category id
+Response:
+- userId (String) : userId from request
+- categoryId (number) : categoryId from request
+- status (number) : status code
+
+### /users/recipebook/cat/read
+View recipes in a category.
+
+Parameters:
+- userId (String) : unique username of the user
+- categoryId (number) : id of category
+Response:
+- userId (String) : userId from request
+- categoryId (number) : category id from request
+- title (String) : title of the category
+- recipes (Array of objects) : an array of recipes, where each recipe is an object made up of an id (number), a title (String), and an image url (String)
+- status (number) : status code
+
+### /users/recipebook/cat/edit
 Delete a recipe from a category.
+
 Parameters:
-- ingredient (string) : recipe to delete.
+- userId (String) : unique username of the user
+- categoryId (number) : the category id
+- recipeId (number) : the recipe id of recipe to delete
+Response:
+- userId (String) : user id from request
+- categoryId (number) : category id from request
+- recipeId (number) : recipe id from request
+- status (number) : status code
