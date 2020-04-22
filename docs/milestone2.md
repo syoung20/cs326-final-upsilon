@@ -39,16 +39,22 @@ Routes to the recipes home page
 ### /recipes/add [POST]
 Add a recipe. Requires user authentication. Once authenticated, the user will fill out a form that includes all parts of the recipe, and then that will be sent to the server with a post request. 
 
+Parameters: 
+- Form fields 
+
+Response:
+- Addition status code - a `string`
+
+
 ### /recipes/read [POST]
 Parameters:
 - recipeID
 
 Response:
-
 JSON object that includes
-- Recipe name 
-- Discription 
-- Ingrediants
+- Recipe name a `string`
+- Discription - a `string` 
+- [Ingrediants] - an `Array<string>` 
 - etc
 
 ### /recipes/edit [POST] 
@@ -57,6 +63,7 @@ Will re-populate recipe creation form so user can edit and post the form again.
 
 Parameters:
 - recipeID
+
 
 Response:
 JSON object that includes
