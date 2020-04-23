@@ -1,16 +1,39 @@
-const express = require('express');
-const router = express.Router();
+"use strict";
+exports.__esModule = true;
+var express = require('express');
+var router = express.Router();
+var faker = require('faker');
+router.post('/', function (req, res) {
+    /*
 
+        code to validate request will go here.
 
-router.post('/', (req, res) => {
-    //code to handle the req will go here 
-    
-
-})
-
-
-router.get('/', (req, res) => {
-    res.redirect('/')
-})
-
+    */
+    // the string that the user inputed
+    var searchQuery = req.body.searchq;
+    var searchParameters = {
+        tags: req.body.tags,
+        categories: req.body.categories
+    };
+    //perform search then send it back 
+    var searchReturn = {
+        matchedItems: [
+            {
+                title: faker.commerce.productName(),
+                discription: faker.lorem.paragraph()
+            },
+            {
+                title: faker.commerce.productName(),
+                discription: faker.lorem.paragraph()
+            }
+        ],
+        matchedCount: 2
+    };
+    res.status(200);
+    res.send(JSON.stringify(searchReturn));
+    res.end();
+});
+router.get('/', function (req, res) {
+    res.redirect('/');
+});
 module.exports = router;

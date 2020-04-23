@@ -15,7 +15,9 @@ Parameters:
 - omit (list of strings): ingredients to not include
 - tags (list of strings): tags to search for
 Response:
-- the server will return a response formatted in JSON
+- A json object with two values:
+  - matchedItems - an array that includes all the matched recipes
+  - matchedCount - a count of the number of recipes being returned 
 
 
 
@@ -31,39 +33,112 @@ Revover/ change password.
 
 
 # Recipe Endpoints
+### /recipes [GET]
+Routes to the recipes home page
 
-### /recipes/add
+### /recipes/add [POST]
 Add a recipe. Requires user authentication. Once authenticated, the user will fill out a form that includes all parts of the recipe, and then that will be sent to the server with a post request. 
 
-### /recipes/{recipe id}/read 
-View a recipe corresponding to the recipe ID.
-### /recipes/{recipe id}/edit
+Parameters: 
+- Form fields 
+
+Response:
+- Addition status code - a `string`
+
+
+### /recipes/read [POST]
+Parameters:
+- recipeID
+
+Response:
+JSON object that includes
+- Recipe name a `string`
+- Discription - a `string` 
+- [Ingrediants] - an `Array<string>` 
+- etc
+
+### /recipes/edit [POST] 
 Edit an existing recipe. Requires user authentication.
-Parameters: ?
-### /recipes/{recipe id}/del
+Will re-populate recipe creation form so user can edit and post the form again.
+
+Parameters:
+- recipeID
+
+
+Response:
+JSON object that includes
+- Recipe name 
+- Discription 
+- Ingrediants
+- etc
+
+
+### /recipes/del[POST]
 Delete an existing recipe. Requires user authentication.
-### /recipes/addgroceries
+
+Parameters:
+- recipeID
+
+Response:
+JSON object that includes
+- Deletion Status message
+
+
+### /recipes/addgroceries[POST]
 Edit grocery list (if user is logged in), by adding ingredients from recipe
 Parameters:
 - ingredients (list of strings) : ingredients to add
-### /recipes/saverecipe
+
+Response:
+JSON object that includes
+- Addition Status message 
+
+
+### /recipes/saverecipe [POST]
 Add recipe to a recipe book category (if user is logged in).
 Parameters:
 - category (string) : recipe book category to add recipe to
+- recipeID
+
+
+Response
+- Addition Status message 
 
 ## Comment Endpoints
 
-### /recipes/{recipe id}/comments/add
+### /recipes/comments/add [POST]
 Create a comment on a recipe.
 Parameters:
 - rating (number) : rating for recipe
 - comment (string) : text content of comment
-### /recipes/{recipe id}/comments/{comment id}/del
+- recipeID
+
+Response:
+- Comment addition status message
+
+
+### /recipes/comments/del [POST]
 Delete a comment on a recipe. Requires user authentication - recipes can only be deleted by the user that created it.
-### /recipes/{recipe id}/comments/{comment id}/edit
+
+Parameters:
+- recipe id
+- comment id}
+
+Response:
+- Comment deletion status message
+
+### /recipes/comments/edit
 Edit a comment on a recipe. Requires user authentication.
-- rating (number) : updated rating
-- comment (string) : updated comment
+
+Parameters:
+- rating (number) : rating for recipe
+- comment (string) : text content of comment
+- recipeID
+
+Response:
+- Edit status message
+
+
 
 # User Endpoints
 All require user authentication.
