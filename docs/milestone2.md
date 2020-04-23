@@ -4,20 +4,32 @@
 # General Endpoints
 
 
-### /search
+### /search [POST] [GET] 
+A GET request to this url will serve the home page where the user can search for recipes.
+
 Once the user searches for something, we will make a POST request to this endpoint with the parameters below in the body of the post request.
 
 Parameters:
-- term (string): search term
-- limit (number): number of recipes returned
-- offset (number): index to begin returning recipes
+- search_query : search string
+- params : A json object that that includes an array of recipe categories, blah blah 
+
+
+
+-- which ones of the ones below do we actually want to implement?
+- limit (number): number of recipes returned ?? is this even useful? who does this?
+- offset (number): index to begin returning recipes ?? i don't think this is something a user would commonly do
 - include (list of strings): ingredients to include
 - omit (list of strings): ingredients to not include
 - tags (list of strings): tags to search for
+
+
+- params : A json object that that includes an array of recipe categories, blah blah 
+
+
 Response:
-- A json object with two values:
-  - matchedItems - an array that includes all the matched recipes
-  - matchedCount - a count of the number of recipes being returned 
+- A json object with two fields:
+  - recipes - an array which holds json objects (recipes) as it's elements. 
+  - recipe_count - a count of the number of recipes present in the field above. 
 
 
 

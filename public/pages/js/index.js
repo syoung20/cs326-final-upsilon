@@ -58,18 +58,100 @@ $("#searchbar").keypress(function (e) {
 $("#searchbar").click(function () {
     $(".searchParams").show();
 });
-var params = {
+var parameters = {
     recipe_categoreis: []
 };
 $(".btn-primary").click(function (e) {
     if ($(this).attr("aria-pressed") == "false") {
-        params.recipe_categoreis.push($(this)[0].value);
+        parameters.recipe_categoreis.push($(this)[0].value);
     }
 });
-function performSearch(userQuery) {
+function performSearch(searchQuery) {
     return __awaiter(this, void 0, void 0, function () {
+        function updateResultView(json) {
+            return __awaiter(this, void 0, void 0, function () {
+                var mainDiv;
+                return __generator(this, function (_a) {
+                    mainDiv = document.createElement('div');
+                    mainDiv.setAttribute('class', 'row');
+                    //mainDiv.setAttribute('class', 'justify-content-center')
+                    json.recipes.forEach(function (element) {
+                        //nick's result card
+                        var resultCard = document.createElement('div');
+                        resultCard.setAttribute('class', 'result');
+                        resultCard.setAttribute('id', element['recipe_id']);
+                        //img
+                        var imageContainer = document.createElement('div');
+                        imageContainer.setAttribute('class', 'imgcontainer');
+                        var image = document.createElement('img');
+                        image.setAttribute('src', 'images/img.jpg');
+                        imageContainer.appendChild(image);
+                        resultCard.appendChild(imageContainer);
+                        //title 
+                        var titleAndlistdiv = document.createElement('div');
+                        var title = document.createElement('h3');
+                        title.innerText = element['title'];
+                        titleAndlistdiv.appendChild(title);
+                        var ul = document.createElement('ul');
+                        for (var i = 0; i < 4; i++) {
+                            var li = document.createElement('li');
+                            li.setAttribute('style', 'list-style-type: none');
+                            if (i == 0) {
+                                li.innerText = "Prep-Time: " + "20mins";
+                            }
+                            else if (i == 1) {
+                                li.innerText = "Cook-Time: " + "40mins";
+                            }
+                            else if (i == 2) {
+                                li.innerText = "Total Time: " + "1hr";
+                            }
+                            else if (i == 3) {
+                                li.innerText = "Servings: " + "4";
+                            }
+                            ul.appendChild(li);
+                        }
+                        titleAndlistdiv.appendChild(ul);
+                        resultCard.appendChild(titleAndlistdiv);
+                        //append nick's card to the main result view 
+                        mainDiv.appendChild(resultCard);
+                        //append main result view to body
+                    });
+                    document.getElementsByTagName('body')[0].appendChild(mainDiv);
+                    return [2 /*return*/];
+                });
+            });
+        }
+        var requestBody, url;
+        var _this = this;
         return __generator(this, function (_a) {
-            console.log(console.log(params));
+            requestBody = {
+                "search_query": searchQuery,
+                params: parameters
+            };
+            url = 'http://localhost:5657/search';
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': "application/json"
+                },
+                body: JSON.stringify(requestBody)
+            })
+                .then(function (res) { return res.json(); })
+                .then(function (json) { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            $(".spinner-border").hide();
+                            return [4 /*yield*/, updateResultView(json)];
+                        case 1:
+                            _a.sent();
+                            return [2 /*return*/];
+                    }
+                });
+            }); })["catch"](function (err) {
+                console.log(err.message);
+            });
             return [2 /*return*/];
         });
     });
