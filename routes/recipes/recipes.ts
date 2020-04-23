@@ -9,7 +9,19 @@ router.post('/add', (req, res) => {
     
     //this endpoint is going to be called with form data once the data has succesfully been written to a db just render a view
     
-    res.render('index')
+    //res.render('index')
+
+    let formData : string = req.body;
+
+    /*
+
+    code to add recipe to database 
+
+    */ 
+
+    
+    res.status(200)
+    res.send(JSON.stringify({'message' : 'added succesfully to the database'}))
 
 })
 
@@ -27,7 +39,17 @@ router.post('/read', (req, res) => {
     let recipeReturn = {
         name : "foo",
         discription : "bar",
-        ingrediants : "foo",
+        ingrediants : ["foo"],
+
+        comments : {
+            comments : [
+                {
+                    rating: '32',
+                    comment: "foo bar",
+                    rid: 323
+                },
+            ]
+        }
         //more to be added
     }
 
