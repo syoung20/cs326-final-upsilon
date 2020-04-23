@@ -39,5 +39,41 @@
     margin: auto;
 }
 
+.imgcontainer {
+    text-align: center;
+    margin: 5px 5px 5px 5px;
+}
+
+.result {
+    border: 1px solid #202020;
+    margin: 10px 15px 10px 15px;
+    padding-top: 4px;
+    width: 250px;
+    height: 350px;
+    background-color: #f4f4f4;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+.result:hover {
+    opacity: 80%;
+    cursor: pointer;
+}
+
+.result h3 {
+    padding: 2px 15px 2px 15px;
+    font-size: 16px;
+    font-style: normal;
+    text-align: center;
+}
+
+.result p {
+    margin-top: 10px;
+    padding: 0px 15px 15px 15px;
+    color: #636363;
+    text-align: center;
+
+}
+
 
 

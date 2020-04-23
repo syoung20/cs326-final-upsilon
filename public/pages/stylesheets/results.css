@@ -68,18 +68,15 @@ body {
     margin-bottom: 20px;
 }
 
-.main {
-    margin-left: 200px;
-    padding: 20px 20px;
-}
+
 
 .result {
-    border: 1px solid #1f1f1f;
+    border: 1px solid #202020;
     margin: 10px 15px 10px 15px;
     padding-top: 4px;
     width: 250px;
     height: 350px;
-    background-color: #f1f1f1;
+    background-color: #f7f7f7;
     display: inline-block;
     border-radius: 4px;
 }
