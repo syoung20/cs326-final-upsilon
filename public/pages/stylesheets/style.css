@@ -1,42 +1,11 @@
 
-.input-group {
-    padding-top: 1em;
-}
 .logo {
     text-align: center;
 }
 
-.navbar2 {
-    text-align: left
-}
-
-.dynamicContent {
-    display: flex;
-    justify-content: space-between;
-}
-
-.dcOne {
-    grid-column-start: 1;
-    grid-column-end: 1;
-}
-
-.dcTwo {
-    grid-column-start: 2;
-    grid-column-end: 2;
-}
-
-.dcThree {
-    grid-column-start: 3;
-    grid-column-end: 3;
-}
 .mainLogo {
     width: 30em;
     height: 15m;
-}
-
-#account-nav svg {
-    display: block;
-    margin: auto;
 }
 
 
