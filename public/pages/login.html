@@ -19,10 +19,9 @@
             <label for=email>Email</label>
             <input type="text" placehodler="Enter Email" name=email required>
             <label for=pswd>Password</label>
-            <span class=psw><a href="">Recover password</a></span>
+            <span class=psw id="recoverPsw"><a>Recover password</a></span>
             <input type="password" placehodler="Enter Password" name=pswd required>
             <button type="submit" id="myBtn">Login</button>
-
         </div>
 
         <div class=container>
@@ -30,15 +29,19 @@
         </div>
     </form>
     <div id="myModal" class="modal">
-
-
-  <div class="modal-content">
-
-    <p>Login succesfull!</p>
-    <p>Click to go back to <a href="/">Home Page</a></p>
-  </div>
-
-</div>
+        <div class="modal-content">
+            <p>Login succesfull!</p>
+            <p>Click to go back to <a href="/">Home Page</a></p>
+        </div>
+    </div>
+    <div id="recoverModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>  
+            <label for=pswd>Enter email to get a new password</label>
+            <input type="email" placehodler="Enter Password" name=email required>
+            <button type="submit" id="myBtn">Recover password</button>
+        </div>
+    </div>
 </body>
 
 <script src="js/login.js"></script>
