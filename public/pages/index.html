@@ -15,6 +15,7 @@
 </head>
 
 <body class='container'>
+    <!-- nav bar -->
     <div class="row justify-content-end" id="account-nav">
         <div class="mx-2 d-flex flex-column justify-content-center" id="recipe-tab">
             <div>
@@ -34,18 +35,7 @@
     <div class="logo">
         <img src="images/logo.svg" alt="APPetizer Logo" class="mainLogo grow">
     </div>
-
-
-    <!--
-    <div class="p-3 row input-group">
-        <input type="text" class="form-control" placeholder="Search for a recipe..." aria-label="Recipe's Title"
-            aria-describedby="button-addon2" id="searchbar">
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>
-        </div>
-
-    </div>
-    -->
+    <!--search bar-->
     <div class="p-3 input-group mb-3">
         <input type="text" class="form-control" placeholder="Search for a recipe..." aria-label="Recipient's username"
             aria-describedby="button-addon2" id="searchbar">
@@ -53,7 +43,7 @@
             <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>
         </div>
     </div>
-
+    <!--filters view-->
     <div class="row alert alert-warning alert-dismissible fade show searchParams" role="alert" data-target="#parameters"
         data-toggle="collapse">
         To further refine your search, click on this alert.
@@ -62,7 +52,7 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="card collapse" id="parameters">
+    <div class="card collapse"> <!--id="parameters"-->
         <div class="card-header ">
             Filters
         </div>
@@ -94,9 +84,45 @@
         </div>
     </div>
 
+
+
+    <!--
+        testing different view for filters
+    -->
+    <div class="collapse" id="parameters">
+        <p>
+            <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button"
+                aria-expanded="false" aria-controls="multiCollapseExample1">Recipe Categories</a>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2"
+                aria-expanded="false" aria-controls="multiCollapseExample2">Filter 2</button>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"
+                aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Show all
+                Filters</button>
+        </p>
+    </div>
+    <div class="row">
+        <div class="row">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                <div class="card card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="collapse multi-collapse" id="multiCollapseExample2">
+                <div class="card card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </div>
+            </div>
+        </div>
+    </div>
+
     <hr>
 
 
+    <!--loading spinner-->
     <div class="p-3 d-flex justify-content-center" id="loading">
         <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
@@ -108,7 +134,7 @@
 
 
 
-<!--
+    <!--
 
 
 

@@ -36,8 +36,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-$(".spinner-border").hide();
-$(".searchParams").hide();
+$(".spinner-border").hide(); //the loading sign
+$(".searchParams").hide(); // the yellow box alert that allows you to see availble filters
 //an event listener for when the search button is clicked
 $("#searchButton").click(function () {
     if ($("#searchbar")[0].value != "") { //making sure the search bar isn't empty
@@ -72,8 +72,13 @@ function performSearch(searchQuery) {
             return __awaiter(this, void 0, void 0, function () {
                 var mainDiv;
                 return __generator(this, function (_a) {
+                    //remove previous results view
+                    if (document.getElementById('resultsView') != null) {
+                        document.getElementById('resultsView').remove();
+                    }
                     mainDiv = document.createElement('div');
                     mainDiv.setAttribute('class', 'row');
+                    mainDiv.setAttribute('id', 'resultsView');
                     //mainDiv.setAttribute('class', 'justify-content-center')
                     json.recipes.forEach(function (element) {
                         //nick's result card
