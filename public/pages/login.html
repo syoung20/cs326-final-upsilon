@@ -3,6 +3,8 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="stylesheets/login.css">
 </head>
 
@@ -19,12 +21,26 @@
             <label for=pswd>Password</label>
             <span class=psw><a href="">Recover password</a></span>
             <input type="password" placehodler="Enter Password" name=pswd required>
-            <button type=submit>Login</button>
+            <button type="submit" id="myBtn">Login</button>
+
         </div>
 
         <div class=container>
-            <span>Don't have an account?  <a href="">Sign up</a></span>
+            <span>Don't have an account?  <a href="signup.html">Sign up</a></span>
         </div>
     </form>
+    <div id="myModal" class="modal">
+
+
+  <div class="modal-content">
+
+    <p>Login succesfull!</p>
+    <p>Click to go back to <a href="/">Home Page</a></p>
+  </div>
+
+</div>
 </body>
+
+<script src="js/login.js"></script>
+
 </html>

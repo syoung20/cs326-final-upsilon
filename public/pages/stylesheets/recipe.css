@@ -51,6 +51,11 @@ h4 {
 .tags {
     padding: 0% 10%;
 }
+.description {
+    margin: 2% 10%;
+    padding: 1%;
+    border: 1px solid rgb(128,0,0, 0.7);
+}
 .comments h3{
     padding: 2% 5%;
 }
