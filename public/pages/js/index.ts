@@ -1,8 +1,8 @@
 import { papayawhip } from "color-name";
 import { promises } from "fs";
 
-$(".spinner-border").hide()
-$(".searchParams").hide()
+$(".spinner-border").hide() //the loading sign
+$(".searchParams").hide() // the yellow box alert that allows you to see availble filters
 
 //an event listener for when the search button is clicked
 $("#searchButton").click(function () {
@@ -30,7 +30,8 @@ $("#searchbar").click(function () {
 
 
 let parameters = {
-    recipe_categoreis: []
+    recipe_categoreis: [],
+    //add more parameters once we all decide on wgat they will be
 }
 
 $(".btn-primary").click(function (e) {
@@ -77,8 +78,14 @@ async function performSearch(searchQuery) {
 
 
     async function updateResultView(json): Promise<boolean> {
+        //remove previous results view
+        if(document.getElementById('resultsView') != null){
+            document.getElementById('resultsView').remove()
+        }
+
         let mainDiv = document.createElement('div')
         mainDiv.setAttribute('class', 'row')
+        mainDiv.setAttribute('id', 'resultsView')
         //mainDiv.setAttribute('class', 'justify-content-center')
 
         json.recipes.forEach(element => {
@@ -115,18 +122,10 @@ async function performSearch(searchQuery) {
             }
             titleAndlistdiv.appendChild(ul)
             resultCard.appendChild(titleAndlistdiv)
-
-
             //append nick's card to the main result view 
             mainDiv.appendChild(resultCard)
-
             //append main result view to body
-            
-
-            
         });
         document.getElementsByTagName('body')[0].appendChild(mainDiv)
-
-
     }
 }
