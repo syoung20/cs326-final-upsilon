@@ -20,126 +20,115 @@
 
 <body class="container">
 
-        <div style="background-color: black">
-                <hr>
-                <hr>
-                <hr>
-                <hr>
-                <div class="row justify-content-end">
-                        <h3 style="border-bottom: black 2px solid; color: white; padding-right: 3em">USERNAME</h3>
-                    </div>
+
+
+
+
+    <div class="m-3 row justify-content-center align-content-center">
+        <img src="images/logo.svg" alt="" height="200em" width="300em">
+    </div>
+
+
+    <div class="row m-3" style="text-align: center">
+        <p>To add your recipe to the APPetizer collection, please fill in the fields below and hit the submit button at
+            the bottom of the page. After you submit your recipe, it will be discoverable by all of APPetizer's users
+        </p>
+    </div>
+    <!--border : black 2px solid;-->
+    <div class="formContainer">
+        <form class="shaddow" style="padding: 1em 1em;" method="POST" action="endpoint">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Recipe Name</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">What do you want this recipe to be called</small>
             </div>
-
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Recipe Discription</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
     
-
-    <div class="m-3 row justify-content-center">
-            <img src="images/logo.svg" alt="" height="200em" width="300em">
-    </div>
     
-
-    <div class="row">
-        <p>To add your recipe to the APPetizer collection, please fill in the fields below and hit the submit button. After you submit your recipe, it will be discoverable by all of APPetizer's users<neque class="lore"></neque></enim></p>
-    </div>
+            <div class="form-group accordion" id="accordionExample">
+                <div class="card">
     
-    <form style="border : black 2px solid; padding: 1em 1em; box-shadow: 10px 10px grey;" method="POST" action="endpoint">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Recipe Name</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            <small id="emailHelp" class="form-text text-muted">What do you want this recipe to be called</small>
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Recipe Discription</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-
-
-        <div class="form-group accordion" id="accordionExample">
-            <div class="card">
-
-                <div class="card-header" id="headingOne">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                            aria-expanded="true" aria-controls="collapseOne">
-                            Add Ingrediants
-                        </button>
-                    </h2>
-                </div>
-
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                    data-parent="#accordionExample">
-                    <div class="card-body" id="incrediantsCard">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Ingrediant Name"
-                                aria-label="Ingrediant" id='ingrediant' aria-describedby="button-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-success" type="button" id="ingrediantAdd">Add</button>
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                                Add Ingrediants
+                            </button>
+                        </h2>
+                    </div>
+    
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                        data-parent="#accordionExample">
+                        <div class="card-body" id="incrediantsCard">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Ingrediant Name"
+                                    aria-label="Ingrediant" id='ingrediant' aria-describedby="button-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-success" type="button" id="ingrediantAdd">Add</button>
+                                </div>
                             </div>
+    
                         </div>
-
                     </div>
                 </div>
             </div>
-        </div>
-
-
-
-
-
-
-
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Instructions</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Cook-Time</label>
-            <div class="input-group">
-                <input type="text" class="form-control" aria-label="Text input with dropdown button">
-                <div class="input-group-append">
-                    <select class="custom-select" id="inputGroupSelect01">
-                        <option selected>Choose...</option>
-                        <option value="1">Hours</option>
-                        <option value="2">Minutes</option>
-                    </select>
+    
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Instructions</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+    
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Cook-Time</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                    <div class="input-group-append">
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option selected>Choose...</option>
+                            <option value="1">Hours</option>
+                            <option value="2">Minutes</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Prep-Time</label>
-            <div class="input-group">
-                <input type="text" class="form-control" aria-label="Text input with dropdown button">
-                <div class="input-group-append">
-                    <select class="custom-select" id="inputGroupSelect01">
-                        <option selected>Choose...</option>
-                        <option value="1">Hours</option>
-                        <option value="2">Minutes</option>
-                    </select>
+    
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Prep-Time</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                    <div class="input-group-append">
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option selected>Choose...</option>
+                            <option value="1">Hours</option>
+                            <option value="2">Minutes</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Picture of your recipe</label>
-            <div class="input-group">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">Choose file</label>
+    
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Picture of your recipe</label>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
                 </div>
+    
             </div>
-
-        </div>
-
-
-
-
-
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-
-
+    
+    
+    
+    
+    
+    
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    
 
 
 
