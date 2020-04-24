@@ -1,6 +1,8 @@
 
 var modal = document.getElementById("myModal");
 
+var faker = 10;
+
 var recoverMod = document.getElementById("recoverModal");
 
 var btn = document.getElementById("myBtn");
