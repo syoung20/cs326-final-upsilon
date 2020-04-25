@@ -30,7 +30,7 @@ if(close != null){
 
 function recipeRead() {
     console.log("arranca?")
-    var url = "http://localhost:5657/recipes/read";
+    var url = "https://cs326-final-upsilon.herokuapp.com/recipes/read";
     var req = {'name' : 'nombre'};
     var resp = fetch(url,
         {
