@@ -372,3 +372,28 @@ The following is an example of a delete operation. A user can delete a recipe ca
 Below is another example of a delete operation, in which the user can remove a specific recipe from their recipe collection.
 ![Screen Shot 2020-04-24 at 9 59 50 PM](https://user-images.githubusercontent.com/44949568/80269693-8c390a00-8677-11ea-97f8-d79a794c9efd.png)
 
+
+# Division of Labor
+
+We distributed labor by pages, each working on js/ts and endpoints call for each respective page. 
+
+Sara worked on:
+  - public/pages/account.html. --- main html page
+  - routes/users users.js & users.ts --- client side server js/ts for account.html
+  - public/pages/js/ account.js & account.ts --- frontend functionality
+  - updates on public/pages/sylesheets/account.css --- frontend
+
+Nicholas worked on:
+  - public/pages/recipe.html --- main html page
+  - public/pages/ login.html & signup.html --- main html page
+  - routes/recipes recipes.js & recipes.ts --- client side js/ts for recipe.html
+  - public/pages/js/ recipe.js, login.js & signup.js --- frontend functionality
+  - updates on public/pages/sylesheets/ login.css & recipe.css --- frontend
+
+Tinsae worked on:
+  - public/pages/index.html --- main html page
+  - public/pages/create_recipe.html --- main html page
+  - routes/routes/ recipes.js & recipes.ts --- client side js/ts for create-recipe.html
+  - routes/routes/ search.js & search.ts --- client side js/ts for index.html
+  - public/pages/js/ index.js/ts & create_recipe.js/ts --- frontend functionality
+  - updates on public/pages/sylesheets/ style.css & create_r.css --- frontend
