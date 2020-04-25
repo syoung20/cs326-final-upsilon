@@ -4,7 +4,15 @@ var faker = require('faker');
 //code to handle the different posts
 router.post('/add', function (req, res) {
     //this endpoint is going to be called with form data once the data has succesfully been written to a db just render a view
-    res.render('index');
+    //res.render('index')
+    var formData = req.body;
+    /*
+
+    code to add recipe to database
+
+    */
+    res.status(200);
+    res.send(JSON.stringify({ 'message': 'added succesfully to the database' }));
 });
 router.post('/read', function (req, res) {
     var recipeID = req.body.rid;
@@ -16,7 +24,17 @@ router.post('/read', function (req, res) {
     var recipeReturn = {
         name: "foo",
         discription: "bar",
-        ingrediants: "foo"
+        ingrediants: ["foo"],
+        comments: {
+            comments: [
+                {
+                    rating: '32',
+                    comment: "foo bar",
+                    rid: 323
+                },
+            ]
+        }
+        //more to be added
     };
     res.status(200);
     res.send(JSON.stringify(recipeReturn));
