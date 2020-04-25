@@ -1,4 +1,13 @@
+body {background: #EEF2F7;}
 
+.navbar {
+    width: 100%;
+	float: left;
+    margin: 0 0 1em 0;
+    justify-content: end;
+    
+	
+}
 .logo {
     text-align: center;
 }

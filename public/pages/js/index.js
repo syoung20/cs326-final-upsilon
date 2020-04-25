@@ -36,13 +36,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+var searchString;
 $(".spinner-border").hide(); //the loading sign
 $(".searchParams").hide(); // the yellow box alert that allows you to see availble filters
 //an event listener for when the search button is clicked
 $("#searchButton").click(function () {
     if ($("#searchbar")[0].value != "") { //making sure the search bar isn't empty
         $(".spinner-border").show();
-        performSearch($("#searchbar")[0].value);
+        //performSearch($("#searchbar")[0].value);
+        performSearch();
     }
 });
 //an event listener for when the enter key is clicked
@@ -51,22 +53,15 @@ $("#searchbar").keypress(function (e) {
     if (keycode == 13 && this.value != "") { //making sure the search bar isn't empty
         $(".spinner-border").show();
         $("#searchParams").show();
-        performSearch(this.value);
+        //performSearch(this.value)
+        performSearch();
     }
 });
 //event listener to show filter options
 $("#searchbar").click(function () {
     $(".searchParams").show();
 });
-var parameters = {
-    recipe_categoreis: []
-};
-$(".btn-primary").click(function (e) {
-    if ($(this).attr("aria-pressed") == "false") {
-        parameters.recipe_categoreis.push($(this)[0].value);
-    }
-});
-function performSearch(searchQuery) {
+function performSearch() {
     return __awaiter(this, void 0, void 0, function () {
         function updateResultView(json) {
             return __awaiter(this, void 0, void 0, function () {
@@ -121,14 +116,34 @@ function performSearch(searchQuery) {
                         mainDiv.appendChild(resultCard);
                         //append main result view to body
                     });
-                    document.getElementsByTagName('body')[0].appendChild(mainDiv);
+                    document.getElementById('container').appendChild(mainDiv);
                     return [2 /*return*/];
                 });
             });
         }
-        var requestBody, url;
+        var searchQuery, parameters, requestBody, url;
         var _this = this;
         return __generator(this, function (_a) {
+            if ($("#searchbar")[0].value == "") {
+                return [2 /*return*/];
+            }
+            searchQuery = $("#searchbar")[0].value;
+            parameters = {
+                recipe_categoreis: [],
+                ingrediants_list: []
+                //add more parameters once we all decide on wgat they will be
+            };
+            $(".btn-light").each(function () {
+                if (this.getAttribute("aria-pressed") == "true") {
+                    parameters.recipe_categoreis.push(this.value);
+                }
+            });
+            $(".ingrediantInput").each(function (index) {
+                if (this.value !== "") {
+                    parameters.ingrediants_list.push(this.value);
+                }
+            });
+            console.log(parameters);
             requestBody = {
                 "search_query": searchQuery,
                 params: parameters
@@ -159,5 +174,89 @@ function performSearch(searchQuery) {
             });
             return [2 /*return*/];
         });
+    });
+}
+/*
+
+adding parameters
+
+*/
+//event listner for ingrediant add 
+$("#ingrediantAdd").click(function () {
+    if ($("#ingrediant")[0].value != "") { //making sure the search bar isn't empty
+        updateIngrediantsView();
+        performSearch();
+        addEventListener();
+    }
+});
+//re-do search
+$(".btn-light").click(function () {
+    performSearch();
+});
+//an event listener for when the enter key is clicked
+$("#ingrediant").keypress(function (e) {
+    var keycode = (e.keyCode ? e.keyCode : e.which);
+    if (keycode == 13 && $("#ingrediant")[0].value != "") { //making sure the search bar isn't empty
+        updateIngrediantsView();
+        performSearch();
+        addEventListener();
+    }
+});
+function updateIngrediantsView() {
+    // div holding all ingrediants
+    var mainDiv = $(".ingrediantsInputG")[0];
+    //create new ingrediant add form group
+    var inputGroup = document.createElement('div');
+    inputGroup.setAttribute('class', 'input-group mb-3');
+    //input bar 
+    //<input type="text" class="form-control" placeholder="Ingrediant Name" aria-label="Recipient's username" id='ingrediant' aria-describedby="button-addon2">
+    var inputBar = document.createElement('input');
+    inputBar.setAttribute('class', 'form-control ingrediantInput');
+    inputBar.setAttribute('type', 'text');
+    inputBar.setAttribute('placeholder', 'Ingrediant Name');
+    inputBar.setAttribute('aria-label', 'Ingrediant');
+    inputBar.setAttribute('id', 'ingrediant');
+    inputBar.setAttribute("aria-describedby", "button-addon2");
+    inputGroup.appendChild(inputBar);
+    var buttonDiv = document.createElement('div');
+    buttonDiv.setAttribute('class', 'input-group-append');
+    var button = document.createElement('button');
+    button.setAttribute('class', "btn btn-success");
+    button.setAttribute("type", "button");
+    button.innerText = "Add";
+    button.setAttribute("id", "ingrediantAdd");
+    buttonDiv.appendChild(button);
+    inputGroup.appendChild(buttonDiv);
+    //change old add area
+    var oldInputBar = document.getElementById('ingrediant');
+    oldInputBar.setAttribute('id', "");
+    var oldButton = document.getElementById("ingrediantAdd");
+    oldButton.setAttribute('id', '');
+    oldButton.setAttribute('class', 'btn btn-danger oldButton');
+    oldButton.innerText = 'Remove';
+    mainDiv.appendChild(inputGroup);
+    addEventListener();
+}
+function addEventListener() {
+    //event listner for ingrediant add 
+    $("#ingrediantAdd").click(function () {
+        //console.log(this)
+        if ($("#ingrediant")[0].value != "") { //making sure the search bar isn't empty
+            updateIngrediantsView();
+            performSearch();
+        }
+    });
+    //an event listener for when the enter key is clicked
+    $("#ingrediant").keypress(function (e) {
+        var keycode = (e.keyCode ? e.keyCode : e.which);
+        if (keycode == 13 && this.value != "") { //making sure the search bar isn't empty
+            updateIngrediantsView();
+            performSearch();
+        }
+    });
+    $(".oldButton").click(function () {
+        this.parentElement.parentElement.remove();
+        performSearch();
+        //this.parentElement.parentElement.innerHTML = ""
     });
 }

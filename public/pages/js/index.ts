@@ -1,6 +1,8 @@
 import { papayawhip } from "color-name";
 import { promises } from "fs";
 
+let searchString : string 
+
 $(".spinner-border").hide() //the loading sign
 $(".searchParams").hide() // the yellow box alert that allows you to see availble filters
 
@@ -8,7 +10,8 @@ $(".searchParams").hide() // the yellow box alert that allows you to see availbl
 $("#searchButton").click(function () {
     if ($("#searchbar")[0].value != "") { //making sure the search bar isn't empty
         $(".spinner-border").show()
-        performSearch($("#searchbar")[0].value);
+        //performSearch($("#searchbar")[0].value);
+        performSearch()
     }
 })
 
@@ -18,7 +21,8 @@ $("#searchbar").keypress(function (e) {
     if (keycode == 13 && this.value != "") { //making sure the search bar isn't empty
         $(".spinner-border").show()
         $("#searchParams").show()
-        performSearch(this.value)
+        //performSearch(this.value)
+        performSearch()
     }
 })
 
@@ -29,27 +33,37 @@ $("#searchbar").click(function () {
 
 
 
-let parameters = {
-    recipe_categoreis: [],
-    //add more parameters once we all decide on wgat they will be
-}
-
-$(".btn-primary").click(function (e) {
-    if ($(this).attr("aria-pressed") == "false") {
-        parameters.recipe_categoreis.push($(this)[0].value)
-    }
-})
 
 
+async function performSearch() {
+    if($("#searchbar")[0].value == ""){return}
 
-
-
-async function performSearch(searchQuery) {
-
+    let searchQuery = $("#searchbar")[0].value
     /*
     perform fetch of request passing in the search query and parameters object
     */
+   let parameters = {
+        recipe_categoreis: [],
+        ingrediants_list : []
+    //add more parameters once we all decide on wgat they will be
+    }
 
+    $(".btn-light").each(function() {
+        if(this.getAttribute("aria-pressed") == "true") {
+            parameters.recipe_categoreis.push(this.value)
+        }
+        
+    })
+
+    
+
+   $(".ingrediantInput").each(function (index) {
+        if(this.value !== ""){
+            parameters.ingrediants_list.push(this.value)
+        }
+   })
+  
+   console.log(parameters)
 
     let requestBody = {
         "search_query": searchQuery,
@@ -126,6 +140,143 @@ async function performSearch(searchQuery) {
             mainDiv.appendChild(resultCard)
             //append main result view to body
         });
-        document.getElementsByTagName('body')[0].appendChild(mainDiv)
+        document.getElementById('container').appendChild(mainDiv)
     }
 }
+
+
+
+
+
+
+
+
+
+/* 
+
+adding parameters 
+
+*/
+
+//event listner for ingrediant add 
+$("#ingrediantAdd").click(function () {
+    
+    if ($("#ingrediant")[0].value != "") { //making sure the search bar isn't empty
+        
+        updateIngrediantsView()
+        performSearch()
+        addEventListener()
+    }
+})
+
+
+
+//re-do search
+$(".btn-light").click(function () {
+    performSearch()
+})
+    
+
+
+
+
+//an event listener for when the enter key is clicked
+$("#ingrediant").keypress(function (e) {
+    var keycode = (e.keyCode ? e.keyCode : e.which);
+    if (keycode == 13 && $("#ingrediant")[0].value != "") { //making sure the search bar isn't empty
+        updateIngrediantsView()
+        performSearch()
+        addEventListener()
+    }
+})
+
+
+
+function updateIngrediantsView() {
+    
+    // div holding all ingrediants
+    let mainDiv = $(".ingrediantsInputG")[0]
+
+    //create new ingrediant add form group
+    
+   
+
+    let inputGroup = document.createElement('div')
+    inputGroup.setAttribute('class', 'input-group mb-3')
+
+    //input bar 
+    //<input type="text" class="form-control" placeholder="Ingrediant Name" aria-label="Recipient's username" id='ingrediant' aria-describedby="button-addon2">
+    let inputBar = document.createElement('input')
+    inputBar.setAttribute('class', 'form-control ingrediantInput')
+    inputBar.setAttribute('type', 'text')
+    inputBar.setAttribute('placeholder', 'Ingrediant Name')
+    inputBar.setAttribute('aria-label', 'Ingrediant')
+    inputBar.setAttribute('id', 'ingrediant')
+    inputBar.setAttribute("aria-describedby", "button-addon2")
+    inputGroup.appendChild(inputBar)
+
+    let buttonDiv = document.createElement('div')
+    buttonDiv.setAttribute('class', 'input-group-append')
+
+    let button = document.createElement('button')
+    button.setAttribute('class', "btn btn-success")
+    button.setAttribute("type", "button")
+    button.innerText = "Add"
+    button.setAttribute("id", "ingrediantAdd")
+    buttonDiv.appendChild(button)
+    inputGroup.appendChild(buttonDiv)
+
+    
+
+
+    //change old add area
+
+    let oldInputBar = document.getElementById('ingrediant')
+    oldInputBar.setAttribute('id', "")
+    
+    let oldButton = document.getElementById("ingrediantAdd")
+    oldButton.setAttribute('id', '')
+    oldButton.setAttribute('class', 'btn btn-danger oldButton')
+    oldButton.innerText = 'Remove'
+
+
+
+
+
+    mainDiv.appendChild(inputGroup)
+    addEventListener()
+
+}
+
+
+function addEventListener() {
+    //event listner for ingrediant add 
+    $("#ingrediantAdd").click(function () {
+        //console.log(this)
+        if ($("#ingrediant")[0].value != "") { //making sure the search bar isn't empty
+            updateIngrediantsView()
+            performSearch()
+        }
+    })
+
+    //an event listener for when the enter key is clicked
+    $("#ingrediant").keypress(function (e) {
+        var keycode = (e.keyCode ? e.keyCode : e.which);
+        if (keycode == 13 && this.value != "") { //making sure the search bar isn't empty
+            updateIngrediantsView()
+            performSearch()
+        }
+    })
+
+
+    $(".oldButton").click(function () {
+        this.parentElement.parentElement.remove()
+        performSearch()
+        //this.parentElement.parentElement.innerHTML = ""
+    }) 
+
+    
+    
+    
+}
+    
