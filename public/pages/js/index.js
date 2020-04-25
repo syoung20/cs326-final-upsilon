@@ -77,6 +77,7 @@ function performSearch() {
                     //mainDiv.setAttribute('class', 'justify-content-center')
                     json.recipes.forEach(function (element) {
                         //nick's result card
+                        var link = document.createElement('a');
                         var resultCard = document.createElement('div');
                         resultCard.setAttribute('class', 'result');
                         resultCard.setAttribute('id', element['recipe_id']);
@@ -113,7 +114,9 @@ function performSearch() {
                         titleAndlistdiv.appendChild(ul);
                         resultCard.appendChild(titleAndlistdiv);
                         //append nick's card to the main result view 
-                        mainDiv.appendChild(resultCard);
+                        link.setAttribute('href', 'https://cs326-final-upsilon.herokuapp.com/recipe.html');
+                        link.appendChild(resultCard);
+                        mainDiv.appendChild(link);
                         //append main result view to body
                     });
                     document.getElementById('container').appendChild(mainDiv);
@@ -148,7 +151,7 @@ function performSearch() {
                 "search_query": searchQuery,
                 params: parameters
             };
-            url = 'http://localhost:5657/search';
+            url = 'https://cs326-final-upsilon.herokuapp.com';
             fetch(url, {
                 method: 'POST',
                 headers: {

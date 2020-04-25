@@ -70,7 +70,7 @@ async function performSearch() {
         params: parameters
     }
 
-    let url = 'http://localhost:5657/search'
+    let url = 'https://cs326-final-upsilon.herokuapp.com'
 
 
     fetch(url, {
@@ -105,6 +105,7 @@ async function performSearch() {
         json.recipes.forEach(element => {
 
             //nick's result card
+            let link = document.createElement('a');
             let resultCard = document.createElement('div')
             resultCard.setAttribute('class', 'result')
             resultCard.setAttribute('id', element['recipe_id'])
@@ -137,7 +138,9 @@ async function performSearch() {
             titleAndlistdiv.appendChild(ul)
             resultCard.appendChild(titleAndlistdiv)
             //append nick's card to the main result view 
-            mainDiv.appendChild(resultCard)
+            link.setAttribute('href', 'https://cs326-final-upsilon.herokuapp.com/recipe.html')
+            link.appendChild(resultCard)
+            mainDiv.appendChild(link)
             //append main result view to body
         });
         document.getElementById('container').appendChild(mainDiv)
