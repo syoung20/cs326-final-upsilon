@@ -33,17 +33,32 @@
     </div>
     <!--border : black 2px solid;-->
     <div class="formContainer">
-        <form class="shaddow" style="padding: 1em 1em;" method="POST" action="endpoint">
+        <form class="shaddow" style="padding: 1em 1em;" method="POST" action="/recipes/add">
             <div class="form-group">
                 <label for="exampleInputEmail1">Recipe Name</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input name="recipe.title" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 <small id="emailHelp" class="form-text text-muted">What do you want this recipe to be called</small>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Recipe Discription</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea name="recipe.discription" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
-    
+            
+            <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Recipe Category</label>
+                            <select name="recipe.category" class="custom-select" id="inputGroupSelect02">
+                              <option selected>Choose...</option>
+                              <option value="appetizer">Appetizer</option>
+                              <option value="soup">Soup</option>
+                              <option value="main dish">Main Dish</option>
+                              <option value="dessert">Dessert</option>
+                            </select>
+            </div>
+
+
+
+
+
     
             <div class="form-group accordion" id="accordionExample">
                 <div class="card">
@@ -61,7 +76,7 @@
                         data-parent="#accordionExample">
                         <div class="card-body" id="incrediantsCard">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Ingrediant Name"
+                                <input name= "ingrediant" type="text" class="form-control" placeholder="Ingrediant Name"
                                     aria-label="Ingrediant" id='ingrediant' aria-describedby="button-addon2">
                                 <div class="input-group-append">
                                     <button class="btn btn-success" type="button" id="ingrediantAdd">Add</button>
@@ -72,18 +87,52 @@
                     </div>
                 </div>
             </div>
+
+
+
+
+
+            <div class="form-group accordion" id="accordionExample">
+                    <div class="card">
+        
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                                    aria-expanded="true" aria-controls="collapseOne">
+                                    Add Instructions
+                                </button>
+                            </h2>
+                        </div>
+        
+                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne"
+                            data-parent="#accordionExample">
+                            <div class="card-body" id="instructionsCard">
+                                <div class="input-group mb-3">
+                                    <input name="instruction" type="text" class="form-control" placeholder="Ingrediant Name"
+                                        aria-label="Instrutions" id='instruction' aria-describedby="button-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success" type="button" id="instructionAdd">Add</button>
+                                    </div>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+                </div>
     
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Instructions</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
+
+
+
+
+
+            
     
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Cook-Time</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                    <input name="cook.time" type="text" class="form-control" aria-label="Text input with dropdown button">
                     <div class="input-group-append">
-                        <select class="custom-select" id="inputGroupSelect01">
+                        <select name="cook.unit" class="custom-select" id="inputGroupSelect01">
                             <option selected>Choose...</option>
                             <option value="1">Hours</option>
                             <option value="2">Minutes</option>
@@ -95,9 +144,9 @@
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Prep-Time</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                    <input name="prep.time" type="text" class="form-control" aria-label="Text input with dropdown button">
                     <div class="input-group-append">
-                        <select class="custom-select" id="inputGroupSelect01">
+                        <select name="pre.unit" class="custom-select" id="inputGroupSelect01">
                             <option selected>Choose...</option>
                             <option value="1">Hours</option>
                             <option value="2">Minutes</option>
@@ -110,7 +159,7 @@
                 <label for="exampleFormControlTextarea1">Picture of your recipe</label>
                 <div class="input-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile">
+                        <input name="image" type="file" class="custom-file-input" id="customFile">
                         <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
                 </div>
@@ -132,5 +181,6 @@
 
 </body>
 <script src="js/create_recipe.js"></script>
+<script src="js/create_recipe_instructions.js"></script>
 
 </html>
