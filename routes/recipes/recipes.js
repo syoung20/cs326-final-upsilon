@@ -4,7 +4,6 @@ var faker = require('faker');
 //code to handle the different posts
 router.post('/add', function (req, res) {
     //this endpoint is going to be called with form data once the data has succesfully been written to a db just render a view
-    //res.render('index')
     var responseObj = {
         "recipe.name": req.body['recipe.title'],
         "recipe.discription": req.body["recipe.discription"],
@@ -34,7 +33,18 @@ router.post('/read', function (req, res) {
     var recPreptime = 20;
     var recCooktime = 40;
     var recServings = 4;
-    res.write(JSON.stringify({ 'title': recipeName, 'author': recipeAuthor, 'description': recDescription, 'ingredients': recIngredients, 'instructions': recInstructions, 'preptime': recPreptime, 'cooktime': recCooktime, 'totaltime': totaltime, 'servings': recServings }));
+    var resObj = {
+        title: recipeName,
+        author: recipeAuthor,
+        description: recDescription,
+        ingredients: recIngredients,
+        instructions: recInstructions,
+        preptime: recPreptime,
+        cooktime: recCooktime,
+        //totaltime: totaltime,
+        servings: recServings
+    };
+    res.send(JSON.stringify(resObj));
     res.end();
 });
 router.post('/edit', function (req, res) {
