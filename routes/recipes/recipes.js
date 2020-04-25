@@ -16,7 +16,7 @@ router.post('/add', function (req, res) {
         "pre.unit": req.body['pre.unit']
     };
     console.log(responseObj);
-    res.redirect('http://localhost:5657');
+    res.redirect('https://cs326-final-upsilon.herokuapp.com');
 });
 router.post('/read', function (req, res) {
     //let recipeID : string = req.body.rid
