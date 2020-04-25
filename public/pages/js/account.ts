@@ -1,4 +1,4 @@
-const url = "http://localhost:5657/users/";
+const url = "https://cs326-final-upsilon.herokuapp.com/users/";
 var userId : string; //right now just using email from account credentials
 var view : string = "recipebook"; //view to keep track of current tab for post requests
 var numRecip : number = 0; //used to adjust layout
