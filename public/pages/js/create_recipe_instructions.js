@@ -1,32 +1,32 @@
-//event listner for ingrediant add 
-$("#ingrediantAdd").click(function () {
-    if ($("#ingrediant")[0].value != "") { //making sure the search bar isn't empty
-        updateingrediantsView();
+//event listner for instruction add 
+$("#instructionAdd").click(function () {
+    if ($("#instruction")[0].value != "") { //making sure the search bar isn't empty
+        updateinstructionsView();
     }
 });
 //an event listener for when the enter key is clicked
-$("#ingrediant").keypress(function (e) {
+$("#instruction").keypress(function (e) {
     var keycode = (e.keyCode ? e.keyCode : e.which);
     if (keycode == 13 && this.value != "") { //making sure the search bar isn't empty
-        updateingrediantsView();
+        updateinstructionsView();
     }
 });
-function updateingrediantsView() {
-    // div holding all ingrediants
-    var mainDiv = $("#incrediantsCard")[0];
-    //create new ingrediant add form group
+function updateinstructionsView() {
+    // div holding all instructions
+    var mainDiv = $("#instructionsCard")[0];
+    //create new instruction add form group
     var newFormGroup = document.createElement('div');
     newFormGroup.setAttribute('class', 'input-group mb-3');
     var inputGroup = document.createElement('div');
     inputGroup.setAttribute('class', 'input-group mb-3');
     //input bar 
-    //<input type="text" class="form-control" placeholder="ingrediant Name" aria-label="Recipient's username" id='ingrediant' aria-describedby="button-addon2">
+    //<input type="text" class="form-control" placeholder="instruction Name" aria-label="Recipient's username" id='instruction' aria-describedby="button-addon2">
     var inputBar = document.createElement('input');
     inputBar.setAttribute('class', 'form-control');
     inputBar.setAttribute('type', 'text');
-    inputBar.setAttribute('placeholder', 'ingrediant');
-    inputBar.setAttribute('aria-label', 'ingrediant');
-    inputBar.setAttribute('id', 'ingrediant');
+    inputBar.setAttribute('placeholder', 'instruction');
+    inputBar.setAttribute('aria-label', 'instruction');
+    inputBar.setAttribute('id', 'instruction');
     inputBar.setAttribute("aria-describedby", "button-addon2");
     inputGroup.appendChild(inputBar);
     var buttonDiv = document.createElement('div');
@@ -35,36 +35,36 @@ function updateingrediantsView() {
     button.setAttribute('class', "btn btn-success");
     button.setAttribute("type", "button");
     button.innerText = "Add";
-    button.setAttribute("id", "ingrediantAdd");
+    button.setAttribute("id", "instructionAdd");
     buttonDiv.appendChild(button);
     inputGroup.appendChild(buttonDiv);
     newFormGroup.appendChild(inputGroup);
     //change old add area
-    var oldInputBar = document.getElementById('ingrediant');
+    var oldInputBar = document.getElementById('instruction');
     oldInputBar.setAttribute('id', "");
-    var oldButton = document.getElementById("ingrediantAdd");
+    var oldButton = document.getElementById("instructionAdd");
     oldButton.setAttribute('id', '');
-    oldButton.setAttribute('class', 'btn btn-danger oldingrediantButton');
+    oldButton.setAttribute('class', 'btn btn-danger oldInstructionButton');
     oldButton.innerText = 'Remove';
     mainDiv.appendChild(newFormGroup);
     addEventListener();
 }
 function addEventListener() {
-    //event listner for ingrediant add 
-    $("#ingrediantAdd").click(function () {
-        console.log(this);
-        if ($("#ingrediant")[0].value != "") { //making sure the search bar isn't empty
-            updateingrediantsView();
+    //event listner for instruction add 
+    $("#instructionAdd").click(function () {
+        //console.log(this)
+        if ($("#instruction")[0].value != "") { //making sure the search bar isn't empty
+            updateinstructionsView();
         }
     });
     //an event listener for when the enter key is clicked
-    $("#ingrediant").keypress(function (e) {
+    $("#instruction").keypress(function (e) {
         var keycode = (e.keyCode ? e.keyCode : e.which);
         if (keycode == 13 && this.value != "") { //making sure the search bar isn't empty
-            updateingrediantsView();
+            updateinstructionsView();
         }
     });
-    $(".oldingrediantButton").click(function () {
+    $(".oldInstructionButton").click(function () {
         this.parentElement.parentElement.remove();
         //this.parentElement.parentElement.innerHTML = ""
     });

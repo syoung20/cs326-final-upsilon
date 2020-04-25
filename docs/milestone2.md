@@ -1,23 +1,40 @@
 # API Documentation
 ## Endpoint Reference
 
+# Heroku Link
+
+[APPetizer](https://cs326-final-upsilon.herokuapp.com)
+
+
 # General Endpoints
 
 
-### /search
+### /search [POST] [GET] 
+A GET request to this url will serve the home page where the user can search for recipes.
+
 Once the user searches for something, we will make a POST request to this endpoint with the parameters below in the body of the post request.
 
 Parameters:
-- term (string): search term
-- limit (number): number of recipes returned
-- offset (number): index to begin returning recipes
+- search_query : search string
+- params : A json object that that includes an array of recipe categories, blah blah 
+
+
+
+-- which ones of the ones below do we actually want to implement?
+- limit (number): number of recipes returned ?? is this even useful? who does this?
+- offset (number): index to begin returning recipes ?? i don't think this is something a user would commonly do
 - include (list of strings): ingredients to include
 - omit (list of strings): ingredients to not include
 - tags (list of strings): tags to search for
+
+
+- params : A json object that that includes an array of recipe categories, blah blah 
+
+
 Response:
-- A json object with two values:
-  - matchedItems - an array that includes all the matched recipes
-  - matchedCount - a count of the number of recipes being returned 
+- A json object with two fields:
+  - recipes - an array which holds json objects (recipes) as it's elements. 
+  - recipe_count - a count of the number of recipes present in the field above. 
 
 
 
@@ -25,16 +42,14 @@ Response:
 Sign into user account
 ### /signup
 Create a new user.
-
 ### /logout
 Log out of current accout.
 ### /recoverPassword
-Revover/ change password.
-
+Revover password.
+### /changePassword
+Change password
 
 # Recipe Endpoints
-### /recipes [GET]
-Routes to the recipes home page
 
 ### /recipes/add [POST]
 Add a recipe. Requires user authentication. Once authenticated, the user will fill out a form that includes all parts of the recipe, and then that will be sent to the server with a post request. 
@@ -55,7 +70,11 @@ JSON object that includes
 - Recipe name a `string`
 - Discription - a `string` 
 - [Ingrediants] - an `Array<string>` 
-- etc
+- [Instructions] - an `Array<string>`
+- Cook time an `int`
+- Prep time an `int`
+- Servings an `int`
+- author a `string` (from userId)
 
 ### /recipes/edit [POST] 
 Edit an existing recipe. Requires user authentication.
@@ -316,3 +335,40 @@ Response:
 - categoryId (number) : category id from request
 - recipeId (number) : recipe id from request
 - status (number) : status code
+
+
+# CRUD Operation
+
+## Create 
+
+The two screenshots below highlight the Create part of the CRUD operation our web-app performs. 
+
+![Screen Shot 2020-04-24 at 10 47 18 PM](https://user-images.githubusercontent.com/53792284/80269423-cd341d00-867d-11ea-8780-dac31cef6fdf.png)
+
+`console.log` of the form data server-side. Note, the data is not real recipe data 
+
+![Screen Shot 2020-04-24 at 10 47 49 PM](https://user-images.githubusercontent.com/53792284/80269440-efc63600-867d-11ea-9ba3-896f2bea8a94.png)
+
+## READ
+
+The following is an example of a read operation to show a recipe on recipe.html
+![image](https://user-images.githubusercontent.com/55409182/80270662-11c4b600-8688-11ea-8e29-9eceed51aebc.png)
+
+This is the json object recieved after the fetch call:
+![image](https://user-images.githubusercontent.com/55409182/80270683-49336280-8688-11ea-8eab-30ac0f1acb0d.png)
+
+
+
+
+## UPDATE
+
+This is an example of an update operation. A user can update the title of a category of their pantry inventory, and can also update the items in that category.
+![Screen Shot 2020-04-24 at 10 00 19 PM](https://user-images.githubusercontent.com/44949568/80269701-94914500-8677-11ea-8c22-a6222e17313f.png)
+
+## DELETE
+The following is an example of a delete operation. A user can delete a recipe category from their recipe book.
+![Screen Shot 2020-04-24 at 9 59 25 PM](https://user-images.githubusercontent.com/44949568/80269689-86432900-8677-11ea-89c3-d0b17487fa0e.png)
+
+Below is another example of a delete operation, in which the user can remove a specific recipe from their recipe collection.
+![Screen Shot 2020-04-24 at 9 59 50 PM](https://user-images.githubusercontent.com/44949568/80269693-8c390a00-8677-11ea-97f8-d79a794c9efd.png)
+

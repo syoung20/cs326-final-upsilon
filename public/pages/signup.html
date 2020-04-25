@@ -3,16 +3,17 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="stylesheets/login.css">
 </head>
 
 <body background="images/wallpaper.jpg">
 
-    <form action="/action_page.php" method="get" valign="middle">
+    <div class="form" valign="middle">
         <div class="imgcontainer">
             <img src="images/user-avatar.jpg" heigth=140 width=140 alt=Avatar class=avatar>
         </div>
-        
         <div class=container>
             <label for=uname>First Name</label>
             <input type="text" placehodler="Enter Username" name=fname required>
@@ -24,12 +25,22 @@
             <input type="password" placehodler="Enter Password" name=pswd required>
             <label for=rpswd>Repeat Password</label>
             <input type="password" placehodler="Repeat Password" name=rpswd required>
-            <button type=submit>Signup</button>
+            <button type="submit" id="myBtn">Signup</button>
         </div>
 
         <div class=container>
             <span>Already have an account?  <a href="login.html">Log in</a></span>
         </div>
     </form>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+          <p>Signup succesfull!</p>
+          <p>Click to go <a href="/login.html">Login Page</a></p>
+        </div>
+    </div>
 </body>
+
+<script src="js/signup.js"></script>
+
 </html>
