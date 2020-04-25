@@ -34,7 +34,17 @@ router.post('/read', function (req, res) {
     var recPreptime = 20;
     var recCooktime = 40;
     var recServings = 4;
-    res.write(JSON.stringify({ 'title': recipeName, 'author': recipeAuthor, 'description': recDescription, 'ingredients': recIngredients, 'instructions': recInstructions, 'preptime': recPreptime, 'cooktime': recCooktime, 'totaltime': totaltime, 'servings': recServings }));
+    var resObj = {
+        title: recipeName,
+        author: recipeAuthor,
+        description: recDescription,
+        ingredients: recIngredients,
+        instructions: recInstructions,
+        preptime: recPreptime,
+        cooktime: recCooktime,
+        servings: recServings
+    };
+    res.send(JSON.stringify(resObj));
     res.end();
 });
 router.post('/edit', function (req, res) {
