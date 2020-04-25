@@ -34,7 +34,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var url = "http://localhost:5656/users/";
+var url = "http://localhost:5657/users/";
 var userId; //right now just using email from account credentials
 var view = "recipebook"; //view to keep track of current tab for post requests
 var numRecip = 0; //used to adjust layout
@@ -73,18 +73,24 @@ $("#create").click(function () {
 //prevents any popup forms from automatically submitting
 $("form").submit(function () { return false; });
 //change password popup: open popup on gear click, route to page on button click
-$("#user svg").click(function () { settings.show(); });
-settings.find("button").click(function () { window.location.href = "login.html"; });
+$("#user svg").click(function () {
+    settings.show();
+});
+settings.find("button").click(function () {
+    window.location.href = "change_password.html";
+});
 //add category popup: open popup, add category on button click
-$(".add-category h4").click(function () { addCat.show(); });
+$(".add-category h4").click(function () {
+    addCat.show();
+});
 addCat.find("button").click(function () {
-    if ($("#newCategory").val() != "")
-        loadNewCategory();
+    loadNewCategory();
 });
 //edit category popup: open popup
 $(document).on('click', ".edit-category", function (event) {
     editForm.show();
-    editForm.find("form").attr("class", $(event.currentTarget).parent().parent().attr("id"));
+    var id = $(event.currentTarget).parent().parent().attr("id");
+    editForm.find("form").attr("class", id);
     $("#edit-title").val($(event.currentTarget).parent().text());
     $("#edit-items").val($(event.currentTarget).parent().parent().find("ul li").map(function () {
         return $(this).text();
@@ -232,7 +238,7 @@ function adjustRecipebook() {
 //access /users/read and reflect data on html page
 function loadAccountData() {
     return __awaiter(this, void 0, void 0, function () {
-        var data, resp, status, name_1, recipeCategories, i, catId, title, img, html;
+        var data, resp, status, name, recipeCategories, i, catId, title, img, html;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -243,10 +249,10 @@ function loadAccountData() {
                     console.log(resp);
                     status = resp["status"];
                     if (status == 200) {
-                        name_1 = resp["name"];
+                        name = resp["name"];
                         recipeCategories = resp["recipeCategories"];
                         console.log(recipeCategories);
-                        $("#username").text(name_1);
+                        $("#username").text(name);
                         for (i = 0; i < recipeCategories.length; i++) {
                             catId = recipeCategories[i]["id"];
                             title = recipeCategories[i]["title"];
@@ -265,7 +271,7 @@ function loadAccountData() {
 //access users/recipebook/cat/read and put data into html
 function loadRecipeCategory(id) {
     return __awaiter(this, void 0, void 0, function () {
-        var data, resp, status, name_2, recipes, i, recipeId, recipeTitle, recipeImg, html;
+        var data, resp, status, name, recipes, i, recipeId, recipeTitle, recipeImg, html;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -276,9 +282,9 @@ function loadRecipeCategory(id) {
                     console.log(resp);
                     status = resp["status"];
                     if (status == 200) {
-                        name_2 = resp["title"];
+                        name = resp["title"];
                         recipes = resp["recipes"];
-                        recipeCatHeader.find("h3").text(name_2);
+                        recipeCatHeader.find("h3").text(name);
                         for (i = 0; i < recipes.length; i++) {
                             recipeId = recipes[i]["recipeId"];
                             recipeTitle = recipes[i]["recipeTitle"];

@@ -1,4 +1,4 @@
-const url = "http://localhost:5656/users/";
+const url = "http://localhost:5657/users/";
 var userId : string; //right now just using email from account credentials
 var view : string = "recipebook"; //view to keep track of current tab for post requests
 var numRecip : number = 0; //used to adjust layout
@@ -47,7 +47,7 @@ $("#user svg").click(() => {
     settings.show()
 });
 settings.find("button").click(() => {
-    window.location.href="login.html"
+    window.location.href="change_password.html"
 });
 //add category popup: open popup, add category on button click
 $(".add-category h4").click(function() {

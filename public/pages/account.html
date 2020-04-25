@@ -9,20 +9,25 @@
         <link rel="stylesheet" href="stylesheets/account.css">
     </head>
     <body>
+        <nav class="mx-3 navbar navbar-expand-lg navbar-light justify-content-end sticky-top"
+        style="background-color: #EEF2F7; width: 100%">
+        <a class="navbar-brand" href="index.html">APPetizer</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="create_recipe.html">Create Recipe</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
         <div class="container">
-            <div class="row d-flex flex-row justify-content-end" id="navbar">
-                <div class="mx-2 d-flex flex-column justify-content-center" id="home-tab">
-                    <div>
-                        <p class="grow"><a href="index.html">Home</a></p>
-                    </div>
-                </div>
-                <div class="mx-2" id="create-tab">
-                    <p class="grow"><a href="create_recipe.html">Create recipe</a></p>
-                </div>
-                <div class="mx-2" id="logout-tab">
-                    <p class="grow"><a href="logout.html">Login</a></p>
-                </div>
-            </div>
             <div class="row d-flex flex-row justify-content-between">
                 <div id="user">
                     <h1><span id="username">Username</span>'s Kitchen</h1>
