@@ -37,12 +37,12 @@ Response:
 Sign into user account
 ### /signup
 Create a new user.
-
 ### /logout
 Log out of current accout.
 ### /recoverPassword
-Revover/ change password.
-
+Revover password.
+### /changePassword
+Change password
 
 # Recipe Endpoints
 ### /recipes [GET]
@@ -67,7 +67,11 @@ JSON object that includes
 - Recipe name a `string`
 - Discription - a `string` 
 - [Ingrediants] - an `Array<string>` 
-- etc
+- [Instructions] - an `Array<string>`
+- Cook time a `int`
+- Prep time a `int`
+- Servings a `int`
+- author a `string` (from userId)
 
 ### /recipes/edit [POST] 
 Edit an existing recipe. Requires user authentication.
