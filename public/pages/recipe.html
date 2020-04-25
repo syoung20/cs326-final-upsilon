@@ -7,39 +7,66 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="stylesheets/recipe.css">
+        <script src="js/recipe.js"></script>
+
+        
     </head>
     <body>
+        <nav class="m-3 navbar navbar-expand-lg navbar-light justify-content-end sticky-top"
+        style="background-color: #EEF2F7; width: 100%">
+        <a class="navbar-brand" href="index.html">APPetizer</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+        </nav>
+        <div class="container">
+        <button onclick="recipeRead()">get data</button>
+        <button type="submit" id="myBtn">Populate page</button>
+        
         <section>
-            <div class="recipe-head container-fluid">
-                <h1 class="recipe-title">Blackberry Lavender Cake with White Chocolate Buttercream</h1>
-                <div class="container-fluid recipe-img"></div>
-                <h2 class="recipe-author">Half-Baked Harvest</h2>
+            <div class="top-container">
+                <img src="../images/img.jpg" alt="Snow" style="width:100%;">
+                <h1 class="top-left" id="recipeTitle">Title</h1>
+                <h2 class="bottom-right" id="recipeAuthor">Author</h2>
             </div>
         </section>
         <section>
+            <hr>
+            <div class="description">
+                <h3>Description</h3>
+                <p id="recipeDescription">description...</p>
+            </div>
             <div class="details container">
                 <div class= "row">
                     <div class="col-3">
                         <div>
-                            <h4>20m</h4>
+                            <h4 id="recipePreptime">##</h4>
                             <p>prep</p>
                         </div>
                     </div>
                     <div class="col-3">
                         <div>
-                            <h4>40m</h4>
+                            <h4 id="recipeCooktime">##</h4>
                             <p>cook</p>
                         </div>
                     </div>
                     <div class="col-3">
                         <div>
-                            <h4>1hr</h4>
+                            <h4 id="recipeTotaltime">##</h4>
                             <p>total</p>
                         </div>
                     </div>
                     <div class="col-3">
                         <div>
-                            <h4>4</h4>
+                            <h4 id="recipeServings">##</h4>
                             <p>servings</p>
                         </div>
                     </div>
@@ -50,36 +77,15 @@
             <div class="row container recipe-content">
             <div class="container ingredients col-md-4">
                 <h3>Ingredients</h3>
-                <ul>
-                    <li>1 cup canola oil</li>
-                    <li>1/2 cup plain greek yogurt</li>
-                    <li>3 large eggs</li>
-                    <li>2 cups granulated sugar</li>
-                    <li>1 tablespoon vanilla extract</li>
-                    <li>1 1/2 cups buttermilk</li>
-                    <li>3 3/4 cups all purpose flour</li>
-                    <li>1 teaspoon baking soda</li>
-                    <li>1 teaspoon baking powder</li>
-                    <li>1 teaspoon kosher salt</li>
-                    <li>6 cups blackberries</li>
-                    <li>1/2 cup honey</li>
-                    <li>1 tablespoon lemon juice</li>
-                    <li>1-2 teaspoons dried lavender</li>
-                    <li>3 sticks salted butter, at room temperature</li>
-                    <li>1 1/2 cups powdered sugar</li>
-                    <li>8 ounces white chocolate, melted and cooled</li>
+                <ul id="recipeIngredients">
+                    <li>ingredients...</li>
                 </ul>
-                <button type="button" class="btn btn-light">Add to grocery list</button>
+                <button type="button" class="btn btn-light" id="buttonAdd">Add to grocery list</button>
             </div>
             <div class="container col-md-8 instructions">
                 <h3>Instructions</h3>
-                <ol>
-                    <li>Preheat oven to 350 degrees F. Grease 2 (8-inch) round cake pans. Line with parchment paper, then butter/spray with cooking spray.</li>
-                    <li>In the bowl of a stand mixer (or use a hand-held mixer) beat together the canola oil, yogurt, eggs, sugar, vanilla, and buttermilk. Add the flour, baking soda, baking powder, and salt and mix until just combined.</li>
-                    <li>Pour the batter among the cake pans and bake 30-35 minutes, until the tops are just set and no longer wiggly in the center. Remove and let cool five minutes, then run a knife around the edges of the pan and turn the cakes out onto a cooling rack. Cover and let the cakes cool completely before assembling.</li>
-                    <li>To make the jam. Add the blackberries, honey, lemon juice, and lavender to a medium size pot set over high heat. Bring the mixture to a boil, once boiling use a potato masher or fork to break down and mash the berries. Continue to cook for 5-8 minutes or until the jam has reduced and thickened by 1/3. Remove from the heat and let cool. Should thicken as it cools. </li>
-                    <li>To make the buttercream. Add the butter and powdered sugar to the bowl of a stand mixer. Beat the butter and powdered sugar together until the butter is light and fluffy. Add the melted white chocolate and beat until combined.</li>
-                    <li>To assemble. Using a large serrated knife, carefully cut each cake in half horizontally. Place one cake layer on a serving plate. Spread 1/4 of the buttercream over the cake and layer with about 1/4 cup of jam. Repeat with the remaining 3 cake layers. Be careful not to over fill your layers or the cake will be hard to slice. Lightly frost the outside of the cake. Chill 30 minutes. Serve or store in the fridge for up to 3 days. </li>
+                <ol id="recipeInstructions">
+                    <li>instructions...</li>    
                 </ol>
             </div>
             </div>
@@ -87,7 +93,7 @@
         <section>
             <div class="tags">
                 <h4>Tags</h4>
-                <p>cake, blackberries, white chocolate, lavender, layer-cake, medium-difficulty, baking</p>
+                <p id="recipeTags">cake, blackberries, white chocolate, lavender, layer-cake, medium-difficulty, baking</p>
             </div>
             <hr>
             <div class="comments">
@@ -99,5 +105,16 @@
                 </div>
             </div>
         </section>
+        <div id="recoverModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>  
+                <p>Ingredients added to grocery list!</p>
+            </div>
+        </div>
+        </div>
     </body>
+
+
+    <script src="js/recipe.js"></script>
+
 </html>

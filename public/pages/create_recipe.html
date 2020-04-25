@@ -20,52 +20,196 @@
 
 <body>
 
+    <nav class="m-3 navbar navbar-expand-lg navbar-light justify-content-end sticky-top"
+        style="background-color: #EEF2F7; width: 100%">
+        <a class="navbar-brand" href="index.html">APPetizer</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="create_recipe.html">Create Recipe</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="container">
-        <div class="row d-flex flex-row justify-content-end" id="account-nav">
-            <div class="mx-2 d-flex flex-column justify-content-center" id="recipe-tab">
-                <div>
-                    <p class="grow"><a href="index.html">Home</a></p>
-                </div>
-                <!--<div>
-                            <svg class="bi bi-caret-up-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 00.753-1.659l-4.796-5.48a1 1 0 00-1.506 0z"/>
-                              </svg>
-                        </div>-->
-            </div>
-            <div class="mx-2" id="pantry-tab">
-                <p class="grow"><a href="recipe.html">Recipes</a></p>
-            </div>
-            <div class="mx-2" id="grocery-tab">
-                <p class="grow"><a href="create_recipe.html">Create recipe</a></p>
-            </div>
-            <div class="mx-2" id="login">
-                <p class="grow"><a href="login.html">Login</a></p>
-            </div>
-        </div>
-    </div>
-    <div class="container" id="content-area">
-        <div class="row justify-content-start">
-            <h2 id="user">Username</h2>
-        </div>
-        <div class="title row justify-content-center title">
-            <h1 id='mainHeading'>Recipe Title</h1>
-        </div>
-        <div class="title row justify-content-center" id="warnShow">
-            <p>Type your title and hit enter</p>
+        <div class="m-3 row justify-content-center align-content-center">
+            <img src="images/logo.svg" alt="" height="200em" width="300em">
         </div>
 
-        <hr>
-        <div class="row justify-content-center input-group mb-3">
-            <input type="text" class="form-control" placeholder="Recipe Title" aria-label="Recipe's Title"
-                aria-describedby="button-addon2" id="bobo">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
-            </div>
+
+        <div class="row m-3" style="text-align: center">
+            <p>To add your recipe to the APPetizer collection, please fill in the fields below and hit the submit button
+                at
+                the bottom of the page. After you submit your recipe, it will be discoverable by all of APPetizer's
+                users
+            </p>
+        </div>
+        <!--border : black 2px solid;-->
+        <div class="formContainer">
+            <form class="shaddow" style="padding: 1em 1em;" method="POST" action="/recipes/add">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Recipe Name</label>
+                    <input name="recipe.title" type="email" class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted">What do you want this recipe to be called</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Recipe Discription</label>
+                    <textarea name="recipe.discription" class="form-control" id="exampleFormControlTextarea1"
+                        rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Recipe Category</label>
+                    <select name="recipe.category" class="custom-select" id="inputGroupSelect02">
+                        <option selected>Choose...</option>
+                        <option value="appetizer">Appetizer</option>
+                        <option value="soup">Soup</option>
+                        <option value="main dish">Main Dish</option>
+                        <option value="dessert">Dessert</option>
+                    </select>
+                </div>
+
+
+
+
+
+
+                <div class="form-group accordion" id="accordionExample">
+                    <div class="card">
+
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Add Ingrediants
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                            data-parent="#accordionExample">
+                            <div class="card-body" id="incrediantsCard">
+                                <div class="input-group mb-3">
+                                    <input name="ingrediant" type="text" class="form-control"
+                                        placeholder="Ingrediant Name" aria-label="Ingrediant" id='ingrediant'
+                                        aria-describedby="button-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success" type="button" id="ingrediantAdd">Add</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="form-group accordion" id="accordionExample">
+                    <div class="card">
+
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+                                    Add Instructions
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne"
+                            data-parent="#accordionExample">
+                            <div class="card-body" id="instructionsCard">
+                                <div class="input-group mb-3">
+                                    <input name="instruction" type="text" class="form-control"
+                                        placeholder="Ingrediant Name" aria-label="Instrutions" id='instruction'
+                                        aria-describedby="button-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success" type="button" id="instructionAdd">Add</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Cook-Time</label>
+                    <div class="input-group">
+                        <input name="cook.time" type="text" class="form-control"
+                            aria-label="Text input with dropdown button">
+                        <div class="input-group-append">
+                            <select name="cook.unit" class="custom-select" id="inputGroupSelect01">
+                                <option selected>Choose...</option>
+                                <option value="1">Hours</option>
+                                <option value="2">Minutes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Prep-Time</label>
+                    <div class="input-group">
+                        <input name="prep.time" type="text" class="form-control"
+                            aria-label="Text input with dropdown button">
+                        <div class="input-group-append">
+                            <select name="pre.unit" class="custom-select" id="inputGroupSelect01">
+                                <option selected>Choose...</option>
+                                <option value="1">Hours</option>
+                                <option value="2">Minutes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Picture of your recipe</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input name="image" type="file" class="custom-file-input" id="customFile">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
     </div>
+
+
+
+
 
 
 </body>
 <script src="js/create_recipe.js"></script>
+<script src="js/create_recipe_instructions.js"></script>
 
 </html>
