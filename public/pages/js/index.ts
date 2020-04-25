@@ -73,7 +73,7 @@ async function performSearch() {
 <<<<<<< HEAD
     let url = 'https://cs326-final-upsilon.herokuapp.com/search'
 =======
-    let url = 'https://cs326-final-upsilon.herokuapp.com'
+    let url = 'https://cs326-final-upsilon.herokuapp.com/search'
 >>>>>>> 8d719dbde769beeb080473a3bc8802a0b2668c04
 
 
