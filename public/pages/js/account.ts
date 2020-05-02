@@ -1,5 +1,5 @@
-const url = "https://cs326-final-upsilon.herokuapp.com/users/";
-var userId : string; //right now just using email from account credentials
+const url = "http://localhost:5657/users/";
+var userId : string = "test5@email.com"; //right now just using email from account credentials
 var view : string = "recipebook"; //view to keep track of current tab for post requests
 var numRecip : number = 0; //used to adjust layout
 
@@ -95,6 +95,8 @@ recipeOptions.find(".btn-danger").click(() => {
     var id : string = recipeOptions.find("form").attr("class");
     var catId : string = recipeCatHeader.find("h3").attr("class");
     removeRecipe(id, catId);
+    recipeCat.find(".recipe").remove();
+    loadRecipeCategory(catId);
     recipeOptions.hide();
 });
 //handle closing all popups
@@ -197,37 +199,39 @@ async function loadAccountData() {
     const data = { 'userId' : userId };
     const resp = await sendPostRequest(url + "read/", data);
     console.log(resp);
-    var status : number = resp["status"];
-    if (status == 200) {
-        var name : string = resp["name"];
-        var recipeCategories : Array<object> = resp["recipeCategories"];
-        console.log(recipeCategories);
-        $("#username").text(name);
-        for (var i : number = 0; i < recipeCategories.length; i++) {
-            var catId : string = recipeCategories[i]["id"];
-            var title : string = recipeCategories[i]["title"];
-            var img : string = recipeCategories[i]["img"];
-            var html : string = '<div id="' + catId + '" class="recipe-cat m-3"><h3 class="recipe-title">' + title + '</h3><img class="recipe-img" src="' + img + '"></div>';
-            $(html).insertBefore(recipebook.find(".add-category"));
-        }
-        numRecip = recipeCategories.length;
-        adjustRecipebook();
+    var name : string = resp["name"];
+    var recipeCategories : Array<object> = resp["recipeCategories"];
+    console.log(recipeCategories);
+    $("#username").text(name);
+    for (var i : number = 0; i < recipeCategories.length; i++) {
+        var catId : string = recipeCategories[i]["id"];
+        var title : string = recipeCategories[i]["title"];
+        var img : string;
+        if (recipeCategories[i]["img"] == "") { 
+            img = "./images/missing_img.png";
+        } else {img = recipeCategories[i]["img"];}
+        var html : string = '<div id="' + catId + '" class="recipe-cat m-3"><h3 class="recipe-title">' + title + '</h3><img class="recipe-img" src="' + img + '"></div>';
+        $(html).insertBefore(recipebook.find(".add-category"));
     }
+    numRecip = recipeCategories.length;
+    adjustRecipebook();
 }
 //access users/recipebook/cat/read and put data into html
 async function loadRecipeCategory(id) {
     const data = {'userId' : userId, 'categoryId' : id};
     const resp = await sendPostRequest(url + "recipebook/cat/read", data)
     console.log(resp);
-    var status : number = resp["status"];
-    if (status == 200) {
-        var name : string = resp["title"];
-        var recipes : Array<object> = resp["recipes"];
-        recipeCatHeader.find("h3").text(name);
-        for (var i : number = 0; i < recipes.length; i++) {
-            var recipeId : string = recipes[i]["recipeId"];
+    var name : string = resp["title"];
+    var recipes : Array<object> = resp["recipes"];
+    recipeCatHeader.find("h3").text(name);
+    for (var i : number = 0; i < recipes.length; i++) {
+        var recipeId : string = recipes[i]["recipeId"];
+        if (recipeId != "") {
             var recipeTitle : string = recipes[i]["recipeTitle"];
-            var recipeImg : string = recipes[i]["recipeImg"];
+            var recipeImg : string;
+            if (recipes[i]["recipeImg"] == "") { 
+                recipeImg = "./images/missing_img.png";
+            } else {recipeImg = recipes[i]["recipeImg"];}
             var html : string = '<div id="' + recipeId + '" class="recipe m-3"><h3 class="recipe-title">' + recipeTitle + '</h3><img class="recipe-img" src="' + recipeImg + '"></div>';
             recipeCat.children().first().append(html)
         }
@@ -238,24 +242,22 @@ async function loadPantryGroceryData(tab) {
     const data = { 'userId' : userId };
     const resp = await sendPostRequest(url + tab + "/read/", data);
     console.log(resp);
-    var status : number = resp["status"];
-    if (status == 200) {
-        var categories = resp["categories"];
-        console.log("categories returned");
-        console.log(categories);
-        console.log(categories[0]);
-        console.log(categories[0]["id"]);
-        for (var i : number = 0; i < categories.length; i++) {
-            var catId : string = categories[i]["id"];
-            var title : string = categories[i]["title"];
-            var items : string = categories[i]["items"];
-            var html : string = '<div id="' + catId + '" class="food-category"><h3>' + title + ' <span class="edit-category"><svg class="no-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="rgb(126, 88, 88)" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg><svg class="on-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="#501616 " xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg></span></h3><ul>';
+    var categories = resp;
+    var keys : Array<string> = Object.keys(resp);
+    for (var i : number = 0; i < keys.length; i++) {
+        var catId : string = keys[i];
+        var title : string = categories[catId]["title"];
+        var items : Array<string> = categories[catId]["items"];
+        console.log("cat id - " + catId + " title - " + title + " items - " + items);
+        var html : string = '<div id="' + catId + '" class="food-category"><h3>' + title + ' <span class="edit-category"><svg class="no-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="rgb(126, 88, 88)" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg><svg class="on-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="#501616 " xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg></span></h3><ul>';
+        if (items[0] != "") {
+            console.log("made it");
             for (var j : number = 0; j < items.length; j++) {
                 html += '<li>'+ items[j] + '</li>'
             }
-            html += '</ul></div>'
-            $(html).insertBefore($("#"+ tab + " .add-category"));
-        }
+        } 
+        html += '</ul></div>'
+        $(html).insertBefore($("#"+ tab + " .add-category"));
     }
 }
 //access users/recipebook/cat/add, users/pantry/cat/add, and users/grocery/cat/add, reflect changes in html
@@ -264,21 +266,19 @@ async function loadNewCategory() {
     const data = {"userId" : userId, "category" : categoryName};
     const resp = await sendPostRequest(url + view + "/cat/add/", data);
     addCat.find("input").val("");
-    if (resp["status"] == 200) {
-        addCat.hide();
-        var catId : number = resp["categoryId"];
-        var title : String = resp["category"];
-        var html : string = "";
-        console.log("view");
-        if (view == "recipebook") {
-            numRecip = numRecip + 1;
-            adjustRecipebook();
-            html = '<div id="' + catId + '" class="recipe-cat m-3"><h3 class="recipe-title">' + title + '</h3><img class="recipe-img" src="./images/missing_img.png"></div>';
-        } else {
-            html = '<div id="' + catId + '" class="food-category"><h3>' + title + ' <span class="edit-category"><svg class="no-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="rgb(126, 88, 88)" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg><svg class="on-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="#501616 " xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg></span></h3><ul>';
-        }
-        $(html).insertBefore($("#"+ view + " .add-category"));
+    addCat.hide();
+    var catId : number = resp["categoryId"];
+    var title : String = resp["category"];
+    var html : string = "";
+    console.log("view");
+    if (view == "recipebook") {
+        numRecip = numRecip + 1;
+        adjustRecipebook();
+        html = '<div id="' + catId + '" class="recipe-cat m-3"><h3 class="recipe-title">' + title + '</h3><img class="recipe-img" src="./images/missing_img.png"></div>';
+    } else {
+        html = '<div id="' + catId + '" class="food-category"><h3>' + title + ' <span class="edit-category"><svg class="no-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="rgb(126, 88, 88)" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg><svg class="on-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="#501616 " xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg></span></h3><ul>';
     }
+    $(html).insertBefore($("#"+ view + " .add-category"));
 }
 //remove recipe from category
 async function removeRecipe(recipeId, categoryId) {
@@ -286,36 +286,31 @@ async function removeRecipe(recipeId, categoryId) {
     console.log(data);
     const resp = await sendPostRequest(url + "recipebook/cat/edit", data);
     console.log(resp);
-    if (resp["status"] == 200) {
-        $("#" + resp["recipeId"]).remove();
-    }
+     //   $("#" + resp["recipeId"]).remove();
+    //loadRecipeCategory(categoryId);
 }
 //access /users/pantry/cat/edit and /users/grocery/cat/edit, reflect changes in html
 async function editPantryGroceryData(catId, title, items) {
+    console.log(title + " " + items);
     var data = {'userId' : userId, 'categoryId' : catId, 'title': title, 'ingredients' : items}
     const resp = await sendPostRequest(url + view + "/cat/edit", data);
     console.log(resp);
-    var status : number = resp["status"];
-    if (status == 200) {
-        var html : string = "";
-        if (resp["ingredients"][0] != "")
-        {for (var i : number = 0; i < resp["ingredients"].length; i++) {
+    var html : string = "";
+    console.log("ingredients: " + resp["ingredients"][0]);
+    if (resp["ingredients"][0].trim() != "") {
+        for (var i : number = 0; i < resp["ingredients"].length; i++) {
             html += "<li>"+ resp["ingredients"][i] + "</li>"
-        }}
-        $("#"+resp["categoryId"]).find("h3").html(resp["title"] + '<span class="edit-category"><svg class="no-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="rgb(126, 88, 88)" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg><svg class="on-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="#501616 " xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg></span>');
-        $("#"+resp["categoryId"]).find("ul").html(html)
+        }
     }
+    $("#"+resp["categoryId"]).find("h3").html(resp["title"] + '<span class="edit-category"><svg class="no-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="rgb(126, 88, 88)" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg><svg class="on-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="#501616 " xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg></span>');
+    $("#"+resp["categoryId"]).find("ul").html(html)
 }
 //access users/recipebook/cat/del, users/pantry/cat/del, and users/grocery/cat/del, reflect changes in html
 async function deleteCategory(id) {
     const data = {"userId" : userId, "categoryId" : id};
-    const resp = await sendPostRequest(url + view + "/cat/del", data);
-    console.log(resp);
-    var status : number = resp["status"];
-    if (status == 200) {
-        $("#" + id).remove();
-        editForm.hide();
-    }
+    await sendPostRequest(url + view + "/cat/del", data);
+    $("#" + id).remove();
+    editForm.hide();
 }
 
 //FUNCTIONS FOR HTTP REQUESTS TO SERVER
