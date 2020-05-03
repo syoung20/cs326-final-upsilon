@@ -183,13 +183,19 @@
                 </div>
 
                 <div class="form-group">
+                    
                     <label for="exampleFormControlTextarea1">Picture of your recipe</label>
                     <div class="input-group">
                         <div class="custom-file">
-                            <input name="image" type="file" class="custom-file-input" id="customFile">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
+                            <input name="image" type="file" class="custom-file-input" id="imageFile">
+                            <label class="custom-file-label" for="customFile">Choose Image File</label>
                         </div>
                     </div>
+                    <div class="p-3 row imageUploadView justify-content-center" style="display: none">
+                    
+                            <img src="#" id="imageUploaded" style="max-width: 100%;">
+    
+                        </div>
 
                 </div>
 
@@ -209,7 +215,11 @@
 
 
 </body>
+<script>
+        var exports = {};
+    </script>
 <script src="js/create_recipe.js"></script>
 <script src="js/create_recipe_instructions.js"></script>
+<script src="js/imageUpload.js"></script>
 
 </html>
