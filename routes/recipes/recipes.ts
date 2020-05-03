@@ -8,7 +8,7 @@ var faker = require('faker');
 router.post('/add', (req, res) => {
 
     //this endpoint is going to be called with form data once the data has succesfully been written to a db just render a view
-
+    //console.log(req.body)
 
     let responseObj = {
         "recipe.name": req.body['recipe.title'],
@@ -17,16 +17,18 @@ router.post('/add', (req, res) => {
         "ingrediant": req.body["ingrediant"],
         "instruction": req.body["instruction"],
         "cook.time": req.body["cook.time"],
-        "cook.unit": req.body["cook.unit"],
+        "cook.unit": req.body["cook.unit"], // 1 - hours 2 - minutes 
         "prep.time": req.body["prep.time"],
-        "pre.unit": req.body['pre.unit'],
+        "prep.unit": req.body['prep.unit'],
+        "image" : req.body['imageB64']
+
         // "image" : req.body['image']
 
 
     }
     console.log(responseObj)
 
-    res.redirect('https://cs326-final-upsilon.herokuapp.com')
+    res.redirect('http://localhost:5657')
 
 })
 
