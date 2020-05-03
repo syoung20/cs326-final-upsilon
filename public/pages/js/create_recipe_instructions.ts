@@ -68,11 +68,11 @@ function updateinstructionsView() {
 
 
     mainDiv.appendChild(newFormGroup)
-    addEventListener()
+    addEventListenerForInstructions()
 }
 
 
-function addEventListener() {
+function addEventListenerForInstructions() {
     //event listner for instruction add 
     $("#instructionAdd").click(function () {
         //console.log(this)
