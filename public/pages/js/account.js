@@ -34,8 +34,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var url = "https://cs326-final-upsilon.herokuapp.com/users/";
-var userId; //right now just using email from account credentials
+var url = "http://localhost:5657/users/";
+var userId = "test5@email.com"; //right now just using email from account credentials
 var view = "recipebook"; //view to keep track of current tab for post requests
 var numRecip = 0; //used to adjust layout
 //account.html popup divs. These are displayed/hidden based on clicks
@@ -136,6 +136,8 @@ recipeOptions.find(".btn-danger").click(function () {
     var id = recipeOptions.find("form").attr("class");
     var catId = recipeCatHeader.find("h3").attr("class");
     removeRecipe(id, catId);
+    recipeCat.find(".recipe").remove();
+    loadRecipeCategory(catId);
     recipeOptions.hide();
 });
 //handle closing all popups
@@ -238,7 +240,7 @@ function adjustRecipebook() {
 //access /users/read and reflect data on html page
 function loadAccountData() {
     return __awaiter(this, void 0, void 0, function () {
-        var data, resp, status, name, recipeCategories, i, catId, title, img, html;
+        var data, resp, name, recipeCategories, i, catId, title, img, html;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -247,22 +249,24 @@ function loadAccountData() {
                 case 1:
                     resp = _a.sent();
                     console.log(resp);
-                    status = resp["status"];
-                    if (status == 200) {
-                        name = resp["name"];
-                        recipeCategories = resp["recipeCategories"];
-                        console.log(recipeCategories);
-                        $("#username").text(name);
-                        for (i = 0; i < recipeCategories.length; i++) {
-                            catId = recipeCategories[i]["id"];
-                            title = recipeCategories[i]["title"];
-                            img = recipeCategories[i]["img"];
-                            html = '<div id="' + catId + '" class="recipe-cat m-3"><h3 class="recipe-title">' + title + '</h3><img class="recipe-img" src="' + img + '"></div>';
-                            $(html).insertBefore(recipebook.find(".add-category"));
+                    name = resp["name"];
+                    recipeCategories = resp["recipeCategories"];
+                    console.log(recipeCategories);
+                    $("#username").text(name);
+                    for (i = 0; i < recipeCategories.length; i++) {
+                        catId = recipeCategories[i]["id"];
+                        title = recipeCategories[i]["title"];
+                        if (recipeCategories[i]["img"] == "") {
+                            img = "./images/missing_img.png";
                         }
-                        numRecip = recipeCategories.length;
-                        adjustRecipebook();
+                        else {
+                            img = recipeCategories[i]["img"];
+                        }
+                        html = '<div id="' + catId + '" class="recipe-cat m-3"><h3 class="recipe-title">' + title + '</h3><img class="recipe-img" src="' + img + '"></div>';
+                        $(html).insertBefore(recipebook.find(".add-category"));
                     }
+                    numRecip = recipeCategories.length;
+                    adjustRecipebook();
                     return [2 /*return*/];
             }
         });
@@ -271,7 +275,7 @@ function loadAccountData() {
 //access users/recipebook/cat/read and put data into html
 function loadRecipeCategory(id) {
     return __awaiter(this, void 0, void 0, function () {
-        var data, resp, status, name, recipes, i, recipeId, recipeTitle, recipeImg, html;
+        var data, resp, name, recipes, i, recipeId, recipeTitle, recipeImg, html;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -280,15 +284,19 @@ function loadRecipeCategory(id) {
                 case 1:
                     resp = _a.sent();
                     console.log(resp);
-                    status = resp["status"];
-                    if (status == 200) {
-                        name = resp["title"];
-                        recipes = resp["recipes"];
-                        recipeCatHeader.find("h3").text(name);
-                        for (i = 0; i < recipes.length; i++) {
-                            recipeId = recipes[i]["recipeId"];
+                    name = resp["title"];
+                    recipes = resp["recipes"];
+                    recipeCatHeader.find("h3").text(name);
+                    for (i = 0; i < recipes.length; i++) {
+                        recipeId = recipes[i]["recipeId"];
+                        if (recipeId != "") {
                             recipeTitle = recipes[i]["recipeTitle"];
-                            recipeImg = recipes[i]["recipeImg"];
+                            if (recipes[i]["recipeImg"] == "") {
+                                recipeImg = "./images/missing_img.png";
+                            }
+                            else {
+                                recipeImg = recipes[i]["recipeImg"];
+                            }
                             html = '<div id="' + recipeId + '" class="recipe m-3"><h3 class="recipe-title">' + recipeTitle + '</h3><img class="recipe-img" src="' + recipeImg + '"></div>';
                             recipeCat.children().first().append(html);
                         }
@@ -301,7 +309,7 @@ function loadRecipeCategory(id) {
 //access users/pantry/read and users/grocery/read and put data into html
 function loadPantryGroceryData(tab) {
     return __awaiter(this, void 0, void 0, function () {
-        var data, resp, status, categories, i, catId, title, items, html, j;
+        var data, resp, categories, keys, i, catId, title, items, html, j;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -310,24 +318,22 @@ function loadPantryGroceryData(tab) {
                 case 1:
                     resp = _a.sent();
                     console.log(resp);
-                    status = resp["status"];
-                    if (status == 200) {
-                        categories = resp["categories"];
-                        console.log("categories returned");
-                        console.log(categories);
-                        console.log(categories[0]);
-                        console.log(categories[0]["id"]);
-                        for (i = 0; i < categories.length; i++) {
-                            catId = categories[i]["id"];
-                            title = categories[i]["title"];
-                            items = categories[i]["items"];
-                            html = '<div id="' + catId + '" class="food-category"><h3>' + title + ' <span class="edit-category"><svg class="no-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="rgb(126, 88, 88)" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg><svg class="on-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="#501616 " xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg></span></h3><ul>';
+                    categories = resp;
+                    keys = Object.keys(resp);
+                    for (i = 0; i < keys.length; i++) {
+                        catId = keys[i];
+                        title = categories[catId]["title"];
+                        items = categories[catId]["items"];
+                        console.log("cat id - " + catId + " title - " + title + " items - " + items);
+                        html = '<div id="' + catId + '" class="food-category"><h3>' + title + ' <span class="edit-category"><svg class="no-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="rgb(126, 88, 88)" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg><svg class="on-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="#501616 " xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg></span></h3><ul>';
+                        if (items[0] != "") {
+                            console.log("made it");
                             for (j = 0; j < items.length; j++) {
                                 html += '<li>' + items[j] + '</li>';
                             }
-                            html += '</ul></div>';
-                            $(html).insertBefore($("#" + tab + " .add-category"));
                         }
+                        html += '</ul></div>';
+                        $(html).insertBefore($("#" + tab + " .add-category"));
                     }
                     return [2 /*return*/];
             }
@@ -347,22 +353,20 @@ function loadNewCategory() {
                 case 1:
                     resp = _a.sent();
                     addCat.find("input").val("");
-                    if (resp["status"] == 200) {
-                        addCat.hide();
-                        catId = resp["categoryId"];
-                        title = resp["category"];
-                        html = "";
-                        console.log("view");
-                        if (view == "recipebook") {
-                            numRecip = numRecip + 1;
-                            adjustRecipebook();
-                            html = '<div id="' + catId + '" class="recipe-cat m-3"><h3 class="recipe-title">' + title + '</h3><img class="recipe-img" src="./images/missing_img.png"></div>';
-                        }
-                        else {
-                            html = '<div id="' + catId + '" class="food-category"><h3>' + title + ' <span class="edit-category"><svg class="no-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="rgb(126, 88, 88)" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg><svg class="on-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="#501616 " xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg></span></h3><ul>';
-                        }
-                        $(html).insertBefore($("#" + view + " .add-category"));
+                    addCat.hide();
+                    catId = resp["categoryId"];
+                    title = resp["category"];
+                    html = "";
+                    console.log("view");
+                    if (view == "recipebook") {
+                        numRecip = numRecip + 1;
+                        adjustRecipebook();
+                        html = '<div id="' + catId + '" class="recipe-cat m-3"><h3 class="recipe-title">' + title + '</h3><img class="recipe-img" src="./images/missing_img.png"></div>';
                     }
+                    else {
+                        html = '<div id="' + catId + '" class="food-category"><h3>' + title + ' <span class="edit-category"><svg class="no-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="rgb(126, 88, 88)" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg><svg class="on-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="#501616 " xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg></span></h3><ul>';
+                    }
+                    $(html).insertBefore($("#" + view + " .add-category"));
                     return [2 /*return*/];
             }
         });
@@ -381,9 +385,6 @@ function removeRecipe(recipeId, categoryId) {
                 case 1:
                     resp = _a.sent();
                     console.log(resp);
-                    if (resp["status"] == 200) {
-                        $("#" + resp["recipeId"]).remove();
-                    }
                     return [2 /*return*/];
             }
         });
@@ -392,26 +393,25 @@ function removeRecipe(recipeId, categoryId) {
 //access /users/pantry/cat/edit and /users/grocery/cat/edit, reflect changes in html
 function editPantryGroceryData(catId, title, items) {
     return __awaiter(this, void 0, void 0, function () {
-        var data, resp, status, html, i;
+        var data, resp, html, i;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
+                    console.log(title + " " + items);
                     data = { 'userId': userId, 'categoryId': catId, 'title': title, 'ingredients': items };
                     return [4 /*yield*/, sendPostRequest(url + view + "/cat/edit", data)];
                 case 1:
                     resp = _a.sent();
                     console.log(resp);
-                    status = resp["status"];
-                    if (status == 200) {
-                        html = "";
-                        if (resp["ingredients"][0] != "") {
-                            for (i = 0; i < resp["ingredients"].length; i++) {
-                                html += "<li>" + resp["ingredients"][i] + "</li>";
-                            }
+                    html = "";
+                    console.log("ingredients: " + resp["ingredients"][0]);
+                    if (resp["ingredients"][0].trim() != "") {
+                        for (i = 0; i < resp["ingredients"].length; i++) {
+                            html += "<li>" + resp["ingredients"][i] + "</li>";
                         }
-                        $("#" + resp["categoryId"]).find("h3").html(resp["title"] + '<span class="edit-category"><svg class="no-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="rgb(126, 88, 88)" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg><svg class="on-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="#501616 " xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg></span>');
-                        $("#" + resp["categoryId"]).find("ul").html(html);
                     }
+                    $("#" + resp["categoryId"]).find("h3").html(resp["title"] + '<span class="edit-category"><svg class="no-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="rgb(126, 88, 88)" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg><svg class="on-hover-svg bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="#501616 " xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/></svg></span>');
+                    $("#" + resp["categoryId"]).find("ul").html(html);
                     return [2 /*return*/];
             }
         });
@@ -420,20 +420,16 @@ function editPantryGroceryData(catId, title, items) {
 //access users/recipebook/cat/del, users/pantry/cat/del, and users/grocery/cat/del, reflect changes in html
 function deleteCategory(id) {
     return __awaiter(this, void 0, void 0, function () {
-        var data, resp, status;
+        var data;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     data = { "userId": userId, "categoryId": id };
                     return [4 /*yield*/, sendPostRequest(url + view + "/cat/del", data)];
                 case 1:
-                    resp = _a.sent();
-                    console.log(resp);
-                    status = resp["status"];
-                    if (status == 200) {
-                        $("#" + id).remove();
-                        editForm.hide();
-                    }
+                    _a.sent();
+                    $("#" + id).remove();
+                    editForm.hide();
                     return [2 /*return*/];
             }
         });
