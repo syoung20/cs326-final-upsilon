@@ -199,21 +199,20 @@ var Database = /** @class */ (function () {
             });
         });
     };
-    Database.prototype.putRecipeData = function (userId, title, img, prep, cook, servings) {
+    Database.prototype.loginUser = function (userId) {
         return __awaiter(this, void 0, void 0, function () {
             var result, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("put: userId = " + userId + ", title: " + title + ", img: " + img.slice(0, 10) + ", prep: " + prep + ", cook: " + cook + ", servings: " + servings);
+                        console.log("get: userId = " + userId);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, this.db.one({ text: "INSERT INTO recipes (user_id, title, image, prep_time, cook_time, servings) VALUES ($1, $2, $3, $4, $5, $6) RETURNING recipe_id", values: [userId, title, img, prep, cook, servings] })];
+                        return [4 /*yield*/, this.db.one({ text: "SELECT * FROM users WHERE user_id = $1", values: [userId] })];
                     case 2:
                         result = _a.sent();
-                        console.log(result);
-                        return [3 /*break*/, 4];
+                        return [2 /*return*/, result];
                     case 3:
                         err_2 = _a.sent();
                         console.log(err_2);
@@ -223,9 +222,84 @@ var Database = /** @class */ (function () {
             });
         });
     };
-    Database.prototype.getRecipeData = function (recipeId) {
+    Database.prototype.putUserData = function (userId, userName, userPswd) {
         return __awaiter(this, void 0, void 0, function () {
             var result, err_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.log("put: userId = " + userId + ", userName = " + userName + ", userPswd = SECURED");
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.db.one({ text: "INSERT INTO users (user_id, name, password) VALUES ($1, $2, $3) RETURNING user_id", values: [userId, userName, userPswd] })];
+                    case 2:
+                        result = _a.sent();
+                        console.log(result);
+                        return [2 /*return*/, result];
+                    case 3:
+                        err_3 = _a.sent();
+                        console.log(err_3);
+                        return [2 /*return*/, null];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Database.prototype.putRecipeData = function (userId, title, img, prep, cook, servings, description, instructions, ingredients) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result, i, i, err_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.log("put: userId = " + userId + ", title: " + title + ", img: " + img.slice(0, 10) + ", prep: " + prep + ", cook: " + cook + ", servings: " + servings);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 11, , 12]);
+                        return [4 /*yield*/, this.db.one({ text: "INSERT INTO recipes VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7) RETURNING recipe_id", values: [userId, title, img, prep, cook, servings, description] })];
+                    case 2:
+                        result = _a.sent();
+                        console.log(result);
+                        i = 0;
+                        _a.label = 3;
+                    case 3:
+                        if (!(i < instructions.length)) return [3 /*break*/, 6];
+                        if (!(instructions[i] != "")) return [3 /*break*/, 5];
+                        console.log(i + instructions[i]);
+                        return [4 /*yield*/, this.db.none({ text: "INSERT INTO instructions VALUES (DEFAULT, $1, $2, $3)", values: [result.recipe_id, instructions[i], (i + 1)] })];
+                    case 4:
+                        _a.sent();
+                        _a.label = 5;
+                    case 5:
+                        i++;
+                        return [3 /*break*/, 3];
+                    case 6:
+                        i = 0;
+                        _a.label = 7;
+                    case 7:
+                        if (!(i < ingredients.length)) return [3 /*break*/, 10];
+                        if (!(ingredients[i] != "")) return [3 /*break*/, 9];
+                        console.log(i + ingredients[i]);
+                        return [4 /*yield*/, this.db.none({ text: "INSERT INTO ingredients VALUES (DEFAULT, $1, $2, $3)", values: [result.recipe_id, ingredients[i], (i + 1)] })];
+                    case 8:
+                        _a.sent();
+                        _a.label = 9;
+                    case 9:
+                        i++;
+                        return [3 /*break*/, 7];
+                    case 10: return [3 /*break*/, 12];
+                    case 11:
+                        err_4 = _a.sent();
+                        console.log(err_4);
+                        return [2 /*return*/, null];
+                    case 12: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Database.prototype.getRecipeData = function (recipeId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result, err_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -238,8 +312,54 @@ var Database = /** @class */ (function () {
                         result = _a.sent();
                         return [2 /*return*/, result];
                     case 3:
-                        err_3 = _a.sent();
+                        err_5 = _a.sent();
                         console.log("error getting recipe data");
+                        return [2 /*return*/, null];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Database.prototype.getRecipeIngredients = function (recipeId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        console.log("get: recipeId = " + recipeId);
+                        _b.label = 1;
+                    case 1:
+                        _b.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.db.many({ text: "SELECT (ingredient) FROM ingredients WHERE recipe_id = $1 ORDER BY order_num ASC LIMIT 100", values: [recipeId] })];
+                    case 2:
+                        result = _b.sent();
+                        return [2 /*return*/, result];
+                    case 3:
+                        _a = _b.sent();
+                        console.log("error getting recipe ingredients");
+                        return [2 /*return*/, null];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Database.prototype.getRecipeInstructions = function (recipeId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        console.log("get: recipeId = " + recipeId);
+                        _b.label = 1;
+                    case 1:
+                        _b.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.db.many({ text: "SELECT (instruction) FROM instructions WHERE recipe_id = $1 ORDER BY order_num ASC LIMIT 100", values: [recipeId] })];
+                    case 2:
+                        result = _b.sent();
+                        return [2 /*return*/, result];
+                    case 3:
+                        _a = _b.sent();
+                        console.log("error getting recipe instructions");
                         return [2 /*return*/, null];
                     case 4: return [2 /*return*/];
                 }
@@ -248,7 +368,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.getRecipebookData = function (userId) {
         return __awaiter(this, void 0, void 0, function () {
-            var result, err_4;
+            var result, err_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -261,7 +381,7 @@ var Database = /** @class */ (function () {
                         result = _a.sent();
                         return [2 /*return*/, result];
                     case 3:
-                        err_4 = _a.sent();
+                        err_6 = _a.sent();
                         console.log("error getting recipebook data");
                         return [2 /*return*/, null];
                     case 4: return [2 /*return*/];
@@ -271,7 +391,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.getRecipebookCategoryData = function (userId, categoryId) {
         return __awaiter(this, void 0, void 0, function () {
-            var title, recipes, err_5;
+            var title, recipes, err_7;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -285,7 +405,7 @@ var Database = /** @class */ (function () {
                         recipes.unshift(title);
                         return [2 /*return*/, recipes];
                     case 3:
-                        err_5 = _a.sent();
+                        err_7 = _a.sent();
                         console.log("error getting recipebook category data");
                         return [2 /*return*/, null];
                     case 4: return [2 /*return*/];
@@ -295,7 +415,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.deleteRecipebookCategory = function (userId, categoryId) {
         return __awaiter(this, void 0, void 0, function () {
-            var err_6;
+            var err_8;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -305,7 +425,7 @@ var Database = /** @class */ (function () {
                         _a.sent();
                         return [2 /*return*/];
                     case 2:
-                        err_6 = _a.sent();
+                        err_8 = _a.sent();
                         console.log("error remove recipebook category");
                         return [2 /*return*/];
                     case 3: return [2 /*return*/];
@@ -315,7 +435,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.addRecipebookCategory = function (userId, category) {
         return __awaiter(this, void 0, void 0, function () {
-            var result, err_7;
+            var result, err_9;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -326,7 +446,7 @@ var Database = /** @class */ (function () {
                         console.log(JSON.stringify(result));
                         return [2 /*return*/, result];
                     case 2:
-                        err_7 = _a.sent();
+                        err_9 = _a.sent();
                         console.log("error adding category");
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -336,7 +456,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.removeCategoryRecipe = function (userId, categoryId, recipeId) {
         return __awaiter(this, void 0, void 0, function () {
-            var result, err_8;
+            var result, err_10;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -346,7 +466,7 @@ var Database = /** @class */ (function () {
                         result = _a.sent();
                         return [2 /*return*/];
                     case 2:
-                        err_8 = _a.sent();
+                        err_10 = _a.sent();
                         console.log("error removing recipe from category");
                         return [2 /*return*/];
                     case 3: return [2 /*return*/];
@@ -356,7 +476,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.getPantryData = function (userId) {
         return __awaiter(this, void 0, void 0, function () {
-            var result, err_9;
+            var result, err_11;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -366,7 +486,7 @@ var Database = /** @class */ (function () {
                         result = _a.sent();
                         return [2 /*return*/, result];
                     case 2:
-                        err_9 = _a.sent();
+                        err_11 = _a.sent();
                         console.log("error getting pantry data");
                         return [2 /*return*/, null];
                     case 3: return [2 /*return*/];
@@ -376,7 +496,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.getGroceryData = function (userId) {
         return __awaiter(this, void 0, void 0, function () {
-            var result, err_10;
+            var result, err_12;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -386,7 +506,7 @@ var Database = /** @class */ (function () {
                         result = _a.sent();
                         return [2 /*return*/, result];
                     case 2:
-                        err_10 = _a.sent();
+                        err_12 = _a.sent();
                         console.log("error getting grocerylist data");
                         return [2 /*return*/, null];
                     case 3: return [2 /*return*/];
@@ -396,7 +516,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.updatePantryTitle = function (id, title) {
         return __awaiter(this, void 0, void 0, function () {
-            var err_11;
+            var err_13;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -409,7 +529,7 @@ var Database = /** @class */ (function () {
                         _a.sent();
                         return [3 /*break*/, 4];
                     case 3:
-                        err_11 = _a.sent();
+                        err_13 = _a.sent();
                         console.log("unable to update pantry category title");
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];
@@ -419,7 +539,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.deletePantryItems = function (catId) {
         return __awaiter(this, void 0, void 0, function () {
-            var err_12;
+            var err_14;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -429,7 +549,7 @@ var Database = /** @class */ (function () {
                         _a.sent();
                         return [3 /*break*/, 3];
                     case 2:
-                        err_12 = _a.sent();
+                        err_14 = _a.sent();
                         console.log("unable to remove pantry items");
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -439,7 +559,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.addPantryItems = function (catId, items) {
         return __awaiter(this, void 0, void 0, function () {
-            var i, err_13;
+            var i, err_15;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -458,7 +578,7 @@ var Database = /** @class */ (function () {
                         return [3 /*break*/, 1];
                     case 4: return [3 /*break*/, 6];
                     case 5:
-                        err_13 = _a.sent();
+                        err_15 = _a.sent();
                         console.log("unable to add pantry item");
                         return [3 /*break*/, 6];
                     case 6: return [2 /*return*/];
@@ -468,7 +588,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.deletePantryCategory = function (catId) {
         return __awaiter(this, void 0, void 0, function () {
-            var err_14;
+            var err_16;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -478,7 +598,7 @@ var Database = /** @class */ (function () {
                         _a.sent();
                         return [3 /*break*/, 3];
                     case 2:
-                        err_14 = _a.sent();
+                        err_16 = _a.sent();
                         console.log("unable to delete pantry category");
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -488,7 +608,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.addPantryCategory = function (userId, cat) {
         return __awaiter(this, void 0, void 0, function () {
-            var result, err_15;
+            var result, err_17;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -499,7 +619,7 @@ var Database = /** @class */ (function () {
                         console.log(result);
                         return [2 /*return*/, result];
                     case 2:
-                        err_15 = _a.sent();
+                        err_17 = _a.sent();
                         console.log("unable to add pantry category");
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -509,7 +629,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.updateGroceryTitle = function (id, title) {
         return __awaiter(this, void 0, void 0, function () {
-            var err_16;
+            var err_18;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -522,7 +642,7 @@ var Database = /** @class */ (function () {
                         _a.sent();
                         return [3 /*break*/, 4];
                     case 3:
-                        err_16 = _a.sent();
+                        err_18 = _a.sent();
                         console.log("unable to update grocery list category title");
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];
@@ -532,7 +652,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.deleteGroceryItems = function (catId) {
         return __awaiter(this, void 0, void 0, function () {
-            var err_17;
+            var err_19;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -542,7 +662,7 @@ var Database = /** @class */ (function () {
                         _a.sent();
                         return [3 /*break*/, 3];
                     case 2:
-                        err_17 = _a.sent();
+                        err_19 = _a.sent();
                         console.log("unable to remove grocery list items");
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -552,7 +672,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.addGroceryItems = function (catId, items) {
         return __awaiter(this, void 0, void 0, function () {
-            var i, err_18;
+            var i, err_20;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -571,7 +691,7 @@ var Database = /** @class */ (function () {
                         return [3 /*break*/, 1];
                     case 4: return [3 /*break*/, 6];
                     case 5:
-                        err_18 = _a.sent();
+                        err_20 = _a.sent();
                         console.log("unable to add grocery list item");
                         return [3 /*break*/, 6];
                     case 6: return [2 /*return*/];
@@ -581,7 +701,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.deleteGroceryCategory = function (catId) {
         return __awaiter(this, void 0, void 0, function () {
-            var err_19;
+            var err_21;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -591,7 +711,7 @@ var Database = /** @class */ (function () {
                         _a.sent();
                         return [3 /*break*/, 3];
                     case 2:
-                        err_19 = _a.sent();
+                        err_21 = _a.sent();
                         console.log("unable to delete grocery list category");
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
@@ -601,7 +721,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.addGroceryCategory = function (userId, cat) {
         return __awaiter(this, void 0, void 0, function () {
-            var result, err_20;
+            var result, err_22;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -612,7 +732,7 @@ var Database = /** @class */ (function () {
                         console.log(result);
                         return [2 /*return*/, result];
                     case 2:
-                        err_20 = _a.sent();
+                        err_22 = _a.sent();
                         console.log("unable to add grocery list category");
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
