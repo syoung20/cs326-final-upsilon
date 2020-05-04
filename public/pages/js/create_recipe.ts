@@ -24,8 +24,8 @@ function updateingrediantsView() {
     let newFormGroup = document.createElement('div')
     newFormGroup.setAttribute('class', 'input-group mb-3')
 
-    let inputGroup = document.createElement('div')
-    inputGroup.setAttribute('class', 'input-group mb-3')
+    //let inputGroup = document.createElement('div')
+    //inputGroup.setAttribute('class', 'input-group mb-3')
 
     //input bar 
     //<input type="text" class="form-control" placeholder="ingrediant Name" aria-label="Recipient's username" id='ingrediant' aria-describedby="button-addon2">
@@ -37,7 +37,7 @@ function updateingrediantsView() {
     inputBar.setAttribute('aria-label', 'ingrediant')
     inputBar.setAttribute('id', 'ingrediant')
     inputBar.setAttribute("aria-describedby", "button-addon2")
-    inputGroup.appendChild(inputBar)
+    newFormGroup.appendChild(inputBar)
 
     let buttonDiv = document.createElement('div')
     buttonDiv.setAttribute('class', 'input-group-append')
@@ -48,9 +48,9 @@ function updateingrediantsView() {
     button.innerText = "Add"
     button.setAttribute("id", "ingrediantAdd")
     buttonDiv.appendChild(button)
-    inputGroup.appendChild(buttonDiv)
+    newFormGroup.appendChild(buttonDiv)
 
-    newFormGroup.appendChild(inputGroup)
+    //newFormGroup.appendChild(inputGroup)
 
 
     //change old add area

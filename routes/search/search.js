@@ -46,29 +46,46 @@ router.post('/', function (req, res) {
         if (req.body.params["ingrediants_list"].length != 0) {
             areThereIngredients_1 = true;
         }
-        var sampleReturn_1 = {
+        var areThereFilters = void 0;
+        if (areThereCategoreis_1 == false && areThereIngredients_1 == false) {
+            areThereFilters = false;
+        }
+        if (areThereCategoreis_1 == true || areThereIngredients_1 == true) {
+            areThereFilters = true;
+        }
+        var returnObject_1 = {
             recipes: [],
-            recipe_count: 5
+            recipe_count: 0,
+            filters: areThereFilters,
+            filterMatchIng: false,
+            filterMatchCat: false,
+            ingrediantsMatched: [],
+            categoriesMatched: []
         };
         var recepiesWithCategories_1 = [];
         var withIngre_1 = [];
-        // let sampleReturn;
+        // let returnObject;
         var returnedOBJ = database.search(searchQuery).then(function (res) {
             //console.log(typeof withIngre)
             res.forEach(function (element) {
                 if (areThereIngredients_1) {
                     req.body.params["ingrediants_list"].forEach(function (ingrediant) {
+                        //console.log(element['ingredient'] + '   ' + ingrediant.toLowerCase())
                         if (element['ingredient'] == ingrediant.toLowerCase()) {
-                            console.log('match');
+                            //console.log('match')
                             withIngre_1.push(element);
+                            returnObject_1.filterMatchIng = true;
+                            returnObject_1.ingrediantsMatched.push(ingrediant);
                         }
                     });
                 }
                 if (areThereCategoreis_1) {
                     req.body.params["recipe_categoreis"].forEach(function (category) {
                         if (element['category'] == category.toLowerCase()) {
-                            console.log('match');
+                            //console.log('match')
                             recepiesWithCategories_1.push(element);
+                            returnObject_1.filterMatchCat = true;
+                            returnObject_1.categoriesMatched.push(category);
                         }
                     });
                 }
@@ -87,14 +104,47 @@ router.post('/', function (req, res) {
                 });
             }
             if (returnA.length != 0) {
-                sampleReturn_1.recipes = returnA;
+                returnA.forEach(function (prospect) {
+                    if (returnObject_1.recipes.length == 0) {
+                        returnObject_1.recipes.push(prospect);
+                    }
+                    else {
+                        returnObject_1.recipes.forEach(function (element) {
+                            if (element.recipe_id == prospect.recipe_id) {
+                                console.log('already in return set');
+                                return;
+                            }
+                            else {
+                                console.log('unique item added');
+                                returnObject_1.recipes.push(prospect);
+                            }
+                        });
+                    }
+                });
+                //returnObject.recipes = returnA;
                 res.status(200);
-                res.send(JSON.stringify(sampleReturn_1));
+                res.send(JSON.stringify(returnObject_1));
             }
             else {
-                sampleReturn_1.recipes = searchQMatch_1;
+                searchQMatch_1.forEach(function (prospect) {
+                    //console.log(prospect)
+                    if (returnObject_1.recipes.length == 0) {
+                        returnObject_1.recipes.push(prospect);
+                    }
+                    else {
+                        returnObject_1.recipes.forEach(function (element) {
+                            if (element.recipe_id == prospect.recipe_id) {
+                                return;
+                            }
+                            else {
+                                returnObject_1.recipes.push(prospect);
+                            }
+                        });
+                    }
+                });
+                //returnObject.recipes = searchQMatch
                 res.status(200);
-                res.send(JSON.stringify(sampleReturn_1));
+                res.send(JSON.stringify(returnObject_1));
             }
         });
     }

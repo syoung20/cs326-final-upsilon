@@ -742,19 +742,19 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.search = function (searchQ, params) {
         return __awaiter(this, void 0, void 0, function () {
-            var result, err_21;
+            var result, err_23;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.db.any({ text: "SELECT * FROM recipes LEFT JOIN ingredients ON recipes.recipe_id = ingredients.recipe_id LEFT JOIN recipebook_category_items on recipes.recipe_id = recipebook_category_items.recipe_id LEFT JOIN recipebook_categories on recipebook_category_items.recipebook_category_item_id = recipebook_categories.recipebook_category_id WHERE recipes.title ~* $1", values: [searchQ] })];
+                        return [4 /*yield*/, this.db.any({ text: "SELECT * FROM recipes LEFT JOIN ingredients ON recipes.recipe_id = ingredients.recipe_id LEFT JOIN recipebook_category_items on recipes.recipe_id = recipebook_category_items.recipe_id LEFT JOIN recipebook_categories on recipebook_category_items.recipebook_category_item_id = recipebook_categories.recipebook_category_id WHERE recipes.title ~* $1 LIMIT 100", values: [searchQ] })];
                     case 1:
                         result = _a.sent();
                         return [2 /*return*/, result];
                     case 2:
-                        err_21 = _a.sent();
+                        err_23 = _a.sent();
                         console.log("Unable to perform search");
-                        console.log(err_21);
+                        console.log(err_23);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -763,7 +763,7 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.formRecipeSubmit = function (userId, title, img, prep, cook, servings, discription) {
         return __awaiter(this, void 0, void 0, function () {
-            var result, err_22;
+            var result, err_24;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -773,8 +773,8 @@ var Database = /** @class */ (function () {
                         result = _a.sent();
                         return [2 /*return*/, result];
                     case 2:
-                        err_22 = _a.sent();
-                        console.log(err_22);
+                        err_24 = _a.sent();
+                        console.log(err_24);
                         return [2 /*return*/, null];
                     case 3: return [2 /*return*/];
                 }

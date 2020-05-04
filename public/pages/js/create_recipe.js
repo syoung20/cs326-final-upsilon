@@ -17,18 +17,19 @@ function updateingrediantsView() {
     //create new ingrediant add form group
     var newFormGroup = document.createElement('div');
     newFormGroup.setAttribute('class', 'input-group mb-3');
-    var inputGroup = document.createElement('div');
-    inputGroup.setAttribute('class', 'input-group mb-3');
+    //let inputGroup = document.createElement('div')
+    //inputGroup.setAttribute('class', 'input-group mb-3')
     //input bar 
     //<input type="text" class="form-control" placeholder="ingrediant Name" aria-label="Recipient's username" id='ingrediant' aria-describedby="button-addon2">
     var inputBar = document.createElement('input');
     inputBar.setAttribute('class', 'form-control');
     inputBar.setAttribute('type', 'text');
+    inputBar.setAttribute('name', "ingrediant");
     inputBar.setAttribute('placeholder', 'ingrediant');
     inputBar.setAttribute('aria-label', 'ingrediant');
     inputBar.setAttribute('id', 'ingrediant');
     inputBar.setAttribute("aria-describedby", "button-addon2");
-    inputGroup.appendChild(inputBar);
+    newFormGroup.appendChild(inputBar);
     var buttonDiv = document.createElement('div');
     buttonDiv.setAttribute('class', 'input-group-append');
     var button = document.createElement('button');
@@ -37,8 +38,8 @@ function updateingrediantsView() {
     button.innerText = "Add";
     button.setAttribute("id", "ingrediantAdd");
     buttonDiv.appendChild(button);
-    inputGroup.appendChild(buttonDiv);
-    newFormGroup.appendChild(inputGroup);
+    newFormGroup.appendChild(buttonDiv);
+    //newFormGroup.appendChild(inputGroup)
     //change old add area
     var oldInputBar = document.getElementById('ingrediant');
     oldInputBar.setAttribute('id', "");

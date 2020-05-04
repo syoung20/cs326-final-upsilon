@@ -65,16 +65,53 @@ function performSearch() {
     return __awaiter(this, void 0, void 0, function () {
         function updateResultView(json) {
             return __awaiter(this, void 0, void 0, function () {
-                var mainDiv;
+                var mainDiv, filtersMatched, cat, innerT_1, ing, innerT_2;
                 return __generator(this, function (_a) {
                     //remove previous results view
                     if (document.getElementById('resultsView') != null) {
                         document.getElementById('resultsView').remove();
                     }
-                    console.log(json.recipes);
+                    if (document.getElementById('filterStatus') != null) {
+                        document.getElementById('filterStatus').remove();
+                    }
+                    console.log(json);
                     mainDiv = document.createElement('div');
                     mainDiv.setAttribute('class', 'row');
                     mainDiv.setAttribute('id', 'resultsView');
+                    if (json.filters) {
+                        filtersMatched = document.createElement('div');
+                        if (json.filterMatchCat || json.filterMatchIng) {
+                            filtersMatched.setAttribute('class', 'row alert alert-success');
+                            filtersMatched.setAttribute('id', 'filterStatus');
+                            if (json.filterMatchCat) {
+                                cat = document.createElement('p');
+                                innerT_1 = "We were able to find a match to the following categories:";
+                                json.categoriesMatched.forEach(function (element) {
+                                    innerT_1 + "<span>" + element + "</span>" + '';
+                                });
+                                cat.innerText = innerT_1;
+                                filtersMatched.appendChild(cat);
+                                filtersMatched.appendChild(document.createElement('hr'));
+                            }
+                            if (json.filterMatchIng) {
+                                ing = document.createElement('p');
+                                innerT_2 = "We were able to find a match to the following ingrediants:";
+                                json.ingrediantsMatched.forEach(function (element) {
+                                    innerT_2 = innerT_2 + " " + element + " ";
+                                });
+                                ing.innerText = innerT_2;
+                                filtersMatched.appendChild(ing);
+                            }
+                            document.getElementById('container').appendChild(filtersMatched);
+                        }
+                        else {
+                            filtersMatched.setAttribute('class', 'row alert alert-danger');
+                            filtersMatched.innerText = "Sorry, none of your filters matched";
+                            filtersMatched.setAttribute('id', 'filterStatus');
+                            document.getElementById('container').appendChild(filtersMatched);
+                        }
+                    }
+                    //filtersMatched.setAttribute('')
                     //mainDiv.setAttribute('class', 'justify-content-center')
                     json.recipes.forEach(function (element) {
                         //nick's result card
@@ -218,9 +255,9 @@ function updateIngrediantsView() {
     inputBar.setAttribute('class', 'form-control ingrediantInput');
     inputBar.setAttribute('type', 'text');
     inputBar.setAttribute('placeholder', 'Ingrediant Name');
-    inputBar.setAttribute('aria-label', 'Ingrediant');
+    //inputBar.setAttribute('aria-label', 'Ingrediant')
     inputBar.setAttribute('id', 'ingrediant');
-    inputBar.setAttribute("aria-describedby", "button-addon2");
+    //inputBar.setAttribute("aria-describedby", "button-addon2")
     inputGroup.appendChild(inputBar);
     var buttonDiv = document.createElement('div');
     buttonDiv.setAttribute('class', 'input-group-append');

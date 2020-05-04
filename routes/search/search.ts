@@ -54,29 +54,42 @@ router.post('/', (req, res) => {
             areThereIngredients = true;
 
         }
+        let areThereFilters : boolean;
+        if(areThereCategoreis == false && areThereIngredients == false){
+            areThereFilters = false;
+        }
+        if(areThereCategoreis == true || areThereIngredients == true) {
+            areThereFilters = true;
+        }
 
-
-        let sampleReturn = {
+        let returnObject = {
             recipes: [],
-            recipe_count: 5
+            recipe_count: 0,
+            filters : areThereFilters,
+            filterMatchIng : false,
+            filterMatchCat : false,
+            ingrediantsMatched : [],
+            categoriesMatched : []
+
         }
 
         let recepiesWithCategories : Array<Object> = []
         let withIngre : Array<Object> = []
 
 
-        // let sampleReturn;
+        // let returnObject;
         let returnedOBJ = database.search(searchQuery).then(function (res) {
             //console.log(typeof withIngre)
             res.forEach(function (element) {
-                
                 if (areThereIngredients) {
                     
                     req.body.params["ingrediants_list"].forEach( function(ingrediant) {
-                        
+                        //console.log(element['ingredient'] + '   ' + ingrediant.toLowerCase())
                         if (element['ingredient'] == ingrediant.toLowerCase()) {
-                            console.log('match')
+                            //console.log('match')
                             withIngre.push(element)
+                            returnObject.filterMatchIng = true;
+                            returnObject.ingrediantsMatched.push(ingrediant)
                         }
                     })
                 }
@@ -84,8 +97,11 @@ router.post('/', (req, res) => {
                 if (areThereCategoreis) {
                     req.body.params["recipe_categoreis"].forEach(function(category)   {
                         if (element['category'] == category.toLowerCase()) {
-                            console.log('match')
+                            //console.log('match')
+                            
                             recepiesWithCategories.push(element)
+                            returnObject.filterMatchCat = true;
+                            returnObject.categoriesMatched.push(category)
                         }
                     });
                 }
@@ -107,14 +123,48 @@ router.post('/', (req, res) => {
                 })
             }
             if (returnA.length != 0) {
-                sampleReturn.recipes = returnA;
+                returnA.forEach(function (prospect) {
+                    if(returnObject.recipes.length == 0){
+                        returnObject.recipes.push(prospect)
+                    }
+                    else{
+                        returnObject.recipes.forEach(function (element) {
+                            if(element.recipe_id == prospect.recipe_id){
+                                console.log('already in return set')
+                                return
+                            }
+                            else{
+                                console.log('unique item added')
+                                returnObject.recipes.push(prospect)
+                            }
+                        })
+                    }
+                })
+                //returnObject.recipes = returnA;
                 res.status(200)
-                res.send(JSON.stringify(sampleReturn))
+                res.send(JSON.stringify(returnObject))
             }
             else {
-                sampleReturn.recipes = searchQMatch
+                searchQMatch.forEach(function (prospect) {
+                    //console.log(prospect)
+                    if(returnObject.recipes.length == 0){
+                        returnObject.recipes.push(prospect)
+                    }
+                    else{
+                        returnObject.recipes.forEach(function (element) {
+                            if(element.recipe_id == prospect.recipe_id){
+                                return
+                            }
+                            else{
+                                returnObject.recipes.push(prospect)
+                            }
+                        })
+                    }
+                    
+                })
+                //returnObject.recipes = searchQMatch
                 res.status(200)
-                res.send(JSON.stringify(sampleReturn))
+                res.send(JSON.stringify(returnObject))
             }
 
         })

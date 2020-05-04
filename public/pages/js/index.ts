@@ -1,7 +1,7 @@
 import { papayawhip } from "color-name";
 import { promises } from "fs";
 
-let searchString : string 
+let searchString: string
 
 $(".spinner-border").hide() //the loading sign
 $(".searchParams").hide() // the yellow box alert that allows you to see availble filters
@@ -36,34 +36,34 @@ $("#searchbar").click(function () {
 
 
 async function performSearch() {
-    if($("#searchbar")[0].value == ""){return}
+    if ($("#searchbar")[0].value == "") { return }
 
     let searchQuery = $("#searchbar")[0].value
     /*
     perform fetch of request passing in the search query and parameters object
     */
-   let parameters = {
+    let parameters = {
         recipe_categoreis: [],
-        ingrediants_list : []
-    //add more parameters once we all decide on wgat they will be
+        ingrediants_list: []
+        //add more parameters once we all decide on wgat they will be
     }
 
-    $(".btn-light").each(function() {
-        if(this.getAttribute("aria-pressed") == "true") {
+    $(".btn-light").each(function () {
+        if (this.getAttribute("aria-pressed") == "true") {
             parameters.recipe_categoreis.push(this.value)
         }
-        
+
     })
 
-    
 
-   $(".ingrediantInput").each(function (index) {
-        if(this.value !== ""){
+
+    $(".ingrediantInput").each(function (index) {
+        if (this.value !== "") {
             parameters.ingrediants_list.push(this.value)
         }
-   })
-  
-   console.log(parameters)
+    })
+
+    console.log(parameters)
 
     let requestBody = {
         "search_query": searchQuery,
@@ -93,15 +93,66 @@ async function performSearch() {
 
     async function updateResultView(json): Promise<boolean> {
         //remove previous results view
-        if(document.getElementById('resultsView') != null){
+        if (document.getElementById('resultsView') != null) {
             document.getElementById('resultsView').remove()
         }
 
-        console.log(json.recipes)
+        if (document.getElementById('filterStatus') != null) {
+            document.getElementById('filterStatus').remove()
+        }
+
+        console.log(json)
 
         let mainDiv = document.createElement('div')
         mainDiv.setAttribute('class', 'row')
         mainDiv.setAttribute('id', 'resultsView')
+        
+        if (json.filters) {
+
+            
+            let filtersMatched = document.createElement('div')
+            if (json.filterMatchCat || json.filterMatchIng) {
+                
+                filtersMatched.setAttribute('class', 'row alert alert-success')
+                filtersMatched.setAttribute('id', 'filterStatus')
+                if(json.filterMatchCat){
+                    let cat = document.createElement('p');
+                    let innerT = "We were able to find a match to the following categories:"
+                    json.categoriesMatched.forEach(function(element) {
+                        innerT + "<span>" + element + "</span>" + ''
+                    })
+                    cat.innerText = innerT
+                    filtersMatched.appendChild(cat)
+                    filtersMatched.appendChild(document.createElement('hr'))
+                }
+                if(json.filterMatchIng){
+                    let ing = document.createElement('p');
+                    let innerT = "We were able to find a match to the following ingrediants:" 
+                    json.ingrediantsMatched.forEach(function(element) {
+                        innerT = innerT + " "+ element + " "
+                    })
+                    ing.innerText = innerT
+                    filtersMatched.appendChild(ing)
+                }
+                document.getElementById('container').appendChild(filtersMatched)
+
+
+                
+            }
+            else {
+                filtersMatched.setAttribute('class', 'row alert alert-danger')
+                filtersMatched.innerText = "Sorry, none of your filters matched"
+                filtersMatched.setAttribute('id', 'filterStatus')
+                document.getElementById('container').appendChild(filtersMatched)
+            }
+        }
+
+
+
+        //filtersMatched.setAttribute('')
+
+
+
         //mainDiv.setAttribute('class', 'justify-content-center')
 
         json.recipes.forEach(element => {
@@ -127,14 +178,14 @@ async function performSearch() {
             titleAndlistdiv.appendChild(title)
 
             let ul = document.createElement('ul')
-            
-            for(let i : number = 0; i < 4; i++){
+
+            for (let i: number = 0; i < 4; i++) {
                 let li = document.createElement('li')
                 li.setAttribute('style', 'list-style-type: none')
-                if(i == 0){li.innerText = "Prep-Time: " + element['prep_time']}
-                else if(i == 1){li.innerText = "Cook-Time: " + element['cook_time']}
-                else if(i == 2){li.innerText = "Total Time: " + "1hr"} //need to calculate this 
-                else if(i == 3){li.innerText = "Servings: " + element['servings']}
+                if (i == 0) { li.innerText = "Prep-Time: " + element['prep_time'] }
+                else if (i == 1) { li.innerText = "Cook-Time: " + element['cook_time'] }
+                else if (i == 2) { li.innerText = "Total Time: " + "1hr" } //need to calculate this 
+                else if (i == 3) { li.innerText = "Servings: " + element['servings'] }
                 ul.appendChild(li)
             }
             titleAndlistdiv.appendChild(ul)
@@ -165,9 +216,9 @@ adding parameters
 
 //event listner for ingrediant add 
 $("#ingrediantAdd").click(function () {
-    
+
     if ($("#ingrediant")[0].value != "") { //making sure the search bar isn't empty
-        
+
         updateIngrediantsView()
         performSearch()
         addEventListener()
@@ -180,7 +231,7 @@ $("#ingrediantAdd").click(function () {
 $(".btn-light").click(function () {
     performSearch()
 })
-    
+
 
 
 
@@ -198,13 +249,13 @@ $("#ingrediant").keypress(function (e) {
 
 
 function updateIngrediantsView() {
-    
+
     // div holding all ingrediants
     let mainDiv = $(".ingrediantsInputG")[0]
 
     //create new ingrediant add form group
-    
-   
+
+
 
     let inputGroup = document.createElement('div')
     inputGroup.setAttribute('class', 'input-group mb-3')
@@ -215,9 +266,9 @@ function updateIngrediantsView() {
     inputBar.setAttribute('class', 'form-control ingrediantInput')
     inputBar.setAttribute('type', 'text')
     inputBar.setAttribute('placeholder', 'Ingrediant Name')
-    inputBar.setAttribute('aria-label', 'Ingrediant')
+    //inputBar.setAttribute('aria-label', 'Ingrediant')
     inputBar.setAttribute('id', 'ingrediant')
-    inputBar.setAttribute("aria-describedby", "button-addon2")
+    //inputBar.setAttribute("aria-describedby", "button-addon2")
     inputGroup.appendChild(inputBar)
 
     let buttonDiv = document.createElement('div')
@@ -231,14 +282,14 @@ function updateIngrediantsView() {
     buttonDiv.appendChild(button)
     inputGroup.appendChild(buttonDiv)
 
-    
+
 
 
     //change old add area
 
     let oldInputBar = document.getElementById('ingrediant')
     oldInputBar.setAttribute('id', "")
-    
+
     let oldButton = document.getElementById("ingrediantAdd")
     oldButton.setAttribute('id', '')
     oldButton.setAttribute('class', 'btn btn-danger oldButton')
@@ -278,10 +329,10 @@ function addEventListener() {
         this.parentElement.parentElement.remove()
         performSearch()
         //this.parentElement.parentElement.innerHTML = ""
-    }) 
+    })
 
-    
-    
-    
+
+
+
 }
-    
+

@@ -21,9 +21,9 @@ router.post('/add', function (req, res) {
         "image": req.body['imageB64']
         // "image" : req.body['image']
     };
-    //formRecipeSubmit(userId: string, title: string, img: string, prep: number, cook: number, servings: number, discription : string)
-    database.formRecipeSubmit(reqObj.userID, reqObj["recipe.name"], reqObj.image, reqObj["prep.time"], reqObj["cook.time"], reqObj.servings, reqObj["recipe.discription"]).then(function (res) {
-        //console.log(reqObj)
+    //console.log(reqObj)
+    database.putRecipeData(reqObj.userID, reqObj["recipe.name"], reqObj.image, reqObj["prep.time"], reqObj["cook.time"], reqObj.servings, reqObj["recipe.discription"], reqObj.instruction, reqObj.ingrediant).then(function (res) {
+        //  //console.log(reqObj)
         console.log(res);
     });
     res.redirect('http://localhost:5657');

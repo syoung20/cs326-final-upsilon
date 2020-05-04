@@ -17,8 +17,8 @@ function updateinstructionsView() {
     //create new instruction add form group
     var newFormGroup = document.createElement('div');
     newFormGroup.setAttribute('class', 'input-group mb-3');
-    var inputGroup = document.createElement('div');
-    inputGroup.setAttribute('class', 'input-group mb-3');
+    //let inputGroup = document.createElement('div')
+    //inputGroup.setAttribute('class', 'input-group mb-3')
     //input bar 
     //<input type="text" class="form-control" placeholder="instruction Name" aria-label="Recipient's username" id='instruction' aria-describedby="button-addon2">
     var inputBar = document.createElement('input');
@@ -29,7 +29,7 @@ function updateinstructionsView() {
     inputBar.setAttribute('aria-label', 'instruction');
     inputBar.setAttribute('id', 'instruction');
     inputBar.setAttribute("aria-describedby", "button-addon2");
-    inputGroup.appendChild(inputBar);
+    newFormGroup.appendChild(inputBar);
     var buttonDiv = document.createElement('div');
     buttonDiv.setAttribute('class', 'input-group-append');
     var button = document.createElement('button');
@@ -38,8 +38,8 @@ function updateinstructionsView() {
     button.innerText = "Add";
     button.setAttribute("id", "instructionAdd");
     buttonDiv.appendChild(button);
-    inputGroup.appendChild(buttonDiv);
-    newFormGroup.appendChild(inputGroup);
+    newFormGroup.appendChild(buttonDiv);
+    //newFormGroup.appendChild(inputGroup)
     //change old add area
     var oldInputBar = document.getElementById('instruction');
     oldInputBar.setAttribute('id', "");
