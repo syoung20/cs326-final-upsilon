@@ -1,4 +1,5 @@
 import { thistle } from "color-name";
+const database = require('../../database')
 
 const express = require('express');
 const router = express.Router();
@@ -18,7 +19,7 @@ router.post('/', (req, res) => {
             res.send(JSON.stringify(badRequest))
             res.end()
         }
-        else if(typeof searchQuery != 'string'){
+        else if (typeof searchQuery != 'string') {
             res.status(400)
             let badRequest = {
                 error: '400 Bad Request',
@@ -38,60 +39,86 @@ router.post('/', (req, res) => {
 
     try {
 
-        /*
-        call to database to get data 
-    */
+        let searchQuery: string = req.body.search_query;
+        let areThereCategoreis: boolean = false
+        let areThereIngredients: boolean = false
+        let searchQMatch = []
+        
+
+        if (req.body.params["recipe_categoreis"].length != 0) {
+            areThereCategoreis = true;
+
+        }
+
+        if (req.body.params["ingrediants_list"].length != 0) {
+            areThereIngredients = true;
+
+        }
 
 
         let sampleReturn = {
-            recipes: [
-                {
-                    'title': 'Blackberry Lavender Cake with White Chocolate Buttercream',
-                    'prep_time': '20mins',
-                    'cook_time': '40mins',
-                    'total_time': '1hr',
-                    'servings': '4',
-                    'recipe_id': 'rid0001'
-                },
-                {
-                    'title': 'Blackberry Mint Cake with Mint Whipped Cream',
-                    'prep_time': '20mins',
-                    'cook_time': '40mins',
-                    'total_time': '1hr',
-                    'servings': '4',
-                    'recipe_id': 'rid0002'
-                },
-                {
-                    'title': 'Lemon Blackberry Cake with Mascarpone Whipped Cream Frosting',
-                    'prep_time': '20mins',
-                    'cook_time': '40mins',
-                    'total_time': '1hr',
-                    'servings': '4',
-                    'recipe_id': 'rid0003'
-                },
-                {
-                    'title': 'Blackberry Upside Down Vanilla Cake',
-                    'prep_time': '20mins',
-                    'cook_time': '40mins',
-                    'total_time': '1hr',
-                    'servings': '4',
-                    'recipe_id': 'rid0004'
-                },
-                {
-                    'title': 'Blackberry Cake with Cream Cheese Frosting',
-                    'prep_time': '20mins',
-                    'cook_time': '40mins',
-                    'total_time': '1hr',
-                    'servings': '4',
-                    'recipe_id': 'rid0005'
-                }
-            ],
+            recipes: [],
             recipe_count: 5
         }
 
-        res.status(200)
-        res.send(JSON.stringify(sampleReturn))
-        console.log('data sent succesfully')
+        let recepiesWithCategories : Array<Object> = []
+        let withIngre : Array<Object> = []
+
+
+        // let sampleReturn;
+        let returnedOBJ = database.search(searchQuery).then(function (res) {
+            //console.log(typeof withIngre)
+            res.forEach(function (element) {
+                
+                if (areThereIngredients) {
+                    
+                    req.body.params["ingrediants_list"].forEach( function(ingrediant) {
+                        
+                        if (element['ingredient'] == ingrediant.toLowerCase()) {
+                            console.log('match')
+                            withIngre.push(element)
+                        }
+                    })
+                }
+
+                if (areThereCategoreis) {
+                    req.body.params["recipe_categoreis"].forEach(function(category)   {
+                        if (element['category'] == category.toLowerCase()) {
+                            console.log('match')
+                            recepiesWithCategories.push(element)
+                        }
+                    });
+                }
+
+                searchQMatch.push(element) //regardless of match of category or ingredient add it this array
+
+            });
+
+        }).then(function () {
+            let returnA = []
+            if (recepiesWithCategories.length != 0) {
+                recepiesWithCategories.forEach(function(cat){
+                    returnA.push(cat)
+                })
+            }
+            if (withIngre.length != 0) {
+                withIngre.forEach(function(ingre){
+                    returnA.push(ingre)
+                })
+            }
+            if (returnA.length != 0) {
+                sampleReturn.recipes = returnA;
+                res.status(200)
+                res.send(JSON.stringify(sampleReturn))
+            }
+            else {
+                sampleReturn.recipes = searchQMatch
+                res.status(200)
+                res.send(JSON.stringify(sampleReturn))
+            }
+
+        })
+
 
     } catch (exception) {
         res.status(500)
@@ -110,3 +137,4 @@ router.get('/', (req, res) => {
 })
 
 module.exports = router;
+

@@ -320,6 +320,27 @@ class Database {
 			console.log("unable to add grocery list category");
 		}
 	}
+
+	public async search(searchQ, params) : Promise<object | null> {
+		try{
+			
+			/*
+
+			SELECT * FROM recipes 
+			LEFT JOIN ingredients ON recipes.recipe_id = ingredients.recipe_id 
+			LEFT JOIN recipebook_category_items on recipes.recipe_id = recipebook_category_items.recipe_id 
+			WHERE recipes.title ~* 'PAYMENT'
+
+			*/
+
+			let result : object = await this.db.any({text: "SELECT * FROM recipes LEFT JOIN ingredients ON recipes.recipe_id = ingredients.recipe_id LEFT JOIN recipebook_category_items on recipes.recipe_id = recipebook_category_items.recipe_id LEFT JOIN recipebook_categories on recipebook_category_items.recipebook_category_item_id = recipebook_categories.recipebook_category_id WHERE recipes.title ~* $1", values : [searchQ]});
+			return result;
+		}
+		catch(err) {
+			console.log("Unable to perform search")
+			console.log(err)
+		}
+	}
 }
 
 const db = new Database('database');

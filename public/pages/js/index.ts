@@ -70,11 +70,7 @@ async function performSearch() {
         params: parameters
     }
 
-<<<<<<< HEAD
-    let url = 'https://cs326-final-upsilon.herokuapp.com/search'
-=======
-    let url = 'https://cs326-final-upsilon.herokuapp.com/search'
->>>>>>> 8d719dbde769beeb080473a3bc8802a0b2668c04
+    let url = 'http://localhost:5657/search'
 
 
     fetch(url, {
@@ -101,6 +97,8 @@ async function performSearch() {
             document.getElementById('resultsView').remove()
         }
 
+        console.log(json.recipes)
+
         let mainDiv = document.createElement('div')
         mainDiv.setAttribute('class', 'row')
         mainDiv.setAttribute('id', 'resultsView')
@@ -118,7 +116,7 @@ async function performSearch() {
             let imageContainer = document.createElement('div')
             imageContainer.setAttribute('class', 'imgcontainer')
             let image = document.createElement('img')
-            image.setAttribute('src', 'images/img.jpg')
+            image.setAttribute('src', element['image'])
             imageContainer.appendChild(image)
             resultCard.appendChild(imageContainer)
 
@@ -133,10 +131,10 @@ async function performSearch() {
             for(let i : number = 0; i < 4; i++){
                 let li = document.createElement('li')
                 li.setAttribute('style', 'list-style-type: none')
-                if(i == 0){li.innerText = "Prep-Time: " + "20mins"}
-                else if(i == 1){li.innerText = "Cook-Time: " + "40mins"}
-                else if(i == 2){li.innerText = "Total Time: " + "1hr"}
-                else if(i == 3){li.innerText = "Servings: "+ "4"}
+                if(i == 0){li.innerText = "Prep-Time: " + element['prep_time']}
+                else if(i == 1){li.innerText = "Cook-Time: " + element['cook_time']}
+                else if(i == 2){li.innerText = "Total Time: " + "1hr"} //need to calculate this 
+                else if(i == 3){li.innerText = "Servings: " + element['servings']}
                 ul.appendChild(li)
             }
             titleAndlistdiv.appendChild(ul)
