@@ -341,6 +341,19 @@ class Database {
 			console.log(err)
 		}
 	}
+
+
+
+	public async formRecipeSubmit(userId: string, title: string, img: string, prep: number, cook: number, servings: number, discription : string) : Promise<number | null>{
+		//console.log("put: userId = " + userId + ", title: " + title + ", img: " + img + ", prep: " + prep + ", cook: " + cook + ", servings: " + servings + "description: " + discription);
+		try {
+			let result = await this.db.any({text: "INSERT INTO recipes VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7) RETURNING recipe_id", values : [userId, title, img, prep, cook, servings, discription]});
+			return result;
+		} catch (err) {
+			console.log(err);
+			return null;
+		}
+	}
 }
 
 const db = new Database('database');

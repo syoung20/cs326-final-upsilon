@@ -1,11 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var faker = require('faker');
+var database = require('../../database');
 //code to handle the different posts
 router.post('/add', function (req, res) {
     //this endpoint is going to be called with form data once the data has succesfully been written to a db just render a view
     //console.log(req.body)
-    var responseObj = {
+    var reqObj = {
+        userID: "test0@email.com",
         "recipe.name": req.body['recipe.title'],
         "recipe.discription": req.body["recipe.discription"],
         "recipe.category": req.body["recipe.category"],
@@ -15,10 +17,15 @@ router.post('/add', function (req, res) {
         "cook.unit": req.body["cook.unit"],
         "prep.time": req.body["prep.time"],
         "prep.unit": req.body['prep.unit'],
+        "servings": req.body["servings"],
         "image": req.body['imageB64']
         // "image" : req.body['image']
     };
-    console.log(responseObj);
+    //formRecipeSubmit(userId: string, title: string, img: string, prep: number, cook: number, servings: number, discription : string)
+    database.formRecipeSubmit(reqObj.userID, reqObj["recipe.name"], reqObj.image, reqObj["prep.time"], reqObj["cook.time"], reqObj.servings, reqObj["recipe.discription"]).then(function (res) {
+        //console.log(reqObj)
+        console.log(res);
+    });
     res.redirect('http://localhost:5657');
 });
 router.post('/read', function (req, res) {
