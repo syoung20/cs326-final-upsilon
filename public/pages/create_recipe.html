@@ -54,11 +54,10 @@
         </div>
         <!--border : black 2px solid;-->
         <div class="formContainer">
-            <form class="shaddow" style="padding: 1em 1em;" method="POST" action="https://cs326-final-upsilon.herokuapp.com/recipes/add">
+            <form id="target" class="shaddow" style="padding: 1em 1em;" method="POST" action="http://localhost:5657/recipes/add">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Recipe Name</label>
-                    <input name="recipe.title" type="email" class="form-control" id="exampleInputEmail1"
-                        aria-describedby="emailHelp">
+                    <input name="recipe.title" class="form-control">
                     <small id="emailHelp" class="form-text text-muted">What do you want this recipe to be called</small>
                 </div>
                 <div class="form-group">
@@ -77,11 +76,6 @@
                         <option value="dessert">Dessert</option>
                     </select>
                 </div>
-
-
-
-
-
 
                 <div class="form-group accordion" id="accordionExample">
                     <div class="card">
@@ -150,18 +144,24 @@
 
 
 
-
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Servings</label>
+                    <div class="input-group">
+                        <input name="servings" type="number" class="form-control"
+                            aria-label="Text input with dropdown button">
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Cook-Time</label>
                     <div class="input-group">
-                        <input name="cook.time" type="text" class="form-control"
+                        <input name="cook.time" type="number" class="form-control"
                             aria-label="Text input with dropdown button">
                         <div class="input-group-append">
                             <select name="cook.unit" class="custom-select" id="inputGroupSelect01">
                                 <option selected>Choose...</option>
-                                <option value="1">Hours</option>
-                                <option value="2">Minutes</option>
+                                <option  value="hours">Hours</option>
+                                <option  value="minutes">Minutes</option>
                             </select>
                         </div>
                     </div>
@@ -170,26 +170,32 @@
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Prep-Time</label>
                     <div class="input-group">
-                        <input name="prep.time" type="text" class="form-control"
+                        <input name="prep.time" type="number" class="form-control"
                             aria-label="Text input with dropdown button">
                         <div class="input-group-append">
-                            <select name="pre.unit" class="custom-select" id="inputGroupSelect01">
-                                <option selected>Choose...</option>
-                                <option value="1">Hours</option>
-                                <option value="2">Minutes</option>
+                            <select name="prep.unit" class="custom-select" id="inputGroupSelect01">
+                                <option  selected>Choose...</option>
+                                <option  value="hours">Hours</option>
+                                <option  value="minutes">Minutes</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
+                    
                     <label for="exampleFormControlTextarea1">Picture of your recipe</label>
-                    <div class="input-group">
+                    <div class="input-group" id="imageInputGroup">
                         <div class="custom-file">
-                            <input name="image" type="file" class="custom-file-input" id="customFile">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
+                            <input name="image" type="file" class="custom-file-input" id="imageFile">
+                            <label class="custom-file-label" for="customFile">Choose Image File</label>
                         </div>
                     </div>
+                    <div class="p-3 row imageUploadView justify-content-center" style="display: none">
+                    
+                            <img src="#" id="imageUploaded" style="max-width: 100%;">
+    
+                        </div>
 
                 </div>
 
@@ -209,7 +215,11 @@
 
 
 </body>
+<script>
+        var exports = {};
+    </script>
 <script src="js/create_recipe.js"></script>
 <script src="js/create_recipe_instructions.js"></script>
+<script src="js/imageUpload.js"></script>
 
 </html>

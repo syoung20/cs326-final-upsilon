@@ -71,6 +71,7 @@ function performSearch() {
                     if (document.getElementById('resultsView') != null) {
                         document.getElementById('resultsView').remove();
                     }
+                    console.log(json.recipes);
                     mainDiv = document.createElement('div');
                     mainDiv.setAttribute('class', 'row');
                     mainDiv.setAttribute('id', 'resultsView');
@@ -85,7 +86,7 @@ function performSearch() {
                         var imageContainer = document.createElement('div');
                         imageContainer.setAttribute('class', 'imgcontainer');
                         var image = document.createElement('img');
-                        image.setAttribute('src', 'images/img.jpg');
+                        image.setAttribute('src', element['image']);
                         imageContainer.appendChild(image);
                         resultCard.appendChild(imageContainer);
                         //title 
@@ -98,16 +99,16 @@ function performSearch() {
                             var li = document.createElement('li');
                             li.setAttribute('style', 'list-style-type: none');
                             if (i == 0) {
-                                li.innerText = "Prep-Time: " + "20mins";
+                                li.innerText = "Prep-Time: " + element['prep_time'];
                             }
                             else if (i == 1) {
-                                li.innerText = "Cook-Time: " + "40mins";
+                                li.innerText = "Cook-Time: " + element['cook_time'];
                             }
                             else if (i == 2) {
                                 li.innerText = "Total Time: " + "1hr";
-                            }
+                            } //need to calculate this 
                             else if (i == 3) {
-                                li.innerText = "Servings: " + "4";
+                                li.innerText = "Servings: " + element['servings'];
                             }
                             ul.appendChild(li);
                         }
@@ -151,7 +152,7 @@ function performSearch() {
                 "search_query": searchQuery,
                 params: parameters
             };
-            url = 'https://cs326-final-upsilon.herokuapp.com/search';
+            url = 'http://localhost:5657/search';
             fetch(url, {
                 method: 'POST',
                 headers: {

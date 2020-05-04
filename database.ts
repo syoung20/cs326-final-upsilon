@@ -378,6 +378,40 @@ class Database {
 			console.log("unable to add grocery list category");
 		}
 	}
+
+	public async search(searchQ, params) : Promise<object | null> {
+		try{
+			
+			/*
+
+			SELECT * FROM recipes 
+			LEFT JOIN ingredients ON recipes.recipe_id = ingredients.recipe_id 
+			LEFT JOIN recipebook_category_items on recipes.recipe_id = recipebook_category_items.recipe_id 
+			WHERE recipes.title ~* 'PAYMENT'
+
+			*/
+
+			let result : object = await this.db.any({text: "SELECT * FROM recipes LEFT JOIN ingredients ON recipes.recipe_id = ingredients.recipe_id LEFT JOIN recipebook_category_items on recipes.recipe_id = recipebook_category_items.recipe_id LEFT JOIN recipebook_categories on recipebook_category_items.recipebook_category_item_id = recipebook_categories.recipebook_category_id WHERE recipes.title ~* $1", values : [searchQ]});
+			return result;
+		}
+		catch(err) {
+			console.log("Unable to perform search")
+			console.log(err)
+		}
+	}
+
+
+
+	public async formRecipeSubmit(userId: string, title: string, img: string, prep: number, cook: number, servings: number, discription : string) : Promise<number | null>{
+		//console.log("put: userId = " + userId + ", title: " + title + ", img: " + img + ", prep: " + prep + ", cook: " + cook + ", servings: " + servings + "description: " + discription);
+		try {
+			let result = await this.db.any({text: "INSERT INTO recipes VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7) RETURNING recipe_id", values : [userId, title, img, prep, cook, servings, discription]});
+			return result;
+		} catch (err) {
+			console.log(err);
+			return null;
+		}
+	}
 }
 
 const db = new Database('database');

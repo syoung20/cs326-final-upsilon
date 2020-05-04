@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 var faker = require('faker');
+const database = require('../../database')
 
 
 //code to handle the different posts
@@ -8,25 +9,35 @@ var faker = require('faker');
 router.post('/add', (req, res) => {
 
     //this endpoint is going to be called with form data once the data has succesfully been written to a db just render a view
+    //console.log(req.body)
 
-
-    let responseObj = {
+    let reqObj = {
+        userID : "test0@email.com",
         "recipe.name": req.body['recipe.title'],
         "recipe.discription": req.body["recipe.discription"],
         "recipe.category": req.body["recipe.category"],
         "ingrediant": req.body["ingrediant"],
         "instruction": req.body["instruction"],
         "cook.time": req.body["cook.time"],
-        "cook.unit": req.body["cook.unit"],
+        "cook.unit": req.body["cook.unit"], // 1 - hours 2 - minutes 
         "prep.time": req.body["prep.time"],
-        "pre.unit": req.body['pre.unit'],
+        "prep.unit": req.body['prep.unit'],
+        "servings" : req.body["servings"],
+        "image" : req.body['imageB64']
+
         // "image" : req.body['image']
 
 
     }
-    console.log(responseObj)
+    
+    //formRecipeSubmit(userId: string, title: string, img: string, prep: number, cook: number, servings: number, discription : string)
+    database.formRecipeSubmit(reqObj.userID, reqObj["recipe.name"], reqObj.image, reqObj["prep.time"], reqObj["cook.time"], reqObj.servings, reqObj["recipe.discription"]).then(function (res) {
+        //console.log(reqObj)
+        console.log(res)
+    })
 
-    res.redirect('https://cs326-final-upsilon.herokuapp.com')
+
+    res.redirect('http://localhost:5657')
 
 })
 

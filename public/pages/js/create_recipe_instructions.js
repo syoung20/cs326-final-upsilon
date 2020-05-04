@@ -25,6 +25,7 @@ function updateinstructionsView() {
     inputBar.setAttribute('class', 'form-control');
     inputBar.setAttribute('type', 'text');
     inputBar.setAttribute('placeholder', 'instruction');
+    inputBar.setAttribute('name', "instruction");
     inputBar.setAttribute('aria-label', 'instruction');
     inputBar.setAttribute('id', 'instruction');
     inputBar.setAttribute("aria-describedby", "button-addon2");
@@ -47,9 +48,9 @@ function updateinstructionsView() {
     oldButton.setAttribute('class', 'btn btn-danger oldInstructionButton');
     oldButton.innerText = 'Remove';
     mainDiv.appendChild(newFormGroup);
-    addEventListener();
+    addEventListenerForInstructions();
 }
-function addEventListener() {
+function addEventListenerForInstructions() {
     //event listner for instruction add 
     $("#instructionAdd").click(function () {
         //console.log(this)

@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+var database = require('../../database');
 var express = require('express');
 var router = express.Router();
 var faker = require('faker');
@@ -35,57 +36,67 @@ router.post('/', function (req, res) {
         res.send(JSON.stringify(badRequest));
     }
     try {
-        /*
-        call to database to get data
-    */
-        var sampleReturn = {
-            recipes: [
-                {
-                    'title': 'Blackberry Lavender Cake with White Chocolate Buttercream',
-                    'prep_time': '20mins',
-                    'cook_time': '40mins',
-                    'total_time': '1hr',
-                    'servings': '4',
-                    'recipe_id': 'rid0001'
-                },
-                {
-                    'title': 'Blackberry Mint Cake with Mint Whipped Cream',
-                    'prep_time': '20mins',
-                    'cook_time': '40mins',
-                    'total_time': '1hr',
-                    'servings': '4',
-                    'recipe_id': 'rid0002'
-                },
-                {
-                    'title': 'Lemon Blackberry Cake with Mascarpone Whipped Cream Frosting',
-                    'prep_time': '20mins',
-                    'cook_time': '40mins',
-                    'total_time': '1hr',
-                    'servings': '4',
-                    'recipe_id': 'rid0003'
-                },
-                {
-                    'title': 'Blackberry Upside Down Vanilla Cake',
-                    'prep_time': '20mins',
-                    'cook_time': '40mins',
-                    'total_time': '1hr',
-                    'servings': '4',
-                    'recipe_id': 'rid0004'
-                },
-                {
-                    'title': 'Blackberry Cake with Cream Cheese Frosting',
-                    'prep_time': '20mins',
-                    'cook_time': '40mins',
-                    'total_time': '1hr',
-                    'servings': '4',
-                    'recipe_id': 'rid0005'
-                }
-            ],
+        var searchQuery = req.body.search_query;
+        var areThereCategoreis_1 = false;
+        var areThereIngredients_1 = false;
+        var searchQMatch_1 = [];
+        if (req.body.params["recipe_categoreis"].length != 0) {
+            areThereCategoreis_1 = true;
+        }
+        if (req.body.params["ingrediants_list"].length != 0) {
+            areThereIngredients_1 = true;
+        }
+        var sampleReturn_1 = {
+            recipes: [],
             recipe_count: 5
         };
-        res.status(200);
-        res.send(JSON.stringify(sampleReturn));
-        console.log('data sent succesfully');
+        var recepiesWithCategories_1 = [];
+        var withIngre_1 = [];
+        // let sampleReturn;
+        var returnedOBJ = database.search(searchQuery).then(function (res) {
+            //console.log(typeof withIngre)
+            res.forEach(function (element) {
+                if (areThereIngredients_1) {
+                    req.body.params["ingrediants_list"].forEach(function (ingrediant) {
+                        if (element['ingredient'] == ingrediant.toLowerCase()) {
+                            console.log('match');
+                            withIngre_1.push(element);
+                        }
+                    });
+                }
+                if (areThereCategoreis_1) {
+                    req.body.params["recipe_categoreis"].forEach(function (category) {
+                        if (element['category'] == category.toLowerCase()) {
+                            console.log('match');
+                            recepiesWithCategories_1.push(element);
+                        }
+                    });
+                }
+                searchQMatch_1.push(element); //regardless of match of category or ingredient add it this array
+            });
+        }).then(function () {
+            var returnA = [];
+            if (recepiesWithCategories_1.length != 0) {
+                recepiesWithCategories_1.forEach(function (cat) {
+                    returnA.push(cat);
+                });
+            }
+            if (withIngre_1.length != 0) {
+                withIngre_1.forEach(function (ingre) {
+                    returnA.push(ingre);
+                });
+            }
+            if (returnA.length != 0) {
+                sampleReturn_1.recipes = returnA;
+                res.status(200);
+                res.send(JSON.stringify(sampleReturn_1));
+            }
+            else {
+                sampleReturn_1.recipes = searchQMatch_1;
+                res.status(200);
+                res.send(JSON.stringify(sampleReturn_1));
+            }
+        });
     }
     catch (exception) {
         res.status(500);
