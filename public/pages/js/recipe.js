@@ -29,7 +29,17 @@ if(close != null){
     }
 }
 
-loadRecipe(51);
+
+var url = window.location.href;
+var index = url.indexOf("?");
+if (index != -1){
+    var recipeID = url.slice(index + 1);
+    loadRecipe(recipeID);
+}
+
+
+
+
 
 function loadRecipe(recid) {
     recipeRead(recid);
@@ -84,6 +94,7 @@ function recipeInstructions(recid) {
                 return response.json();
             })
             .then((data) => {
+                console.log(data);
                 if (data != null){
                     var arrayIns = [];
                     for (let i = 0; i < data.instructions.length; i++){

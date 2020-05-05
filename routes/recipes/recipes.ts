@@ -83,7 +83,7 @@ router.post('/instructions', (req, res) => {
     perform search for that id in db
 
     */
-   let recInstructions : string[] = []
+    let recInstructions : string[] = []
 
     let allInstructions = database.getRecipeInstructions(recipeID).then(function (res){
         for (let i = 0; i < res.length; i++) {
