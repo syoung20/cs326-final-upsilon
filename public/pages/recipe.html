@@ -7,9 +7,6 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="stylesheets/recipe.css">
-        <script src="js/recipe.js"></script>
-
-        
     </head>
     <body>
         <nav class="m-3 navbar navbar-expand-lg navbar-light justify-content-end sticky-top"
@@ -28,12 +25,9 @@
         </div>
         </nav>
         <div class="container">
-        <button onclick="recipeRead()">get data</button>
-        <button type="submit" id="myBtn">Populate page</button>
-        
         <section>
             <div class="top-container">
-                <img src="../images/img.jpg" alt="Snow" style="width:100%;">
+                <img id="recImage" src="../images/img.jpg" alt="Snow" style="width:100%;">
                 <h1 class="top-left" id="recipeTitle">Title</h1>
                 <h2 class="bottom-right" id="recipeAuthor">Author</h2>
             </div>

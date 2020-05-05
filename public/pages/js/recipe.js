@@ -12,6 +12,7 @@ var totaltime = document.getElementById("recipeTotaltime");
 var servings = document.getElementById("recipeServings");
 var ingredients = document.getElementById("recipeIngredients");
 var instructions = document.getElementById("recipeInstructions");
+var image = document.getElementById("recImage");
 
 //add to grocery list button
 var addToGroceries = document.getElementById("buttonAdd");
@@ -28,10 +29,18 @@ if(close != null){
     }
 }
 
-function recipeRead() {
-    console.log("arranca?")
-    var url = "https://cs326-final-upsilon.herokuapp.com/recipes/read";
-    var req = {'name' : 'nombre'};
+loadRecipe(51);
+
+function loadRecipe(recid) {
+    recipeRead(recid);
+    recipeIngredients(recid);
+    recipeInstructions(recid);
+}
+
+
+function recipeRead(recid) {
+    var url = "http://localhost:5657/recipes/read";
+    var req = {'rid' : recid};
     var resp = fetch(url,
         {
             method: 'POST',
@@ -45,22 +54,69 @@ function recipeRead() {
                 return response.json();
             })
             .then((data) => {
-                console.log(data);
-                if(recover != null){
-                    console.log("hola");
-                    recover.onclick = function() {
-                        title.innerHTML = data.title; 
-                        author.innerHTML = data.author;
-                        description.innerHTML = data.description;
-                        preptime.innerHTML = data.preptime + "mins";
-                        cooktime.innerHTML = data.cooktime + "mins";
-                        totaltime.innerHTML = totalTime(data.preptime, data.cooktime);
-                        servings.innerHTML = data.servings;
-                        ingredients.innerHTML = listPopulation(data.ingredients);
-                        instructions.innerHTML = listPopulation(data.instructions);
-                    }
+                if (data != null){
+                    title.innerHTML = data.title; 
+                    description.innerHTML = data.description;
+                    preptime.innerHTML = data.prep + "mins";
+                    cooktime.innerHTML = data.cook + "mins";
+                    totaltime.innerHTML = totalTime(data.prep, data.cook);
+                    servings.innerHTML = data.servings;
+                    image.src = data.image;
                 }
-                
+            })
+}
+
+
+
+function recipeInstructions(recid) {
+    var url = "http://localhost:5657/recipes/instructions";
+    var req = {'rid' : recid};
+    var resp = fetch(url,
+        {
+            method: 'POST',
+            headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': "application/json"
+                },
+            body: JSON.stringify(req)
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                if (data != null){
+                    var arrayIns = [];
+                    for (let i = 0; i < data.instructions.length; i++){
+                        arrayIns.push(data.instructions[i]);
+                    }
+                    instructions.innerHTML = listPopulation(arrayIns);
+                }
+            })
+}
+
+function recipeIngredients(recid) {
+    var url = "http://localhost:5657/recipes/ingredients";
+    var req = {'rid' : recid};
+    var resp = fetch(url,
+        {
+            method: 'POST',
+            headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': "application/json"
+                },
+            body: JSON.stringify(req)
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                if (data != null){
+                    var arrayIng = [];
+                    for (let i = 0; i < data.ingredients.length; i++){
+                        arrayIng.push(data.ingredients[i]);
+                    }
+                    ingredients.innerHTML = listPopulation(arrayIng);
+                }
             })
 }
 

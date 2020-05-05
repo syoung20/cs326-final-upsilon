@@ -1,24 +1,20 @@
-const express = require('express');
-const router = express.Router();
-
-
-//code to handle the different posts
-
-router.post('/', (req, res) => {
-    
-    
-
-
-})
-
-
-
-router.get('/login', (req, res) => {
-    res.redirect('/login.html')
-})
-
-router.get('/signup', (req, res) => {
-    res.redirect('/signup.html')
-})
-
+var express = require('express');
+var router = express.Router();
+var database = require('../../database');
+router.post('/create', function (req, res) {
+    var user_id = req.userid;
+    var name = req.name;
+    var password = req.password;
+    database.putUserData(user_id, name, password).then(function (res) {
+        res.write(res);
+        res.end();
+    });
+});
+router.post('/check', function (req, res) {
+    var user_id = req.user_id;
+    var user = database.loginUser(user_id).then(function (res) {
+        res.write(JSON.stringify(res));
+        res.end();
+    });
+});
 module.exports = router;
