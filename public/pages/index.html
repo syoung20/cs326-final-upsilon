@@ -24,19 +24,28 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav" id="navItems">
                 <li class="nav-item active">
                     <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="create_recipe.html">Create Recipe</a>
-                </li>
-                <li class="nav-item">
-                        <a class="nav-link" href="account.html">My Account</a>
+                <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="create_recipe.html">Create Recipe</a>
                     </li>
-                    <li class="nav-item justify-content-end">
+                -->
+                
+                <!--
+                    <li class="nav-item">
+                    <a class="nav-link" href="account.html" id="accountAccess">My Account</a>
+                </li>
+                -->
+                
+                <!--
+                        <li class="nav-item justify-content-end">
                             <a class="nav-link" href="login.html">Login</a>
-                        </li>
+                    </li>
+                    -->
+
             </ul>
         </div>
     </nav>
@@ -104,7 +113,8 @@
         <div class="m-1 row collapse" id="parameters" style="width: 100%">
             <div class="col">
                 <a style="width: 100%" class="m-1 btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1"
-                    role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Filter By Recipe Categories</a>
+                    role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Filter By Recipe
+                    Categories</a>
             </div>
             <div class="col">
                 <button style="width: 100%" class="m-1 btn btn-primary" type="button" data-toggle="collapse"
@@ -120,7 +130,7 @@
                     Filters</button>
             </div>
             -->
-            
+
 
         </div>
         <div class="m-3 row">
@@ -134,7 +144,8 @@
                         </button>
 
                         </button>
-                        <button style="width: 100%" value="soup" type="button" class="m-1 btn btn-light" data-toggle="button" aria-pressed="false">
+                        <button style="width: 100%" value="soup" type="button" class="m-1 btn btn-light"
+                            data-toggle="button" aria-pressed="false">
                             Soup
                         </button>
                         <button style="width: 100%" value="main_dish" type="button" class="m-1 btn btn-light"
@@ -153,13 +164,15 @@
                     <div class="card card-body">
                         <div class="input-group ingrediantsInputG mb-3">
                             <div class="input-group mb-3">
-                                    <input id="ingrediant" type="text" class="form-control ingrediantInput" placeholder="Ingredient Name"
-                                    aria-label="Recipient's username" aria-describedby="button-addon2">
+                                <input id="ingrediant" type="text" class="form-control ingrediantInput"
+                                    placeholder="Ingredient Name" aria-label="Recipient's username"
+                                    aria-describedby="button-addon2">
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-success" type="button" id="ingrediantAdd">Add</button>
+                                    <button class="btn btn-outline-success" type="button"
+                                        id="ingrediantAdd">Add</button>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -208,6 +221,10 @@
     var exports = {};
 </script>
 <script src="js/index.js"></script>
+
+<script src="js/navigationUpdate.js"></script>
+
+
 
 
 </html>

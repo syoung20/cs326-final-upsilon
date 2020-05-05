@@ -19,7 +19,6 @@ router.post('/add', function (req, res) {
         "prep.unit": req.body['prep.unit'],
         "servings": req.body["servings"],
         "image": req.body['imageB64']
-        // "image" : req.body['image']
     };
     //console.log(reqObj)
     database.putRecipeData(reqObj.userID, reqObj["recipe.name"], reqObj.image, reqObj["prep.time"], reqObj["cook.time"], reqObj.servings, reqObj["recipe.discription"], reqObj.instruction, reqObj.ingrediant).then(function (res) {

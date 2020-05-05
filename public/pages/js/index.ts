@@ -1,6 +1,7 @@
 import { papayawhip } from "color-name";
 import { promises } from "fs";
 
+//sessionStorage.setItem('user_id', 'tinsae@gmail.com')
 let searchString: string
 
 $(".spinner-border").hide() //the loading sign
@@ -191,7 +192,7 @@ async function performSearch() {
             titleAndlistdiv.appendChild(ul)
             resultCard.appendChild(titleAndlistdiv)
             //append nick's card to the main result view 
-            link.setAttribute('href', 'https://cs326-final-upsilon.herokuapp.com/recipe.html')
+            link.setAttribute('href', '/recipe.html?' + element.recipe_id)
             link.appendChild(resultCard)
             mainDiv.appendChild(link)
             //append main result view to body

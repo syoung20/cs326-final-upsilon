@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+//sessionStorage.setItem('user_id', 'tinsae@gmail.com')
 var searchString;
 $(".spinner-border").hide(); //the loading sign
 $(".searchParams").hide(); // the yellow box alert that allows you to see availble filters
@@ -152,7 +153,7 @@ function performSearch() {
                         titleAndlistdiv.appendChild(ul);
                         resultCard.appendChild(titleAndlistdiv);
                         //append nick's card to the main result view 
-                        link.setAttribute('href', 'https://cs326-final-upsilon.herokuapp.com/recipe.html');
+                        link.setAttribute('href', '/recipe.html?' + element.recipe_id);
                         link.appendChild(resultCard);
                         mainDiv.appendChild(link);
                         //append main result view to body
