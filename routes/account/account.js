@@ -19,8 +19,8 @@ router.post('/create', function (req, res) {
     });
 });
 router.post('/check', function (req, res) {
-    var user_id = req.body.user_id;
-    var password = req.body.user_id;
+    var user_id = req.body["email"];
+    var password = req.body["pswd"];
     var real = "";
     var user = database.loginUser(user_id).then(function (res) {
         if (res != null) {
@@ -28,12 +28,12 @@ router.post('/check', function (req, res) {
         }
     });
     Promise.all([user]).then(function () {
-        res.redirect("http://localhost:5657");
         if (real == "") {
             res.redirect("http://localhost:5657/login.html?one");
         }
         if (real == password) {
-            res.redirect("http://localhost:5657/login.html?two");
+            var url = "http://localhost:5657/login.html#" + user_id + "?two";
+            res.redirect(url);
         }
         else {
             res.redirect("http://localhost:5657/login.html?three");

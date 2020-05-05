@@ -27,8 +27,8 @@ router.post('/create', (req, res) => {
 
 router.post('/check', (req, res) => {
 
-    let user_id = req.body.user_id;
-    let password = req.body.user_id;
+    let user_id = req.body["email"];
+    let password = req.body["pswd"];
     let real = "";
 
     let user = database.loginUser(user_id).then(function (res) {
@@ -37,17 +37,19 @@ router.post('/check', (req, res) => {
         }
     })
     Promise.all([user]).then(function() {
-        res.redirect("http://localhost:5657")
         if (real == "") {
             res.redirect("http://localhost:5657/login.html?one");
         }
         if (real == password) {
-            res.redirect("http://localhost:5657/login.html?two");        
+            var url = "http://localhost:5657/login.html#" + user_id + "?two";
+            res.redirect(url);
+                  
         }
         else {
             res.redirect("http://localhost:5657/login.html?three");
         }
     });
+    
 })
 
 module.exports = router;

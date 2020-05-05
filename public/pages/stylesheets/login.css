@@ -69,33 +69,34 @@ button:hover {
 }
 
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 100px; 
-  left: 0;
-  top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0,0.4);
-}
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
+  }
+
+  .modal-content {
+    border: 3px solid #501616;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 15px;
+    border: 1px solid #888;
+    width: 300px;
+    height: 100px;
+  }
+  
+  .modal-content p {
+      text-align: center;
+  }
 
 
-.modal-content {
-  border: 3px solid #501616;
-  background-color: #fefefe;
-  margin: auto;
-  padding: 50px;
-  border: 1px solid #888;
-  width: 50%;
-  height: 50%;
-}
-
-.modal-content p {
-    text-align: center;
-}
 
 .close {
   color: #aaa;
