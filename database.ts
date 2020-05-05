@@ -2,7 +2,7 @@ class Database {
 	faker = require('faker');
 	private pgp = require('pg-promise')();
 
-	private uri = "postgres://wwidmexm:aD7je2Uz9tLDJ5bwe7Fo9qsZChVQmyIo@drona.db.elephantsql.com:5432/wwidmexm";
+	private uri = PROCESS.ENV.DB_URI;
 	private dbName: string = "wwidmexm";
 	private db: any;
 

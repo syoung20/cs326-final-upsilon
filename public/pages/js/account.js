@@ -34,7 +34,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var url = "http://localhost:5657/users/";
+document.getElementById('leaveUs').addEventListener('click', function () {
+    localStorage.clear();
+    window.location.href = './index.html';
+});
+var url = "https://cs326-final-upsilon.herokuapp.com/users/";
 var userId = localStorage.getItem('user_id');
 var view = "recipebook"; //view to keep track of current tab for post requests
 var numRecip = 0; //used to adjust layout

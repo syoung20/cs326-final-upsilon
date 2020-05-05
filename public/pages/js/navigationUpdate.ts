@@ -40,5 +40,23 @@ if (user_id != null) {
     myAccount.appendChild(myAccountLink)
     document.getElementById('navItems').appendChild(myAccount)
 
+
+    let logout = document.createElement('li')
+    logout.setAttribute('class', 'nav-item')
+
+    let buttonl = document.createElement('button')
+    buttonl.setAttribute('type', 'button')
+    buttonl.setAttribute('class', 'btn btn-outline-danger')
+    buttonl.setAttribute('style', 'border: none')
+    buttonl.setAttribute('id', 'leaveUs')
+    buttonl.innerText = "Log Out"
+    logout.appendChild(buttonl)
+    document.getElementById('navItems').appendChild(logout)
+
+    document.getElementById('leaveUs').addEventListener('click', function() {
+        localStorage.clear()
+        window.location.href = './index.html'
+    })
+
 }
 

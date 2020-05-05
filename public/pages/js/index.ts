@@ -16,6 +16,8 @@ $("#searchButton").click(function () {
     }
 })
 
+
+
 //an event listener for when the enter key is clicked
 $("#searchbar").keypress(function (e) {
     var keycode = (e.keyCode ? e.keyCode : e.which);
@@ -71,7 +73,7 @@ async function performSearch() {
         params: parameters
     }
 
-    let url = 'http://localhost:5657/search'
+    let url = 'https://cs326-final-upsilon.herokuapp.com/search'
 
 
     fetch(url, {
@@ -167,7 +169,7 @@ async function performSearch() {
             titleAndlistdiv.appendChild(ul)
             resultCard.appendChild(titleAndlistdiv)
             //append nick's card to the main result view 
-            link.setAttribute('href', '/recipe.html?' + element.recipe_id)
+            link.setAttribute('href', 'https://cs326-final-upsilon.herokuapp.com/recipe.html?' + element.recipe_id)
             link.appendChild(resultCard)
             mainDiv.appendChild(link)
             //append main result view to body

@@ -39,7 +39,7 @@ if (index != -1){
       var indexDos = url.indexOf("#");
       var userid = url.slice(indexDos + 1, index);
       localStorage.setItem('user_id', userid);
-      window.location.replace("http://localhost:5657");
+      window.location.replace("https://cs326-final-upsilon.herokuapp.com");
     }
 }
 
@@ -56,7 +56,7 @@ btn.onclick = function() {
   var userEmail = email.value;
   var userPswd = pswd.value;
   
-  var url = "http://localhost:5657/account/check";
+  var url = "https://cs326-final-upsilon.herokuapp.com/account/check";
     var req = {'user_id' : userEmail, "password" : userPswd};
     var resp = fetch(url,
         {

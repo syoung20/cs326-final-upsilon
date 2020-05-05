@@ -25,7 +25,7 @@ router.post('/add', function (req, res) {
         //  //console.log(reqObj)
         console.log(res);
     });
-    res.redirect('http://localhost:5657');
+    res.redirect('https://cs326-final-upsilon.herokuapp.com');
 });
 router.post('/read', function (req, res) {
     var recipeID = req.body.rid;

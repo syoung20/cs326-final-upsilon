@@ -32,11 +32,12 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="create_recipe.html">Create A Recipe</a>
-                </li>
+                
                 <li class="nav-item">
                     <a class="nav-link" href="account.html">My Account</a>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-outline-danger" style="border: none" id="leaveUs">Log Out</button>
                 </li>
             </ul>
         </div>
@@ -57,7 +58,7 @@
         </div>
         <!--border : black 2px solid;-->
         <div class="formContainer">
-            <form id="target" class="shaddow was-validated" style="padding: 1em 1em;" method="POST" action="http://localhost:5657/recipes/add">
+            <form id="target" class="shaddow was-validated" style="padding: 1em 1em;" method="POST" action="https://cs326-final-upsilon.herokuapp.com/recipes/add">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Recipe Name</label>
                     <input name="recipe.title" class="form-control" required>

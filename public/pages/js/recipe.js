@@ -49,7 +49,7 @@ function loadRecipe(recid) {
 
 
 function recipeRead(recid) {
-    var url = "http://localhost:5657/recipes/read";
+    var url = "https://cs326-final-upsilon.herokuapp.com/recipes/read";
     var req = {'rid' : recid};
     var resp = fetch(url,
         {
@@ -79,7 +79,7 @@ function recipeRead(recid) {
 
 
 function recipeInstructions(recid) {
-    var url = "http://localhost:5657/recipes/instructions";
+    var url = "https://cs326-final-upsilon.herokuapp.com/recipes/instructions";
     var req = {'rid' : recid};
     var resp = fetch(url,
         {
@@ -106,7 +106,7 @@ function recipeInstructions(recid) {
 }
 
 function recipeIngredients(recid) {
-    var url = "http://localhost:5657/recipes/ingredients";
+    var url = "https://cs326-final-upsilon.herokuapp.com/recipes/ingredients";
     var req = {'rid' : recid};
     var resp = fetch(url,
         {

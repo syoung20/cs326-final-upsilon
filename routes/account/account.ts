@@ -16,10 +16,10 @@ router.post('/create', (req, res) => {
     });
     Promise.all([call]).then(function() {
         if (response != null) {
-            res.redirect("http://localhost:5657");
+            res.redirect("https://cs326-final-upsilon.herokuapp.com");
         }
         else {
-            res.redirect("http://localhost:5657/signup.html?no")
+            res.redirect("https://cs326-final-upsilon.herokuapp.com/signup.html?no")
         }
     });
 })
@@ -38,15 +38,15 @@ router.post('/check', (req, res) => {
     })
     Promise.all([user]).then(function() {
         if (real == "") {
-            res.redirect("http://localhost:5657/login.html?one");
+            res.redirect("https://cs326-final-upsilon.herokuapp.com/login.html?one");
         }
         if (real == password) {
-            var url = "http://localhost:5657/login.html#" + user_id + "?two";
+            var url = "https://cs326-final-upsilon.herokuapp.com/login.html#" + user_id + "?two";
             res.redirect(url);
                   
         }
         else {
-            res.redirect("http://localhost:5657/login.html?three");
+            res.redirect("https://cs326-final-upsilon.herokuapp.com/login.html?three");
         }
     });
     

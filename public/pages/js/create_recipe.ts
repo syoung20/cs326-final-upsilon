@@ -4,6 +4,11 @@ if(user_id_check == null){
     window.location.href = './login.html'
 }
 
+document.getElementById('leaveUs').addEventListener('click', function() {
+    localStorage.clear()
+    window.location.href = './index.html'
+})
+
 
 
 $("#ingrediantAdd").click(function () {
