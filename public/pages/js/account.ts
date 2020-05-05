@@ -1,5 +1,5 @@
 const url = "http://localhost:5657/users/";
-var userId : string = "test5@email.com"; //right now just using email from account credentials
+var userId : string = localStorage.getItem('user_id');
 var view : string = "recipebook"; //view to keep track of current tab for post requests
 var numRecip : number = 0; //used to adjust layout
 
@@ -21,15 +21,12 @@ var recipebookTab = $("#recipebook-tab");
 var pantryTab = $("#pantry-tab");
 var groceryTab = $("#grocery-tab");
 
-//Function to load account.html. Takes the user id (right now just email) as parameter.
-function loadPage(id) {
-    userId = id;
-    window.location.href = 'account.html';
-}
-
 //EVENT HANDLERS
 //load initial account data when DOM is loaded
 $("document").ready(function() {
+    if (userId == null) {
+        window.location.href = 'login.html';
+    }
     loadAccountData();
     loadPantryGroceryData("pantry");
     loadPantryGroceryData("grocery");
@@ -89,7 +86,7 @@ $(document).on('click', ".recipe", function(event) {
 })
 recipeOptions.find(".btn-light").click(() => {
     var id : string = recipeOptions.find("form").attr("class"); 
-    window.location.href = "recipe.html";
+    window.location.href = "recipe.html?"+id;
 });
 recipeOptions.find(".btn-danger").click(() => {
     var id : string = recipeOptions.find("form").attr("class");
