@@ -2,7 +2,7 @@
 // check to see if the user is logged in 
 
 let user_id = localStorage.getItem('user_id')
-user_id = "tinsae"
+//user_id = "tinsae"
 if (user_id == null) {
     //user is not logged in
     //append this 

@@ -2,7 +2,7 @@
 
 We are using PostgreSQL for our database. The database is made up of the following tables: recipes, ingredients, instructions, users, recipebook_categories, recipebook_category_items, pantry_categories, pantry_category_items, grocerylist_categories, and grocerylist_category_items. The columns and datatypes for each are displayed below, with a few edits<sup>*</sup>.
 
-![Database Schema](mockups/appetizers_schema.pdf)
+[Database Schema](mockups/appetizers_schema.pdf)
 
 <sup>*</sup>Edits: we are not using the tags table. The recipes table also has a column named description, which is of datatype TEXT. The image column of recipes is also of type TEXT. In addition, all of the table id's (the primary keys) that are listed as type INT in the diagram are actually of type SERIAL in the Postgres database.
 
@@ -77,4 +77,6 @@ We are using PostgreSQL for our database. The database is made up of the followi
 
 # Division of Labor
 
-Sarah created the database structure, wrote the database functions called by routes/users/users.js(the database functions needed to provide data for the account.html page), and added the back-end functionality in users.js.
+- Sarah created the database structure, wrote the database functions called by routes/users/users.js(the database functions needed to provide data for the account.html page), and added the back-end functionality in users.js. 
+- Nick wrote some of the functions called by `account.js` in database.ts. He also implemented sign up and login on the website that required implementing the backend functionality in account.js. Also, nick implemented the recipe view page (`recipe.js`) where search results can be viewed individually with much more detail than the homepage - this required implementing the back end functionality in `recipes.ts`
+- Tinsae implemented the search functionality on the home page - this required implementing the functionality in the back end to query our SQL database and do appropriate filtering. Tinsae also implemented the Create A Recipe page where users can submit a recipe to get added to the database. 

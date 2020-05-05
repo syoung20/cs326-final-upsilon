@@ -1,4 +1,11 @@
 //event listner for ingrediant add 
+let user_id_check = localStorage.getItem('user_id')
+if(user_id_check == null){
+    window.location.href = './login.html'
+}
+
+
+
 $("#ingrediantAdd").click(function () {
     
     if ($("#ingrediant")[0].value != "") { //making sure the search bar isn't empty
