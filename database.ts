@@ -2,7 +2,7 @@ class Database {
 	faker = require('faker');
 	private pgp = require('pg-promise')();
 
-	private uri = PROCESS.ENV.DB_URI;
+	private uri = process.env.DB_URI;
 	private dbName: string = "wwidmexm";
 	private db: any;
 
