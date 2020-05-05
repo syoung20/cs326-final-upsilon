@@ -1,6 +1,5 @@
 // check to see if the user is logged in 
-var user_id = sessionStorage.getItem('user_id');
-//user_id = "tinsae"
+var user_id = localStorage.getItem('user_id');
 if (user_id == null) {
     //user is not logged in
     //append this 
