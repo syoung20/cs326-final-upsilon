@@ -54,22 +54,24 @@
         </div>
         <!--border : black 2px solid;-->
         <div class="formContainer">
-            <form id="target" class="shaddow" style="padding: 1em 1em;" method="POST" action="http://localhost:5657/recipes/add">
+            <form id="target" class="shaddow was-validated" style="padding: 1em 1em;" method="POST" action="http://localhost:5657/recipes/add">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Recipe Name</label>
-                    <input name="recipe.title" class="form-control">
+                    <input name="recipe.title" class="form-control" required>
                     <small id="emailHelp" class="form-text text-muted">What do you want this recipe to be called</small>
+                    <div class="invalid-feedback">You need to enter a recipe name</div>
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Recipe Discription</label>
+                    <label for="exampleFormControlTextarea1">Recipe Description</label>
                     <textarea name="recipe.discription" class="form-control" id="exampleFormControlTextarea1"
-                        rows="3"></textarea>
+                        rows="3" required></textarea>
+                        <div class="invalid-feedback">You need to enter a recipe description</div>
                 </div>
 
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Recipe Category</label>
-                    <select name="recipe.category" class="custom-select" id="inputGroupSelect02">
-                        <option selected>Choose...</option>
+                    <select name="recipe.category" class="custom-select form-control" id="inputGroupSelect02" required>
+                        <option value="" selected>Choose...</option>
                         <option value="appetizer">Appetizer</option>
                         <option value="soup">Soup</option>
                         <option value="main dish">Main Dish</option>
@@ -95,7 +97,7 @@
                                 <div class="input-group mb-3">
                                     <input name="ingrediant" type="text" class="form-control"
                                         placeholder="Ingrediant Name" aria-label="Ingrediant" id='ingrediant'
-                                        aria-describedby="button-addon2">
+                                        aria-describedby="button-addon2" required>
                                     <div class="input-group-append">
                                         <button class="btn btn-success" type="button" id="ingrediantAdd">Add</button>
                                     </div>
@@ -128,7 +130,7 @@
                                 <div class="input-group mb-3">
                                     <input name="instruction" type="text" class="form-control"
                                         placeholder="Ingrediant Name" aria-label="Instrutions" id='instruction'
-                                        aria-describedby="button-addon2">
+                                        aria-describedby="button-addon2" required>
                                     <div class="input-group-append">
                                         <button class="btn btn-success" type="button" id="instructionAdd">Add</button>
                                     </div>
@@ -148,7 +150,7 @@
                     <label for="exampleFormControlTextarea1">Servings</label>
                     <div class="input-group">
                         <input name="servings" type="number" class="form-control"
-                            aria-label="Text input with dropdown button">
+                            aria-label="Text input with dropdown button" required>
                     </div>
                 </div>
 
@@ -156,7 +158,7 @@
                     <label for="exampleFormControlTextarea1">Cook-Time</label>
                     <div class="input-group">
                         <input name="cook.time" type="number" class="form-control"
-                            aria-label="Text input with dropdown button">
+                            aria-label="Text input with dropdown button" required>
                         <div class="input-group-append">
                             <select name="cook.unit" class="custom-select" id="inputGroupSelect01">
                                 <option  value="minutes">Minutes</option>
@@ -169,7 +171,7 @@
                     <label for="exampleFormControlTextarea1">Prep-Time</label>
                     <div class="input-group">
                         <input name="prep.time" type="number" class="form-control"
-                            aria-label="Text input with dropdown button">
+                            aria-label="Text input with dropdown button" required>
                         <div class="input-group-append">
                             <select name="prep.unit" class="custom-select" id="inputGroupSelect01">
                                 <option  value="minutes">Minutes</option>
@@ -183,7 +185,7 @@
                     <label for="exampleFormControlTextarea1">Picture of your recipe</label>
                     <div class="input-group" id="imageInputGroup">
                         <div class="custom-file">
-                            <input name="image" type="file" class="custom-file-input" id="imageFile">
+                            <input name="image" type="file" class="custom-file-input" id="imageFile" required>
                             <label class="custom-file-label" for="customFile">Choose Image File</label>
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 // check to see if the user is logged in 
 var user_id = localStorage.getItem('user_id');
+user_id = "tinsae";
 if (user_id == null) {
     //user is not logged in
     //append this 
@@ -21,7 +22,7 @@ if (user_id != null) {
     creatR.setAttribute('class', "nav-item justify-content-end");
     var creatRLink = document.createElement('a');
     creatRLink.setAttribute('class', "nav-link");
-    creatRLink.setAttribute('href', 'account.html');
+    creatRLink.setAttribute('href', 'create_recipe.html');
     creatRLink.innerText = 'Create A Recipe';
     creatR.appendChild(creatRLink);
     document.getElementById('navItems').appendChild(creatR);

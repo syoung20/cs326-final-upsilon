@@ -44,7 +44,7 @@ router.post('/', (req, res) => {
         let areThereIngredients: boolean = false
         let searchQMatch = []
         
-
+        /*
         if (req.body.params["recipe_categoreis"].length != 0) {
             areThereCategoreis = true;
 
@@ -52,7 +52,6 @@ router.post('/', (req, res) => {
 
         if (req.body.params["ingrediants_list"].length != 0) {
             areThereIngredients = true;
-
         }
         let areThereFilters : boolean;
         if(areThereCategoreis == false && areThereIngredients == false){
@@ -168,7 +167,107 @@ router.post('/', (req, res) => {
             }
 
         })
+        */
+       let returnObject = {
+        recipes: [],
+        recipe_count: 0,
+        filters : areThereFilters,
+        filterMatchIng : false,
+        filterMatchCat : false,
+        ingrediantsMatched : [],
+        categoriesMatched : [],
+        //filters : false
+    }
+        if (req.body.params["recipe_categoreis"].length != 0) {
+            areThereCategoreis = true;
 
+        }
+
+        if (req.body.params["ingrediants_list"].length != 0) {
+            areThereIngredients = true;
+        }
+        let areThereFilters: boolean;
+        if (areThereCategoreis == false && areThereIngredients == false) {
+            areThereFilters = false;
+            // just make a call with the searchQuery because there was no params
+
+            database.search(searchQuery).then(function(response) {
+                returnObject.recipes = response
+                res.status(200)
+                res.send(JSON.stringify(returnObject))
+            })
+
+            
+        }
+        
+
+        if (areThereCategoreis == true && areThereIngredients == true) {
+            database.search(searchQuery, req.body.params["ingrediants_list"], req.body.params["recipe_categoreis"]).then(function(response) {
+                
+                if(response == []){
+                    returnObject.recipe_count = 0
+                    res.status(200)
+                    res.send(JSON.stringify(returnObject))
+                }
+                else {
+                    returnObject.filterMatchCat = true
+                    returnObject.filterMatchIng = true
+                    returnObject.filters = true
+                    res.status(200)
+                    returnObject.recipe_count = response.length
+                    returnObject.recipes = response
+                    res.send(JSON.stringify(returnObject))
+                }
+            })
+        }
+        
+
+        if (areThereCategoreis == true) {
+            database.search(searchQuery, undefined, req.body.params["recipe_categoreis"]).then(function(response) {
+                
+                if(response == []){
+                    returnObject.recipe_count = 0
+                    res.status(200)
+                    res.send(JSON.stringify(returnObject))
+                }
+                else {
+                    //returnObject.filterMatchCat = true
+                   //returnObject.filters = true
+                    res.status(200)
+                    returnObject.recipe_count = response.length
+                    returnObject.recipes = response
+                    res.send(JSON.stringify(returnObject))
+                }
+
+            })
+        }
+        
+        if (areThereIngredients == true) {
+            console.log('in ingre')
+            database.search(searchQuery, req.body.params["ingrediants_list"]).then(function(response) {
+                //console.log(response)
+                if(response == []){
+                    returnObject.recipe_count = 0
+                    res.status(200)
+                    res.send(JSON.stringify(returnObject))
+                }
+                else {
+                    returnObject.filterMatchIng = true
+                    returnObject.filters = true
+                   
+                    returnObject.recipe_count = response.length
+                    res.status(200)
+                    returnObject.recipes = response
+                    res.send(JSON.stringify(returnObject))
+                }
+            })
+        }
+
+
+
+
+        
+        
 
     } catch (exception) {
         res.status(500)

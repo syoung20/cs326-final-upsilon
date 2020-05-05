@@ -740,23 +740,79 @@ var Database = /** @class */ (function () {
             });
         });
     };
-    Database.prototype.search = function (searchQ, params) {
+    Database.prototype.search = function (searchQ, ingredientParams, catParams) {
         return __awaiter(this, void 0, void 0, function () {
-            var result, err_23;
+            var result, ingList_1, catList_1, result, catList_2, result, ingList_2, result, err_23;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.db.any({ text: "SELECT * FROM recipes LEFT JOIN ingredients ON recipes.recipe_id = ingredients.recipe_id LEFT JOIN recipebook_category_items on recipes.recipe_id = recipebook_category_items.recipe_id LEFT JOIN recipebook_categories on recipebook_category_items.recipebook_category_item_id = recipebook_categories.recipebook_category_id WHERE recipes.title ~* $1 LIMIT 100", values: [searchQ] })];
+                        _a.trys.push([0, 9, , 10]);
+                        if (!(ingredientParams == undefined && catParams == undefined)) return [3 /*break*/, 2];
+                        return [4 /*yield*/, this.db.any({ text: "SELECT DISTINCT ON (recipes.recipe_id) recipes.recipe_id, recipes.user_id, title, image, prep_time, servings, cook_time FROM recipes LEFT JOIN ingredients ON recipes.recipe_id = ingredients.recipe_id LEFT JOIN recipebook_category_items on recipes.recipe_id = recipebook_category_items.recipe_id LEFT JOIN recipebook_categories on recipebook_category_items.recipebook_category_item_id = recipebook_categories.recipebook_category_id WHERE recipes.title ~* $1 LIMIT 100", values: [searchQ] })];
                     case 1:
                         result = _a.sent();
                         return [2 /*return*/, result];
                     case 2:
+                        if (!(ingredientParams != undefined && catParams != undefined)) return [3 /*break*/, 4];
+                        ingList_1 = '';
+                        catList_1 = '';
+                        ingredientParams.forEach(function (element) {
+                            if (ingList_1 == '') {
+                                ingList_1 = ingList_1 + element;
+                            }
+                            else {
+                                ingList_1 = ingList_1 + ',' + element;
+                            }
+                        });
+                        catParams.forEach(function (element) {
+                            if (catList_1 == '') {
+                                catList_1 = catList_1 + element;
+                            }
+                            else {
+                                catList_1 = catList_1 + ',' + element;
+                            }
+                        });
+                        return [4 /*yield*/, this.db.any({ text: "SELECT DISTINCT ON (recipes.recipe_id) recipes.recipe_id, recipes.user_id, title, image, prep_time, servings, cook_time FROM recipes LEFT JOIN ingredients ON recipes.recipe_id = ingredients.recipe_id LEFT JOIN recipebook_category_items on recipes.recipe_id = recipebook_category_items.recipe_id LEFT JOIN recipebook_categories on recipebook_category_items.recipebook_category_item_id = recipebook_categories.recipebook_category_id WHERE recipes.title ~* $1 AND recipebook_categories.category in ($2) AND ingredients.ingredient in ($3)", values: [searchQ, catList_1, ingList_1] })];
+                    case 3:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                    case 4:
+                        if (!(catParams != undefined)) return [3 /*break*/, 6];
+                        catList_2 = '';
+                        catParams.forEach(function (element) {
+                            if (catList_2 == '') {
+                                catList_2 = catList_2 + element;
+                            }
+                            else {
+                                catList_2 = catList_2 + ',' + element;
+                            }
+                        });
+                        return [4 /*yield*/, this.db.any({ text: "SELECT DISTINCT ON (recipes.recipe_id) recipes.recipe_id, recipes.user_id, title, image, prep_time, servings, cook_time FROM recipes LEFT JOIN ingredients ON recipes.recipe_id = ingredients.recipe_id LEFT JOIN recipebook_category_items on recipes.recipe_id = recipebook_category_items.recipe_id LEFT JOIN recipebook_categories on recipebook_category_items.recipebook_category_item_id = recipebook_categories.recipebook_category_id WHERE recipes.title ~* $1 AND recipebook_categories.category in ($2)", values: [searchQ, catList_2] })];
+                    case 5:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                    case 6:
+                        if (!(ingredientParams != undefined)) return [3 /*break*/, 8];
+                        ingList_2 = '';
+                        ingredientParams.forEach(function (element) {
+                            if (ingList_2 == '') {
+                                ingList_2 = ingList_2 + element;
+                            }
+                            else {
+                                ingList_2 = ingList_2 + ',' + element;
+                            }
+                        });
+                        return [4 /*yield*/, this.db.any({ text: "SELECT DISTINCT ON (recipes.recipe_id) recipes.recipe_id, recipes.user_id, title, image, prep_time, servings, cook_time FROM recipes LEFT JOIN ingredients ON recipes.recipe_id = ingredients.recipe_id LEFT JOIN recipebook_category_items on recipes.recipe_id = recipebook_category_items.recipe_id LEFT JOIN recipebook_categories on recipebook_category_items.recipebook_category_item_id = recipebook_categories.recipebook_category_id WHERE recipes.title ~* $1 AND ingredients.ingredient in ($2)", values: [searchQ, ingList_2] })];
+                    case 7:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                    case 8: return [3 /*break*/, 10];
+                    case 9:
                         err_23 = _a.sent();
                         console.log("Unable to perform search");
                         console.log(err_23);
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
+                        return [3 /*break*/, 10];
+                    case 10: return [2 /*return*/];
                 }
             });
         });

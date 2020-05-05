@@ -107,38 +107,19 @@ async function performSearch() {
         let mainDiv = document.createElement('div')
         mainDiv.setAttribute('class', 'row')
         mainDiv.setAttribute('id', 'resultsView')
-        
+
+
         if (json.filters) {
 
-            
+
             let filtersMatched = document.createElement('div')
-            if (json.filterMatchCat || json.filterMatchIng) {
-                
+            if (json.filterMatchCat || json.filterMatchIng && json.recipe_count != 0) {
+
                 filtersMatched.setAttribute('class', 'row alert alert-success')
+                filtersMatched.innerText = "We were able to find a match for one or more of your filters"
                 filtersMatched.setAttribute('id', 'filterStatus')
-                if(json.filterMatchCat){
-                    let cat = document.createElement('p');
-                    let innerT = "We were able to find a match to the following categories:"
-                    json.categoriesMatched.forEach(function(element) {
-                        innerT + "<span>" + element + "</span>" + ''
-                    })
-                    cat.innerText = innerT
-                    filtersMatched.appendChild(cat)
-                    filtersMatched.appendChild(document.createElement('hr'))
-                }
-                if(json.filterMatchIng){
-                    let ing = document.createElement('p');
-                    let innerT = "We were able to find a match to the following ingrediants:" 
-                    json.ingrediantsMatched.forEach(function(element) {
-                        innerT = innerT + " "+ element + " "
-                    })
-                    ing.innerText = innerT
-                    filtersMatched.appendChild(ing)
-                }
                 document.getElementById('container').appendChild(filtersMatched)
 
-
-                
             }
             else {
                 filtersMatched.setAttribute('class', 'row alert alert-danger')
@@ -146,15 +127,9 @@ async function performSearch() {
                 filtersMatched.setAttribute('id', 'filterStatus')
                 document.getElementById('container').appendChild(filtersMatched)
             }
+
         }
 
-
-
-        //filtersMatched.setAttribute('')
-
-
-
-        //mainDiv.setAttribute('class', 'justify-content-center')
 
         json.recipes.forEach(element => {
 

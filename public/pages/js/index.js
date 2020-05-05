@@ -66,7 +66,7 @@ function performSearch() {
     return __awaiter(this, void 0, void 0, function () {
         function updateResultView(json) {
             return __awaiter(this, void 0, void 0, function () {
-                var mainDiv, filtersMatched, cat, innerT_1, ing, innerT_2;
+                var mainDiv, filtersMatched;
                 return __generator(this, function (_a) {
                     //remove previous results view
                     if (document.getElementById('resultsView') != null) {
@@ -81,28 +81,10 @@ function performSearch() {
                     mainDiv.setAttribute('id', 'resultsView');
                     if (json.filters) {
                         filtersMatched = document.createElement('div');
-                        if (json.filterMatchCat || json.filterMatchIng) {
+                        if (json.filterMatchCat || json.filterMatchIng && json.recipe_count != 0) {
                             filtersMatched.setAttribute('class', 'row alert alert-success');
+                            filtersMatched.innerText = "We were able to find a match for one or more of your filters";
                             filtersMatched.setAttribute('id', 'filterStatus');
-                            if (json.filterMatchCat) {
-                                cat = document.createElement('p');
-                                innerT_1 = "We were able to find a match to the following categories:";
-                                json.categoriesMatched.forEach(function (element) {
-                                    innerT_1 + "<span>" + element + "</span>" + '';
-                                });
-                                cat.innerText = innerT_1;
-                                filtersMatched.appendChild(cat);
-                                filtersMatched.appendChild(document.createElement('hr'));
-                            }
-                            if (json.filterMatchIng) {
-                                ing = document.createElement('p');
-                                innerT_2 = "We were able to find a match to the following ingrediants:";
-                                json.ingrediantsMatched.forEach(function (element) {
-                                    innerT_2 = innerT_2 + " " + element + " ";
-                                });
-                                ing.innerText = innerT_2;
-                                filtersMatched.appendChild(ing);
-                            }
                             document.getElementById('container').appendChild(filtersMatched);
                         }
                         else {
@@ -112,8 +94,6 @@ function performSearch() {
                             document.getElementById('container').appendChild(filtersMatched);
                         }
                     }
-                    //filtersMatched.setAttribute('')
-                    //mainDiv.setAttribute('class', 'justify-content-center')
                     json.recipes.forEach(function (element) {
                         //nick's result card
                         var link = document.createElement('a');
