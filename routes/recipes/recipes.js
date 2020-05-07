@@ -12,7 +12,7 @@ router.post('/add', function (req, res) {
         "recipe.discription": req.body["recipe.discription"],
         "recipe.category": req.body["recipe.category"],
         "ingrediant": req.body["ingrediant"],
-        "quantity": req.bodu["quantity"],
+        "quantity": req.body["quantity"],
         "instruction": req.body["instruction"],
         "cook.time": req.body["cook.time"],
         "cook.unit": req.body["cook.unit"],
@@ -22,9 +22,10 @@ router.post('/add', function (req, res) {
         "image": req.body['imageB64']
     };
     console.log(req.body.ingrediant);
+    console.log(req.body.quantity);
     //console.log(reqObj)
     database.putRecipeData(reqObj.userID, reqObj["recipe.name"], reqObj.image, reqObj["prep.time"], reqObj["cook.time"], reqObj.servings, reqObj["recipe.discription"], reqObj.instruction, reqObj.ingrediant, reqObj.quantity).then(function (res) {
-        //  //console.log(reqObj)
+        //console.log(reqObj)
         console.log(res);
     });
     res.redirect('https://cs326-final-upsilon.herokuapp.com');
