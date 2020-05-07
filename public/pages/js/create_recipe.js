@@ -3,6 +3,10 @@ var user_id_check = localStorage.getItem('user_id');
 if (user_id_check == null) {
     window.location.href = './login.html';
 }
+document.getElementById('leaveUs').addEventListener('click', function () {
+    localStorage.clear();
+    window.location.href = './index.html';
+});
 $("#ingrediantAdd").click(function () {
     if ($("#ingrediant")[0].value != "") { //making sure the search bar isn't empty
         updateingrediantsView();
@@ -29,11 +33,20 @@ function updateingrediantsView() {
     inputBar.setAttribute('class', 'form-control');
     inputBar.setAttribute('type', 'text');
     inputBar.setAttribute('name', "ingrediant");
-    inputBar.setAttribute('placeholder', 'ingrediant');
+    inputBar.setAttribute('placeholder', 'Ingrediant');
     inputBar.setAttribute('aria-label', 'ingrediant');
     inputBar.setAttribute('id', 'ingrediant');
     inputBar.setAttribute("aria-describedby", "button-addon2");
     newFormGroup.appendChild(inputBar);
+    var quantity = document.createElement('input');
+    quantity.setAttribute('class', 'form-control');
+    quantity.setAttribute('type', 'text');
+    quantity.setAttribute('name', "ingrediant");
+    quantity.setAttribute('placeholder', 'Quantity');
+    quantity.setAttribute('aria-label', 'Quantity');
+    quantity.setAttribute('id', 'ingrediantQ');
+    quantity.setAttribute("aria-describedby", "button-addon2");
+    newFormGroup.appendChild(quantity);
     var buttonDiv = document.createElement('div');
     buttonDiv.setAttribute('class', 'input-group-append');
     var button = document.createElement('button');
