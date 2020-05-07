@@ -161,7 +161,6 @@ class Database {
 	}
 
 	public async putRecipeData(userId: string, title: string, img: string, prep: number, cook: number, servings: number, description: string, instructions: string[], ingredients: string[]): Promise<number | null> {
-		console.log("put: userId = " + userId + ", title: " + title + ", img: " + img.slice(0, 10) + ", prep: " + prep + ", cook: " + cook + ", servings: " + servings);
 		try {
 			let result = await this.db.one({ text: "INSERT INTO recipes VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7) RETURNING recipe_id", values: [userId, title, img, prep, cook, servings, description] });
 			console.log(result);
