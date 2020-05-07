@@ -167,12 +167,10 @@ router.post('/recipebook/read', (req, res) => {
             recipeCategories.push(category);
         }
     });
-    let status : number = 200;
     Promise.all([getRecipebookData]).then(function() {
-        console.log("name returned: " + name);
         console.log("recipe categories returned: " + JSON.stringify(recipeCategories));
         console.log("first value in returned list: " + JSON.stringify(recipeCategories[0]));
-        res.write(JSON.stringify({'userId' : userId, 'name' : name, 'recipeCategories' : recipeCategories, 'status' : status}));
+        res.write(JSON.stringify({'recipeCategories' : recipeCategories}));
         res.end();
     });
 });

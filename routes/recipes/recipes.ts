@@ -175,20 +175,23 @@ router.post('/addgroceries', (req, res) => {
 
 router.post('/saverecipe', (req, res) => {
 
-    let recipeID: string = req.body.rid
-    let category: string = req.body.category
-
-
+    let recipeId: string = req.body.rid
+    let catId: string = req.body.catId
+    database.addCategoryRecipe(catId, recipeId).then( function() {
+        res.send(JSON.stringify({ status: "successfully added" }));
+        res.end();
+    })
+});
 
     /*
     code to delete recipe 
 
-    */
+    
 
     res.send(JSON.stringify({ status: "successfully saved recipie to category" }))
     res.end()
 
-})
+})*/
 
 router.post('/comments/add', (req, res) => {
 
