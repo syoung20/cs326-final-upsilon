@@ -18,10 +18,16 @@ router.post('/read', (req, res) => {
         console.log(res); 
         for (let i : number = 0; i < res.length; i++) {
             let categoryData : Array<string> = res[i]["row"].split(',');
+            var imgstr : string;
+            if (categoryData.length > 3) {
+                imgstr = categoryData[2] + "," + categoryData[3].slice(0, categoryData[3].length-1);
+            } else {
+                imgstr = categoryData[2].slice(0, categoryData[2].length-1);
+            }
             let category : {id : string, title: string, img: string} = {
             'id' : categoryData[0].slice(1),
             'title' : categoryData[1].replace(/\"/g, ''),
-            'img' : categoryData[2].slice(0, categoryData[2].length -1)
+            'img' : imgstr
             };
             recipeCategories.push(category);
         }
@@ -208,13 +214,20 @@ router.post('/recipebook/cat/read', (req, res) => {
         title = res[0]["category"];
         for (let i : number = 1; i < res.length; i++) {
             let recipeData : Array<string> = res[i]["row"].split(',');
+            console.log(recipeData[2]);
+            var imgstr : string;
+            if (recipeData.length > 3) {
+                imgstr = recipeData[2] + "," + recipeData[3].slice(0, recipeData[3].length-1);
+            } else {
+                imgstr = recipeData[2].slice(0, recipeData[2].length-1);
+            }
             let recipe : {recipeId : string, recipeTitle : string, recipeImg : string} = {
                 recipeId : recipeData[0].slice(1),
                 recipeTitle : recipeData[1].replace(/\"/g, ''),
-                recipeImg : recipeData[2].slice(0, recipeData[2].length-1)
+                recipeImg : imgstr
             };
             recipes.push(recipe);
-            console.log(recipe);
+           
         }
     });
     Promise.all([getCategoryData]).then(function() {

@@ -34,10 +34,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-document.getElementById('leaveUs').addEventListener('click', function () {
-    localStorage.clear();
-    window.location.href = './index.html';
-});
 var url = "https://cs326-final-upsilon.herokuapp.com/users/";
 var userId = localStorage.getItem('user_id');
 var view = "recipebook"; //view to keep track of current tab for post requests
@@ -258,13 +254,16 @@ function loadAccountData() {
                     for (i = 0; i < recipeCategories.length; i++) {
                         catId = recipeCategories[i]["id"];
                         title = recipeCategories[i]["title"];
-                        if (recipeCategories[i]["img"] == "") {
+                        if (recipeCategories[i]["recipeImg"] == '""' || recipeCategories[i]["recipeImg"] == "") {
                             img = "./images/missing_img.png";
                         }
                         else {
                             img = recipeCategories[i]["img"];
                         }
-                        html = '<div id="' + catId + '" class="recipe-cat m-3"><h3 class="recipe-title">' + title + '</h3><img class="recipe-img" src="' + img + '"></div>';
+                        if (title == "Garden") {
+                            console.log("img: " + img);
+                        }
+                        html = "<div id='" + catId + "' class='recipe-cat m-3'><h3 class='recipe-title'>" + title + "</h3><img class='recipe-img' src=" + img + "></div>";
                         $(html).insertBefore(recipebook.find(".add-category"));
                     }
                     numRecip = recipeCategories.length;
@@ -293,13 +292,13 @@ function loadRecipeCategory(id) {
                         recipeId = recipes[i]["recipeId"];
                         if (recipeId != "") {
                             recipeTitle = recipes[i]["recipeTitle"];
-                            if (recipes[i]["recipeImg"] == "") {
+                            if (recipes[i]["recipeImg"] == '""' || recipes[i]["recipeImg"] == "") {
                                 recipeImg = "./images/missing_img.png";
                             }
                             else {
                                 recipeImg = recipes[i]["recipeImg"];
                             }
-                            html = '<div id="' + recipeId + '" class="recipe m-3"><h3 class="recipe-title">' + recipeTitle + '</h3><img class="recipe-img" src="' + recipeImg + '"></div>';
+                            html = '<div id="' + recipeId + '" class="recipe m-3"><h3 class="recipe-title">' + recipeTitle + '</h3><img class="recipe-img" src=' + recipeImg + '></div>';
                             recipeCat.children().first().append(html);
                         }
                     }
