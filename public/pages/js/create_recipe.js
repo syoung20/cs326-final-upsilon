@@ -41,7 +41,7 @@ function updateingrediantsView() {
     var quantity = document.createElement('input');
     quantity.setAttribute('class', 'form-control');
     quantity.setAttribute('type', 'text');
-    quantity.setAttribute('name', "ingrediant");
+    quantity.setAttribute('name', "quantity");
     quantity.setAttribute('placeholder', 'Quantity');
     quantity.setAttribute('aria-label', 'Quantity');
     quantity.setAttribute('id', 'ingrediantQ');
