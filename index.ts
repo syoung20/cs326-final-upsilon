@@ -2,9 +2,13 @@ let express = require('express');
 let path = require('path');
 const app = express();
 const exphbs = require('express-handlebars')
+const bodyParser =  require('body-parser')
 
 //the port the server should be listening on 
 const PORT = process.env.PORT || 5657;
+
+// increase payload
+app.use(bodyParser.json({limit: '50mb'})); app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 // static home page 
 app.use(express.static(path.join(__dirname, 'public/pages')));

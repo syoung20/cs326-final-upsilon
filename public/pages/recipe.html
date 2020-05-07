@@ -17,13 +17,13 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav" id="navItems">
                 <li class="nav-item active">
                     <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
-        </nav>
+    </nav>
         <div class="container">
         <section>
             <div class="top-container">
@@ -74,7 +74,9 @@
                 <ul id="recipeIngredients">
                     <li>ingredients...</li>
                 </ul>
+                <!--
                 <button type="button" class="btn btn-light" id="buttonAdd">Add to grocery list</button>
+                -->
             </div>
             <div class="container col-md-8 instructions">
                 <h3>Instructions</h3>
@@ -83,7 +85,9 @@
                 </ol>
             </div>
             </div>
-        </section>
+            <button type="button" class="btn btn-light" id="recipeAdd">Add to recipe book</button>
+
+        </section><!--
         <section>
             <div class="tags">
                 <h4>Tags</h4>
@@ -104,11 +108,29 @@
                 <span class="close">&times;</span>  
                 <p>Ingredients added to grocery list!</p>
             </div>
+        </div>-->
+        <div id="categoryModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>  
+                <form onsubmit="return false">
+                    <div class="form-group" id="cats">
+                      <p>Choose the category to add this recipe to:</p>
+                    </div>
+                    <button id="catSubmit" type="submit" class="btn btn-light">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div id="recipeModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>  
+                <p>Recipe added to recipe book!</p>
+            </div>
         </div>
         </div>
     </body>
 
 
     <script src="js/recipe.js"></script>
+    <script src="js/navigationUpdate.js"></script>
 
 </html>

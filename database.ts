@@ -2,9 +2,11 @@ class Database {
 	faker = require('faker');
 	private pgp = require('pg-promise')();
 
-	private uri = process.env.DB_URI;
+	private uri = "postgres://wwidmexm:aD7je2Uz9tLDJ5bwe7Fo9qsZChVQmyIo@drona.db.elephantsql.com:5432/wwidmexm";
+	//process.env.DB_URI;
 	private dbName: string = "wwidmexm";
 	private db: any;
+
 
 	constructor(dbName: string) {
 		this.dbName = dbName;
@@ -486,6 +488,16 @@ class Database {
 		} catch (err) {
 			console.log(err);
 			return null;
+		}
+	}
+
+	public async addCategoryRecipe(catId: number, recipeId: number) {
+		console.log("input: " + catId + ", " + recipeId);
+		try {
+			await this.db.none({text: 'INSERT INTO recipebook_category_items VALUES (DEFAULT, $1, $2)', values: [catId,recipeId]});
+			return;
+		} catch (err) {
+			console.log(err);
 		}
 	}
 }

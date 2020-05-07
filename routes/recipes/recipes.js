@@ -125,15 +125,22 @@ router.post('/addgroceries', function (req, res) {
     res.end();
 });
 router.post('/saverecipe', function (req, res) {
-    var recipeID = req.body.rid;
-    var category = req.body.category;
-    /*
-    code to delete recipe
-
-    */
-    res.send(JSON.stringify({ status: "successfully saved recipie to category" }));
-    res.end();
+    var recipeId = req.body.rid;
+    var catId = req.body.catId;
+    database.addCategoryRecipe(catId, recipeId).then(function () {
+        res.send(JSON.stringify({ status: "successfully added" }));
+        res.end();
+    });
 });
+/*
+code to delete recipe
+
+
+
+res.send(JSON.stringify({ status: "successfully saved recipie to category" }))
+res.end()
+
+})*/
 router.post('/comments/add', function (req, res) {
     var rating = req.body.rating;
     var comment = req.body.comment;

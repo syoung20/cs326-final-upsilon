@@ -39,7 +39,8 @@ var Database = /** @class */ (function () {
         var _this = this;
         this.faker = require('faker');
         this.pgp = require('pg-promise')();
-        this.uri = process.env.DB_URI;
+        this.uri = "postgres://wwidmexm:aD7je2Uz9tLDJ5bwe7Fo9qsZChVQmyIo@drona.db.elephantsql.com:5432/wwidmexm";
+        //process.env.DB_URI;
         this.dbName = "wwidmexm";
         this.dbName = dbName;
         this.db = this.pgp(this.uri);
@@ -833,6 +834,29 @@ var Database = /** @class */ (function () {
                         console.log(err_24);
                         return [2 /*return*/, null];
                     case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Database.prototype.addCategoryRecipe = function (catId, recipeId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var err_25;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.log("input: " + catId + ", " + recipeId);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.db.none({ text: 'INSERT INTO recipebook_category_items VALUES (DEFAULT, $1, $2)', values: [catId, recipeId] })];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                    case 3:
+                        err_25 = _a.sent();
+                        console.log(err_25);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
