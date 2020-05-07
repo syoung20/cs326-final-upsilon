@@ -45,11 +45,21 @@ function updateingrediantsView() {
     inputBar.setAttribute('class', 'form-control')
     inputBar.setAttribute('type', 'text')
     inputBar.setAttribute('name', "ingrediant")
-    inputBar.setAttribute('placeholder', 'ingrediant')
+    inputBar.setAttribute('placeholder', 'Ingrediant')
     inputBar.setAttribute('aria-label', 'ingrediant')
     inputBar.setAttribute('id', 'ingrediant')
     inputBar.setAttribute("aria-describedby", "button-addon2")
     newFormGroup.appendChild(inputBar)
+    
+    let quantity = document.createElement('input')
+    quantity.setAttribute('class', 'form-control')
+    quantity.setAttribute('type', 'text')
+    quantity.setAttribute('name', "ingrediant")
+    quantity.setAttribute('placeholder', 'Quantity')
+    quantity.setAttribute('aria-label', 'Quantity')
+    quantity.setAttribute('id', 'ingrediantQ')
+    quantity.setAttribute("aria-describedby", "button-addon2")
+    newFormGroup.appendChild(quantity)
 
     let buttonDiv = document.createElement('div')
     buttonDiv.setAttribute('class', 'input-group-append')
@@ -100,6 +110,7 @@ function addEventListener() {
             updateingrediantsView()
         }
     })
+
 
 
     $(".oldingrediantButton").click(function () {

@@ -30,13 +30,14 @@ router.post('/add', (req, res) => {
 
     }
 
+    console.log(req.body.ingrediant)
     
 
     
     //console.log(reqObj)
     database.putRecipeData(reqObj.userID, reqObj["recipe.name"], reqObj.image, reqObj["prep.time"], reqObj["cook.time"], reqObj.servings, reqObj["recipe.discription"], reqObj.instruction, reqObj.ingrediant).then(function (res) {
       //  //console.log(reqObj)
-        console.log(res)
+        //console.log(res)
     })
 
 
