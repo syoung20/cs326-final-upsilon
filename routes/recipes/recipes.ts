@@ -17,6 +17,7 @@ router.post('/add', (req, res) => {
         "recipe.discription": req.body["recipe.discription"],
         "recipe.category": req.body["recipe.category"],
         "ingrediant": req.body["ingrediant"],
+        "quantity" : req.bodu["quantity"]
         "instruction": req.body["instruction"],
         "cook.time": req.body["cook.time"],
         "cook.unit": req.body["cook.unit"], // 1 - hours 2 - minutes 
@@ -35,9 +36,9 @@ router.post('/add', (req, res) => {
 
     
     //console.log(reqObj)
-    database.putRecipeData(reqObj.userID, reqObj["recipe.name"], reqObj.image, reqObj["prep.time"], reqObj["cook.time"], reqObj.servings, reqObj["recipe.discription"], reqObj.instruction, reqObj.ingrediant).then(function (res) {
+    database.putRecipeData(reqObj.userID, reqObj["recipe.name"], reqObj.image, reqObj["prep.time"], reqObj["cook.time"], reqObj.servings, reqObj["recipe.discription"], reqObj.instruction, reqObj.ingrediant, reqObj.quantity).then(function (res) {
       //  //console.log(reqObj)
-        //console.log(res)
+        console.log(res)
     })
 
 
