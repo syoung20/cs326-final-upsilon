@@ -247,7 +247,7 @@ var Database = /** @class */ (function () {
             });
         });
     };
-    Database.prototype.putRecipeData = function (userId, title, img, prep, cook, servings, description, instructions, ingredients) {
+    Database.prototype.putRecipeData = function (userId, title, img, prep, cook, servings, description, instructions, ingredients, quantities) {
         return __awaiter(this, void 0, void 0, function () {
             var result, i, i, err_4;
             return __generator(this, function (_a) {
@@ -281,7 +281,7 @@ var Database = /** @class */ (function () {
                         if (!(i < ingredients.length)) return [3 /*break*/, 10];
                         if (!(ingredients[i] != "")) return [3 /*break*/, 9];
                         console.log(i + ingredients[i]);
-                        return [4 /*yield*/, this.db.none({ text: "INSERT INTO ingredients VALUES (DEFAULT, $1, $2, $3)", values: [result.recipe_id, ingredients[i], (i + 1)] })];
+                        return [4 /*yield*/, this.db.none({ text: "INSERT INTO ingredients VALUES (DEFAULT, $1, $2, $3, $4)", values: [result.recipe_id, ingredients[i], quantities[i], (i + 1)] })];
                     case 8:
                         _a.sent();
                         _a.label = 9;

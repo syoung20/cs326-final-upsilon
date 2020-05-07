@@ -160,7 +160,7 @@ class Database {
 		}
 	}
 
-	public async putRecipeData(userId: string, title: string, img: string, prep: number, cook: number, servings: number, description: string, instructions: string[], ingredients: string[]): Promise<number | null> {
+	public async putRecipeData(userId: string, title: string, img: string, prep: number, cook: number, servings: number, description: string, instructions: string[], ingredients: string[], quantities: string[]): Promise<number | null> {
 		console.log("put: userId = " + userId + ", title: " + title + ", img: " + img.slice(0, 10) + ", prep: " + prep + ", cook: " + cook + ", servings: " + servings);
 		try {
 			let result = await this.db.one({ text: "INSERT INTO recipes VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7) RETURNING recipe_id", values: [userId, title, img, prep, cook, servings, description] });
@@ -174,7 +174,7 @@ class Database {
 			for (let i: number = 0; i < ingredients.length; i++) {
 				if (ingredients[i] != "") {
 					console.log(i + ingredients[i])
-					await this.db.none({ text: "INSERT INTO ingredients VALUES (DEFAULT, $1, $2, $3)", values: [result.recipe_id, ingredients[i], (i + 1)] });
+					await this.db.none({ text: "INSERT INTO ingredients VALUES (DEFAULT, $1, $2, $3, $4)", values: [result.recipe_id, ingredients[i], quantities[i], (i + 1)] });
 				}
 			}
 		} catch (err) {
@@ -259,6 +259,7 @@ class Database {
 			console.log("error adding category");
 		}
 	}
+
 	public async removeCategoryRecipe(userId, categoryId, recipeId): Promise<void> {
 		try {
 			let result: object = await this.db.none({ text: "DELETE FROM recipebook_category_items WHERE recipebook_category_items.recipe_id = $1", values: [recipeId] });
