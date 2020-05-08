@@ -125,46 +125,9 @@ router.post('/ingredients', (req, res) => {
 })
 
 
-router.post('/edit', (req, res) => {
-
-    let recipeID: string = req.body.rid
-
-    /*
-
-    perform search for that id in db
-
-    */
-
-    let recipeReturn = {
-        name: "foo",
-        discription: "bar",
-        ingrediants: "foo",
-        //more to be added
-    }
 
 
-    res.status(200)
 
-    res.send(JSON.stringify(recipeReturn))
-    res.end()
-
-
-})
-
-router.post('/del', (req, res) => {
-
-    let recipeID: string = req.body.rid
-
-
-    /*
-    code to delete recipe 
-
-    */
-
-    res.send(JSON.stringify({ status: "successfully deleted" }))
-    res.end()
-
-})
 
 router.post('/addgroceries', (req, res) => {
 
@@ -200,59 +163,12 @@ router.post('/saverecipe', (req, res) => {
 
 })*/
 
-router.post('/comments/add', (req, res) => {
-
-
-    let rating: string = req.body.rating
-    let comment: string = req.body.comment
-    let rid: string = req.body.recipeID
-
-    /*
-    code to add comment to the recipe
-    */
-
-
-    res.status(200)
-
-    res.send(JSON.stringify({ status: "Comment Succesfully added" }))
-    res.end()
-})
-
-
-router.post('comments/del', (req, res) => {
-
-    let recipeID: string = req.body.recipeID
-    let commentID: string = req.body.commentID
 
 
 
-    /*
-    code to delete comment
-
-    */
-
-    res.send(JSON.stringify({ status: "successfully deleted" }))
-    res.end()
-
-})
-
-router.post('/comments/edit', (req, res) => {
 
 
-    let rating: string = req.body.rating
-    let comment: string = req.body.comment
-    let rid: string = req.body.recipeID
 
-    /*
-    code to edit comment to the recipe
-    */
-
-
-    res.status(200)
-
-    res.send(JSON.stringify({ status: "Comment Succesfully edited" }))
-    res.end()
-})
 
 
 router.get('/', (req, res) => {
