@@ -39,7 +39,7 @@ var Database = /** @class */ (function () {
         var _this = this;
         this.faker = require('faker');
         this.pgp = require('pg-promise')();
-        this.uri = "postgres://wwidmexm:aD7je2Uz9tLDJ5bwe7Fo9qsZChVQmyIo@drona.db.elephantsql.com:5432/wwidmexm";
+        this.uri = "process.env.DB_URI";
         //process.env.DB_URI;
         this.dbName = "wwidmexm";
         this.dbName = dbName;

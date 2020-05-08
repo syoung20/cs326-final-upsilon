@@ -416,12 +416,12 @@ We are using PostgreSQL for our database. The database is made up of the followi
 
 # URL Routes/Mapping
 
-### /.  - Home Page
-  - The page that loads up when I user enters to the website. In here users can search recipes, using different filters, clicking on any of the results wouldroute to the Recipe Page. In addition User can use the dashboard to Login (if not logged in). If they are they can acces the Create A Recipe page and My Account pages, in addition to logging out.
+### /  - Home Page
+  - The page that loads up when a user enters to the website. Here users can search recipes using different filters. Clicking on any of the results routes to the recipe page. In addition users can use the navbar to login (if not logged in). If they are logged in they can acces the Create A Recipe page and My Account pages, in addition to logging out.
 
 ### /recipe  - Recipe Page
-  - In this page users can view a particular recipe, on which they clicked either from the search in the home page, or their recipe book on the Account page
-  + For this page you need to be redirected by clickin on a recipe in either account or home. If accessed without routing the page will load an empty recipe template.
+  - In this page users can view a particular recipe that they clicked on either from the search in the home page, or their recipe book on the Account page
+  + You need to be directed to this page by clicking on a recipe in either account or home. If accessed without routing the page will load an empty recipe template.
 
 ### /login  - Login Page
   - User can log into their exiting accounts.
@@ -431,10 +431,10 @@ We are using PostgreSQL for our database. The database is made up of the followi
 
 ### /account  - Account Page
   - In their personal account page, users can see the recipes in their Recipe Book, their items in their Pantry, and their items/ingredients in their grocery list. All of which can be divided into different customizable categories. 
-  + If not logged in (and accessed directly through the url) this page will redirect to the home page.
+  + If not logged in (and accessed directly through the url) this page will redirect to the login page.
 
 ### /create_recipe  - Create Recipe Page
-  - In this page users, if logged in, can create a new recipe to be added to the APPetizer database, that will be available to be viewed by any users. 
+  - On this page, logged in users can create a new recipe to be added to the APPetizer database, that will be available to be viewed by any users. 
   + If not logged in (and accessed directly through the url) this page will redirect to the home page.
 
 # Authentication/Authorization
