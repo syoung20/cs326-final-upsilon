@@ -333,6 +333,12 @@ Response:
 
 # Database
 
+We are using PostgreSQL for our database. The database is made up of the following tables: recipes, ingredients, instructions, users, recipebook_categories, recipebook_category_items, pantry_categories, pantry_category_items, grocerylist_categories, and grocerylist_category_items. The columns and datatypes for each are displayed below, with a few edits<sup>*</sup>.
+
+[Database Schema](mockups/appetizers_schema.pdf)
+
+<sup>*</sup>Edits: we are not using the tags table. The recipes table also has a column named description, which is of datatype TEXT. The image column of recipes is also of type TEXT. In addition, all of the table id's (the primary keys) that are listed as type INT in the diagram are actually of type SERIAL in the Postgres database.
+
 # URL Routes/Mapping
 
 ### /.  - Home Page
@@ -363,4 +369,10 @@ Response:
 
 # Division of Labor
 
+Tinsae worked on the home page and create a recipe front end. He also worked on the /search and /recipe endpoints to implement searching and the process of adding a recipe to our database.  
+
 # Conclusion
+
+This was overall a fun but challenging project through which we have all grown in our web development skills. While working on this project, the value and sheer importance of planning was made immensely clear to us. When we failed to plan effectively, we often failed at what we were attempting to do and or were not very efficient in dealing with the problems we were running into. This is a valuable lesson we can all carry into our future careers. There wasn't one major difficulty we had; we happened to have little problems that came about because we initially didn't know how to use the resources available to us. 
+
+Before starting this project, the importance of reading the documentation of tools we might use before attempting to use it would have been a useful thing. Overall this was a positive experience, thank you for guiding us through it (instructors)
