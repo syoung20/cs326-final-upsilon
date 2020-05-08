@@ -21,7 +21,7 @@ The homepage is where users can search for recipes. At the top there is a navbar
 Users can type in the search bar to search for a recipe, or they can further narrow their search by inputting the recipe type and ingredients to use. Multiple ingredients can be added to the search.
 ![Search](mockups/search.png)
 After searching, the results will populate in the lower part of the page. They give the user information including the title, the picture, the cook time, prep time, and servings. Clicking on one of these recipes will lead the user to the recipe page.
-![Results](mockups/results.png)
+![Results](mockups/Results.png)
 ## Recipe
 The recipe page is made up of the title, the image, the name of the creator, cook time, prep time, total time, servings, description, ingredients, and instructions. If the user is logged in they can add the ingredients to their grocery list or save the recipe to one of their recipe book categories. Users that are not logged in cannot do anything else on this page.
 ![Recipe1](mockups/recipe1.png)
@@ -30,10 +30,10 @@ The recipe page is made up of the title, the image, the name of the creator, coo
 ![Recipe4](mockups/recipe4.png)
 ## Signup
 The signup page allows users to register an account. They input their email, name, and a password.
-![Signup](mockups/signup.png)
+![Signup](mockups/Signup.png)
 ## Login
 The login page allows users to login using their email and password.
-![Login](mockups/login.png)
+![Login](mockups/Login.png)
 ## Create Recipe
 On the create recipe page, logged in users can add their own recipe to the web application. Users fill out inputs including title, description, recipe type, ingredients, instructions, servings, cook time, prep time, and image.
 ![Create1](mockups/create1.png)
@@ -173,7 +173,9 @@ Response:
 
 JSON object that includes
 - Status message 
-### /users/read
+### /users/ [GET]
+Serves the account page
+### /users/read [POST]
 View user account.
 
 Parameters:
@@ -183,7 +185,7 @@ Response:
 - userId : `string`
 - name : name of user, `string`
 - categories: an `array of objects`, recipe book categories, which are objects made up of category id (`number`), category title (`string`), and category image (`string`)
-### /users/pantry/read
+### /users/pantry/read [POST]
 Read the pantry data.
 
 Parameters:
@@ -193,7 +195,7 @@ Response:
 - userId: userId `string` from request
 - categories: an `array of objects`, pantry categories, where each category is an object made up of an id `number`, a title `string`, and an `array of strings` - food items
 
-### /users/pantry/cat/add
+### /users/pantry/cat/add [POST]
 Add a category to the pantry.
 
 Parameters:
@@ -205,7 +207,7 @@ Response:
 - categoryId: the unique category id `number`
 - category: `string` name of category from request
 
-### /users/pantry/cat/del
+### /users/pantry/cat/del [POST]
 Delete a category.
 
 Parameters:
@@ -215,7 +217,7 @@ Response:
 - userId: `string` userId from request
 - categoryId: `number` categoryId from request
 
-### /users/pantry/cat/edit
+### /users/pantry/cat/edit [POST]
 Edit a category. Updates the title and list of ingredients
 
 Parameters:
@@ -230,7 +232,7 @@ Response:
 - title: the `string` title from request
 - ingredients: the `list of strings` for ingredients from request
 
-### /users/grocery/read
+### /users/grocery/read [POST]
 Read the grocery list data
 
 Parameters:
@@ -240,7 +242,7 @@ Response:
 - userId: userId from request `string`
 - categories: an `Array of objects`, grocery categories, where each category is an object made up of an id `number`, a title `string`, and a list of food items (`Array of strings`).
 
-### /users/grocery/cat/add
+### /users/grocery/cat/add [POST]
 Add a category to the grocery list.
 
 Parameters:
@@ -252,7 +254,7 @@ Response:
 - categoryId: the unique category id `number`
 - category: `string` name of category from request
 
-### /users/grocery/cat/del
+### /users/grocery/cat/del [POST]
 Delete a category.
 
 Parameters:
@@ -262,7 +264,7 @@ Response:
 - userId: `string` userId from request
 - categoryId: `number` categoryId from request
 
-### /users/grocery/cat/edit
+### /users/grocery/cat/edit [POST]
 Edit a category. Compares the title and list of ingredients to any existing values, updating the values.
 
 Parameters:
@@ -277,7 +279,7 @@ Response:
 - title: the `string` title from request
 - ingredients: the `list of strings` for ingredients from request
 
-### /users/recipebook/read
+### /users/recipebook/read [POST]
 Read the recipe book data
 
 Parameters:
@@ -287,7 +289,7 @@ Response:
 - userId: userId `string` from request
 - categories: an `Array of objects`, recipe book categories, which are objects made up of category id `number`, category title `string`, and category image `string`
 
-### /users/recipebook/cat/add
+### /users/recipebook/cat/add [POST]
 Add a category to the recipe book.
 
 Parameters:
@@ -299,7 +301,7 @@ Response:
 - categoryId: the unique category id `number`
 - category: `string` name of category from request
 
-### /users/recipebook/cat/del
+### /users/recipebook/cat/del [POST]
 Delete a category.
 
 Parameters:
@@ -309,7 +311,7 @@ Response:
 - userId: `string` userId from request
 - categoryId: `number` categoryId from request
 
-### /users/recipebook/cat/read
+### /users/recipebook/cat/read [POST]
 View recipes in a category.
 
 Parameters:
@@ -322,7 +324,7 @@ Response:
 - title: `string` title of the category
 - recipes: an `Array of objects`, recipes, where each recipe is an object made up of an id (`number`), a title (`string`), and an image url (`string`)
 
-### /users/recipebook/cat/edit
+### /users/recipebook/cat/edit [POST]
 Delete a recipe from a category.
 
 Parameters:
@@ -337,11 +339,80 @@ Response:
 
 # Database
 
-We are using PostgreSQL for our database. The database is made up of the following tables: recipes, ingredients, instructions, users, recipebook_categories, recipebook_category_items, pantry_categories, pantry_category_items, grocerylist_categories, and grocerylist_category_items. The columns and datatypes for each are displayed below, with a few edits<sup>*</sup>.
+We are using PostgreSQL for our database. The database is made up of the following tables: recipes, ingredients, instructions, users, recipebook_categories, recipebook_category_items, pantry_categories, pantry_category_items, grocerylist_categories, and grocerylist_category_items. The columns, datatypes, and foreign key relationships for each are displayed below, with a few edits<sup>*</sup>.
 
 [Database Schema](mockups/appetizers_schema.pdf)
 
-<sup>*</sup>Edits: we are not using the tags table. The recipes table also has a column named description, which is of datatype TEXT. The image column of recipes is also of type TEXT. In addition, all of the table id's (the primary keys) that are listed as type INT in the diagram are actually of type SERIAL in the Postgres database.
+<sup>*</sup>Edits: we are not using the tags table. The recipes table also has a column named description, which is of datatype TEXT. The image column of recipes is also of type TEXT. We added a column named quantity of type VARCHAR to the ingredients table. In addition, all of the table id's (the primary keys) that are listed as type INT in the diagram are actually of type SERIAL in the Postgres database.
+
+## Description of Schema
+### recipes
+
+- recipe_id: a unique identifier for a record in recipes
+- user_id: the user who created the recipe
+- title: the title of the recipe
+- image: the data url of the image uploaded of the recipe
+- prep_time: the time it takes to prep ingredients for the recipe
+- cook_time: the time spent cooking for a recipe
+- servings: the number of servings the recipe makes
+- description: a description of the recipe
+
+### ingredients
+
+- ingredient_id: a unique identifier for a record in ingredients (records correlate a recipe with a single ingredient for the recipe)
+- recipe_id: the recipe_id that this ingredient record corresponds to
+- ingredient: the ingredient of the record that is used in the recipe
+- quantity: the quantity of the ingredient in the recipe
+- order: the number item it is on the ingredient list of the recipe
+
+### instructions
+
+- instruction_id: a unique identifier for a record in instructions (records correlate a recipe with a single instruction for the recipe)
+- recipe_id: the recipe_id that this instruction record corresponds to
+- instruction: the instruction of the record that is used in the recipe
+- order: the number item it is on the instruction list of the recipe
+
+### users
+
+- user_id: the unique email address that the user registered an account with
+- name: the name of the user
+- password: the password for the user account
+
+### recipebook_categories
+
+- recipebook_category_id: the unique identifier for a record in the table (a record correlates a user with a single one of their recipebook categories)
+- user_id: the user account that has this category record
+- category: the name of the category
+
+### recipebook_category_items
+
+- recipebook_category_item_id: the unique identifier for a record in the table (a record correlates a recipebook category with a single recipe in the category)
+- recipebook_category_id: the recipebook category that has this recipe
+- recipe_id: the recipe that is in this category
+
+### pantry_categories
+
+- pantry_category_id: the unique identifier for a record in the table (a record correlates a user with a single one of their pantry categories)
+- user_id: the user account that has this category record
+- category: the name of the category
+
+### pantry_category_items
+
+- pantry_category_item_id: the unique identifier for a record in the table (a record correlates a pantry category with a single ingredient in the category)
+- pantry_category_id: the pantry category that has this ingredient
+- item: the ingredient in the pantry category
+
+### grocerylist_categories
+
+- grocerylist_category_id: the unique identifier for a record in the table (a record correlates a user with a single one of their grocery list categories)
+- user_id: the user account that has this category record
+- category: the name of the category
+
+### grocerylist_category_items
+
+- grocerylist_category_item_id: the unique identifier for a record in the table (a record correlates a grocery list category with a single ingredient in the category)
+- grocerylist_category_id: the grocery list category that contains this grocery list item
+- item: the ingredient in the grocery list category
 
 # URL Routes/Mapping
 
@@ -368,7 +439,7 @@ We are using PostgreSQL for our database. The database is made up of the followi
 
 # Authentication/Authorization
 
-  - We didn't really implemented any actual secured authentication. For the sake of the the functionality of our app however, login and signup are handled by endpoints and database functions. Login status throughout the use of the website is handled with the window localStorage Property. A user needs to be signed in to access the create a recipe and my account features of the website. The last one also including being able to add recipes and ingredients to the my account recipe book and groceries list, respectively, from directly from the recipe page.
+  - We didn't really implement any actual secured authentication. For the sake of the the functionality of our app however, login and signup are handled by endpoints and database functions. Login status throughout the use of the website is handled with the window localStorage Property. A user needs to be signed in to access the create a recipe and my account features of the website. The last one also including being able to add recipes and ingredients to the my account recipe book and groceries list, respectively, from directly from the recipe page.
 
 
 # Division of Labor
@@ -377,7 +448,9 @@ Tinsae worked on the home page and create a recipe front end. He also worked on 
 
 Nick worked on the Recipe, Login and Signup pages. Including work on the respective html/css and js/ts frontend pages, and backend database functions and endpoints for /recipes and /account. In them worked on functions for login a user, signup a new user, read a recipe from the db, add ingredients to the grocery list db table. In addition worked on database functions to add recipes to the db table. 
 
-# Features to complete
+Sarah worked on the account page and the different views on it. This includes account.html, account.css, and account.ts on the front-end, and routes/users/users.ts and the database functions to support it in database.ts on the back-end. In addition to handling this portion of the web application, I also created the original version of recipe.html and recipe.css before Nick took over implementing the client and server-side javascript and databse functions for that. I designed the database schema and set up the instance we are using with all its structure.
+
+# Features to complete (Extenstion of Video Demo)
 Originaly we wanted to also include features to be able to see tags and comments on recipes. Even being able to filter through tags too in addition to ingredients and categories. Another feature we wanted implemente too, would be the ability to automatically see recipes that you could complete with just ingredients in your pantry. With more time of in a future implementation, we would look into adding those features to the app, in addition to also implementing a more secured autenthication and logged in status system
 
 
