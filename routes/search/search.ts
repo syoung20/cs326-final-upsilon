@@ -43,131 +43,7 @@ router.post('/', (req, res) => {
         let areThereCategoreis: boolean = false
         let areThereIngredients: boolean = false
         let searchQMatch = []
-        
-        /*
-        if (req.body.params["recipe_categoreis"].length != 0) {
-            areThereCategoreis = true;
 
-        }
-
-        if (req.body.params["ingrediants_list"].length != 0) {
-            areThereIngredients = true;
-        }
-        let areThereFilters : boolean;
-        if(areThereCategoreis == false && areThereIngredients == false){
-            areThereFilters = false;
-        }
-        if(areThereCategoreis == true || areThereIngredients == true) {
-            areThereFilters = true;
-        }
-
-        let returnObject = {
-            recipes: [],
-            recipe_count: 0,
-            filters : areThereFilters,
-            filterMatchIng : false,
-            filterMatchCat : false,
-            ingrediantsMatched : [],
-            categoriesMatched : []
-
-        }
-
-        let recepiesWithCategories : Array<Object> = []
-        let withIngre : Array<Object> = []
-
-
-        // let returnObject;
-        let returnedOBJ = database.search(searchQuery).then(function (res) {
-            //console.log(typeof withIngre)
-            res.forEach(function (element) {
-                if (areThereIngredients) {
-                    
-                    req.body.params["ingrediants_list"].forEach( function(ingrediant) {
-                        //console.log(element['ingredient'] + '   ' + ingrediant.toLowerCase())
-                        if (element['ingredient'] == ingrediant.toLowerCase()) {
-                            //console.log('match')
-                            withIngre.push(element)
-                            returnObject.filterMatchIng = true;
-                            returnObject.ingrediantsMatched.push(ingrediant)
-                        }
-                    })
-                }
-
-                if (areThereCategoreis) {
-                    req.body.params["recipe_categoreis"].forEach(function(category)   {
-                        if (element['category'] == category.toLowerCase()) {
-                            //console.log('match')
-                            
-                            recepiesWithCategories.push(element)
-                            returnObject.filterMatchCat = true;
-                            returnObject.categoriesMatched.push(category)
-                        }
-                    });
-                }
-
-                searchQMatch.push(element) //regardless of match of category or ingredient add it this array
-
-            });
-
-        }).then(function () {
-            let returnA = []
-            if (recepiesWithCategories.length != 0) {
-                recepiesWithCategories.forEach(function(cat){
-                    returnA.push(cat)
-                })
-            }
-            if (withIngre.length != 0) {
-                withIngre.forEach(function(ingre){
-                    returnA.push(ingre)
-                })
-            }
-            if (returnA.length != 0) {
-                returnA.forEach(function (prospect) {
-                    if(returnObject.recipes.length == 0){
-                        returnObject.recipes.push(prospect)
-                    }
-                    else{
-                        returnObject.recipes.forEach(function (element) {
-                            if(element.recipe_id == prospect.recipe_id){
-                                console.log('already in return set')
-                                return
-                            }
-                            else{
-                                console.log('unique item added')
-                                returnObject.recipes.push(prospect)
-                            }
-                        })
-                    }
-                })
-                //returnObject.recipes = returnA;
-                res.status(200)
-                res.send(JSON.stringify(returnObject))
-            }
-            else {
-                searchQMatch.forEach(function (prospect) {
-                    //console.log(prospect)
-                    if(returnObject.recipes.length == 0){
-                        returnObject.recipes.push(prospect)
-                    }
-                    else{
-                        returnObject.recipes.forEach(function (element) {
-                            if(element.recipe_id == prospect.recipe_id){
-                                return
-                            }
-                            else{
-                                returnObject.recipes.push(prospect)
-                            }
-                        })
-                    }
-                    
-                })
-                //returnObject.recipes = searchQMatch
-                res.status(200)
-                res.send(JSON.stringify(returnObject))
-            }
-
-        })
-        */
        let returnObject = {
         recipes: [],
         recipe_count: 0,
@@ -262,12 +138,6 @@ router.post('/', (req, res) => {
                 }
             })
         }
-
-
-
-
-        
-        
 
     } catch (exception) {
         res.status(500)
