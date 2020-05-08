@@ -12,4 +12,4 @@
 
 ### notes
 
-Right now url are set up to work on heroku so the app would not run on localhost. 
+Right now url and database access are set up to work on heroku so the app would not run on localhost. 
