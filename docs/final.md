@@ -10,6 +10,10 @@ Sarah Young (syoung20)
 Nicholas Kon (Nikon-knon)
 Tinsae Erkailo (tinnytintin10)
 
+# Targeted users 
+Anyone looking for a recipes page where you can add information about your pantry information and filter through recipes given specific ingredients and categories.
+
+
 # User Interface
 ## Homepage
 The homepage is where users can search for recipes. At the top there is a navbar providing options including 'create a recipe', 'my acccount', 'login', and 'log out', based on whether the current user is logged in. 
@@ -370,6 +374,12 @@ We are using PostgreSQL for our database. The database is made up of the followi
 # Division of Labor
 
 Tinsae worked on the home page and create a recipe front end. He also worked on the /search and /recipe endpoints to implement searching and the process of adding a recipe to our database.  
+
+Nick worked on the Recipe, Login and Signup pages. Including work on the respective html/css and js/ts frontend pages, and backend database functions and endpoints for /recipes and /account. In them worked on functions for login a user, signup a new user, read a recipe from the db, add ingredients to the grocery list db table. In addition worked on database functions to add recipes to the db table. 
+
+# Features to complete
+Originaly we wanted to also include features to be able to see tags and comments on recipes. Even being able to filter through tags too in addition to ingredients and categories. Another feature we wanted implemente too, would be the ability to automatically see recipes that you could complete with just ingredients in your pantry. With more time of in a future implementation, we would look into adding those features to the app, in addition to also implementing a more secured autenthication and logged in status system
+
 
 # Conclusion
 
