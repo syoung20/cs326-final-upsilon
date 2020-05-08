@@ -206,10 +206,10 @@ async function loadAccountData() {
         var catId : string = recipeCategories[i]["id"];
         var title : string = recipeCategories[i]["title"];
         var img : string;
-        if (recipeCategories[i]["img"] == "") { 
+        if (recipeCategories[i]["img"] == '""' || recipeCategories[i]["img"] == "") { 
             img = "./images/missing_img.png";
         } else {img = recipeCategories[i]["img"];}
-        var html : string = '<div id="' + catId + '" class="recipe-cat m-3"><h3 class="recipe-title">' + title + '</h3><img class="recipe-img" src="' + img + '"></div>';
+        var html : string = '<div id="' + catId + '" class="recipe-cat m-3"><h3 class="recipe-title">' + title + '</h3><img class="recipe-img" src=' + img + '></div>';
         $(html).insertBefore(recipebook.find(".add-category"));
     }
     numRecip = recipeCategories.length;
@@ -228,10 +228,10 @@ async function loadRecipeCategory(id) {
         if (recipeId != "") {
             var recipeTitle : string = recipes[i]["recipeTitle"];
             var recipeImg : string;
-            if (recipes[i]["recipeImg"] == "") { 
+            if (recipes[i]["recipeImg"] == '""' || recipes[i]["recipeImg"] == "") { 
                 recipeImg = "./images/missing_img.png";
             } else {recipeImg = recipes[i]["recipeImg"];}
-            var html : string = '<div id="' + recipeId + '" class="recipe m-3"><h3 class="recipe-title">' + recipeTitle + '</h3><img class="recipe-img" src="' + recipeImg + '"></div>';
+            var html : string = '<div id="' + recipeId + '" class="recipe m-3"><h3 class="recipe-title">' + recipeTitle + '</h3><img class="recipe-img" src=' + recipeImg + '></div>';
             recipeCat.children().first().append(html)
         }
     }

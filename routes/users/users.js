@@ -17,10 +17,17 @@ router.post('/read', function (req, res) {
         console.log(res);
         for (var i = 0; i < res.length; i++) {
             var categoryData = res[i]["row"].split(',');
+            var imgstr;
+            if (categoryData.length > 3) {
+                imgstr = categoryData[2] + "," + categoryData[3].slice(0, categoryData[3].length - 1);
+            }
+            else {
+                imgstr = categoryData[2].slice(0, categoryData[2].length - 1);
+            }
             var category = {
                 'id': categoryData[0].slice(1),
                 'title': categoryData[1].replace(/\"/g, ''),
-                'img': categoryData[2].slice(0, categoryData[2].length - 1)
+                'img': imgstr
             };
             recipeCategories.push(category);
         }
@@ -197,10 +204,17 @@ router.post('/recipebook/cat/read', function (req, res) {
         title = res[0]["category"];
         for (var i = 1; i < res.length; i++) {
             var recipeData = res[i]["row"].split(',');
+            var imgstr;
+            if (recipeData.length > 3) {
+                imgstr = recipeData[2] + "," + recipeData[3].slice(0, recipeData[3].length - 1);
+            }
+            else {
+                imgstr = recipeData[2].slice(0, recipeData[2].length - 1);
+            }
             var recipe = {
                 recipeId: recipeData[0].slice(1),
                 recipeTitle: recipeData[1].replace(/\"/g, ''),
-                recipeImg: recipeData[2].slice(0, recipeData[2].length - 1)
+                recipeImg: imgstr
             };
             recipes.push(recipe);
             console.log(recipe);
