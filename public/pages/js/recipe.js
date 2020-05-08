@@ -86,6 +86,7 @@ if (index != -1){
 
 
 function loadRecipe(recid) {
+    console.log(recid)
     recipeRead(recid);
     recipeIngredients(recid);
     recipeInstructions(recid);
@@ -167,14 +168,15 @@ function recipeIngredients(recid) {
             .then((data) => {
                 if (data != null){
                     var arrayIng = [];
-                    for (let i = 0; i < data.ingredients.length; i++){
-                        arrayIng.push(data.ingredients[i]);
-                    }
-                    ingredients.innerHTML = listPopulation(arrayIng);
+                    var arrayQuants = [];
+                        for (let i = 0; i < data.ingredients.length; i++){
+                            arrayIng.push(data.ingredients[i]);
+                            arrayQuants.push(data.quantities[i]);
+                        }
+                        ingredients.innerHTML = listPopulationTwo(arrayIng, arrayQuants);
                 }
             })
 }
-
 
 //helper functions 
 function listPopulation(listArray) {
@@ -182,6 +184,15 @@ function listPopulation(listArray) {
     listRef = "";
     for(i = 0; i < listArray.length; i++){
         listRef = listRef + "<li>" + listArray[i] + "</li>";
+    }
+    return listRef;
+}
+
+function listPopulationTwo(listArray, secondArray) {
+    var i;
+    listRef = "";
+    for(i = 0; i < listArray.length; i++){
+        listRef = listRef + "<li>" + secondArray[i] + " " + "<strong>" + listArray[i] + "</strong>" + "</li>";
     }
     return listRef;
 }

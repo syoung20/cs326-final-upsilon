@@ -164,19 +164,17 @@ class Database {
 		console.log("put: userId = " + userId + ", title: " + title + ", img: " + img.slice(0, 10) + ", prep: " + prep + ", cook: " + cook + ", servings: " + servings);
 		try {
 			let result = await this.db.one({ text: "INSERT INTO recipes VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7) RETURNING recipe_id", values: [userId, title, img, prep, cook, servings, description] });
-			console.log(result);
 			for (let i: number = 0; i < instructions.length; i++) {
 				if (instructions[i] != "") {
-					console.log(i + instructions[i])
 					await this.db.none({ text: "INSERT INTO instructions VALUES (DEFAULT, $1, $2, $3)", values: [result.recipe_id, instructions[i], (i + 1)] });
 				}
 			}
 			for (let i: number = 0; i < ingredients.length; i++) {
 				if (ingredients[i] != "") {
-					console.log(i + ingredients[i])
 					await this.db.none({ text: "INSERT INTO ingredients VALUES (DEFAULT, $1, $2, $3, $4)", values: [result.recipe_id, ingredients[i], quantities[i], (i + 1)] });
 				}
 			}
+			return result;
 		} catch (err) {
 			console.log(err);
 			return null;
@@ -197,7 +195,7 @@ class Database {
 	public async getRecipeIngredients(recipeId: number): Promise<object | null> {
 		console.log("get: recipeId = " + recipeId);
 		try {
-			let result = await this.db.many({ text: "SELECT (ingredient) FROM ingredients WHERE recipe_id = $1 ORDER BY order_num ASC LIMIT 100", values: [recipeId] });
+			let result = await this.db.many({ text: "SELECT * FROM ingredients WHERE recipe_id = $1 ORDER BY order_num ASC LIMIT 100", values: [recipeId] });
 			return result;
 		} catch {
 			console.log("error getting recipe ingredients")

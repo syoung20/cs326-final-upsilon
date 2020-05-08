@@ -82,13 +82,15 @@ router.post('/ingredients', function (req, res) {
 
     */
     var recIngredients = [];
+    var recQuantities = [];
     var allIngredients = database.getRecipeIngredients(recipeID).then(function (res) {
         for (var i = 0; i < res.length; i++) {
             recIngredients.push(res[i].ingredient);
+            recQuantities.push(res[i].quantity);
         }
     });
     Promise.all([allIngredients]).then(function () {
-        res.write(JSON.stringify({ 'ingredients': recIngredients }));
+        res.write(JSON.stringify({ 'ingredients': recIngredients, 'quantities': recQuantities }));
         res.end();
     });
 });

@@ -260,13 +260,11 @@ var Database = /** @class */ (function () {
                         return [4 /*yield*/, this.db.one({ text: "INSERT INTO recipes VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7) RETURNING recipe_id", values: [userId, title, img, prep, cook, servings, description] })];
                     case 2:
                         result = _a.sent();
-                        console.log(result);
                         i = 0;
                         _a.label = 3;
                     case 3:
                         if (!(i < instructions.length)) return [3 /*break*/, 6];
                         if (!(instructions[i] != "")) return [3 /*break*/, 5];
-                        console.log(i + instructions[i]);
                         return [4 /*yield*/, this.db.none({ text: "INSERT INTO instructions VALUES (DEFAULT, $1, $2, $3)", values: [result.recipe_id, instructions[i], (i + 1)] })];
                     case 4:
                         _a.sent();
@@ -280,7 +278,6 @@ var Database = /** @class */ (function () {
                     case 7:
                         if (!(i < ingredients.length)) return [3 /*break*/, 10];
                         if (!(ingredients[i] != "")) return [3 /*break*/, 9];
-                        console.log(i + ingredients[i]);
                         return [4 /*yield*/, this.db.none({ text: "INSERT INTO ingredients VALUES (DEFAULT, $1, $2, $3, $4)", values: [result.recipe_id, ingredients[i], quantities[i], (i + 1)] })];
                     case 8:
                         _a.sent();
@@ -288,7 +285,7 @@ var Database = /** @class */ (function () {
                     case 9:
                         i++;
                         return [3 /*break*/, 7];
-                    case 10: return [3 /*break*/, 12];
+                    case 10: return [2 /*return*/, result];
                     case 11:
                         err_4 = _a.sent();
                         console.log(err_4);
@@ -331,7 +328,7 @@ var Database = /** @class */ (function () {
                         _b.label = 1;
                     case 1:
                         _b.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, this.db.many({ text: "SELECT (ingredient) FROM ingredients WHERE recipe_id = $1 ORDER BY order_num ASC LIMIT 100", values: [recipeId] })];
+                        return [4 /*yield*/, this.db.many({ text: "SELECT * FROM ingredients WHERE recipe_id = $1 ORDER BY order_num ASC LIMIT 100", values: [recipeId] })];
                     case 2:
                         result = _b.sent();
                         return [2 /*return*/, result];

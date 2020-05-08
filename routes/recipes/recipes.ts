@@ -89,6 +89,7 @@ router.post('/instructions', (req, res) => {
     let recInstructions : string[] = []
 
     let allInstructions = database.getRecipeInstructions(recipeID).then(function (res){
+
         for (let i = 0; i < res.length; i++) {
             recInstructions.push(res[i].instruction);
         }
@@ -108,14 +109,17 @@ router.post('/ingredients', (req, res) => {
 
     */
    let recIngredients : string[] = []
+   let recQuantities : string[] = []
+
     let allIngredients = database.getRecipeIngredients(recipeID).then(function (res){
         for (let i = 0; i < res.length; i++) {
             recIngredients.push(res[i].ingredient);
+            recQuantities.push(res[i].quantity);
         }
 
     });
     Promise.all([allIngredients]).then(function() {
-        res.write(JSON.stringify({'ingredients' : recIngredients}));
+        res.write(JSON.stringify({'ingredients' : recIngredients, 'quantities' : recQuantities}));
         res.end();
     });
 })
