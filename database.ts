@@ -377,6 +377,7 @@ class Database {
 			return result;
 		} catch (err) {
 			console.log("unable to add grocery list category");
+			return null;
 		}
 	}
 

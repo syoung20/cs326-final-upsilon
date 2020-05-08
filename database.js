@@ -732,7 +732,7 @@ var Database = /** @class */ (function () {
                     case 2:
                         err_22 = _a.sent();
                         console.log("unable to add grocery list category");
-                        return [3 /*break*/, 3];
+                        return [2 /*return*/, null];
                     case 3: return [2 /*return*/];
                 }
             });
