@@ -14,6 +14,9 @@ var ingredients = document.getElementById("recipeIngredients");
 var instructions = document.getElementById("recipeInstructions");
 var image = document.getElementById("recImage");
 
+var ingredientsArray = [];
+var quantitiesArray = [];
+
 //add recipe
 var catMod = document.getElementById("categoryModal");
 var addToRecipebook = document.getElementById("recipeAdd");
@@ -35,24 +38,33 @@ add.onclick = function() {
     recipeMod.style.display = "block";
 }
 //add to grocery list button
-/*
+
 var addToGroceries = document.getElementById("buttonAdd");
 var groceriesMod = document.getElementById("recoverModal");
+var groceriesModTwo = document.getElementById('failModal');
 var close = document.getElementsByClassName("close")[0];
+
 if(addToGroceries != null){
     addToGroceries.onclick = function() {
-        groceriesMod.style.display = "block";
+        var userid = localStorage.getItem('user_id');
+        groceryAddCat(userid);
     }
 }
+
+
+
+
 if(close != null){
     close.onclick = function() {
         groceriesMod.style.display = "none";
+        groceriesModTwo.style.display = "none";       
         recipeMod.style.display = "none";
         catMod.style.display = "none";
     }
-}*/
+}
+
 $(".modal .close").click(function() {
-    //groceriesMod.style.display = "none";
+    groceriesMod.style.display = "none";
         recipeMod.style.display = "none";
         catMod.style.display = "none";
 });
@@ -61,16 +73,16 @@ $("body").click(function(event) {
     catMod.style.display = "none";
   } else if (event.target.id == "recipeModal"){
     recipeMod.style.display = "none";
-  //} else if (event.target.id == "recoverModal") {
-    //groceriesMod.style.display = "none";
+  } else if (event.target.id == "recoverModal") {
+    groceriesMod.style.display = "none";
   }
 });
 
 if (localStorage.getItem('user_id') == null) {
-    //addToGroceries.style.display = "none";
+    addToGroceries.style.display = "none";
     addToRecipebook.style.display = "none";
 } else {
-    //addToGroceries.style.display = "block";
+    addToGroceries.style.display = "block";
     addToRecipebook.style.display = "block";
 }
 
@@ -81,15 +93,96 @@ if (index != -1){
     loadRecipe(recipeID);
 }
 
-
-
-
-
 function loadRecipe(recid) {
     console.log(recid)
     recipeRead(recid);
     recipeIngredients(recid);
     recipeInstructions(recid);
+}
+
+function groceryAddCat(userid){
+    var url = "https://cs326-final-upsilon.herokuapp.com/users/grocery/cat/add";
+    var name = title.innerHTML;
+    var req = {'userId' : userid, 'category' : name};
+    console.log(req);
+    var resp = fetch(url,
+        {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(req)
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                if (data.error != 'true'){
+                    groceryAddItems(data.categoryId, data.userId);
+                    groceriesMod.style.display = "block";
+                }
+                else {
+                    groceriesModTwo.style.display = "block";
+                }
+            })
+}
+
+function groceryAddItems(grocatId, userId) {
+    var url = "https://cs326-final-upsilon.herokuapp.com/users/grocery/cat/edit";
+    var name = title.innerHTML;
+    var req = {'userId' : userId, 'categoryId' : grocatId, 'title' : name, 'ingredients' : ingredientsArray};
+    var resp = fetch(url,
+        {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(req)
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                if (data != null){
+                    console.log(data);
+                }
+            })
+}
+
+function recipeRead(recid) {
+    var url = "https://cs326-final-upsilon.herokuapp.com/recipes/read";
+    var req = {'rid' : recid};
+    var resp = fetch(url,
+        {
+            method: 'POST',
+            headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': "application/json"
+                },
+            body: JSON.stringify(req)
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                if (data != null){
+                    title.innerHTML = data.title; 
+                    description.innerHTML = data.description;
+                    preptime.innerHTML = data.prep + "mins";
+                    cooktime.innerHTML = data.cook + "mins";
+                    totaltime.innerHTML = totalTime(data.prep, data.cook);
+                    servings.innerHTML = data.servings;
+                    image.src = data.image;
+                }
+            })
 }
 
 
@@ -174,6 +267,10 @@ function recipeIngredients(recid) {
                             arrayQuants.push(data.quantities[i]);
                         }
                         ingredients.innerHTML = listPopulationTwo(arrayIng, arrayQuants);
+                        ingredientsArray = arrayIng;
+                        quantitiesArray = arrayQuants;
+                        console.log(ingredientsArray);
+                        console.log(quantitiesArray);
                 }
             })
 }

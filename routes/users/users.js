@@ -126,10 +126,16 @@ router.post('/grocery/cat/add', function (req, res) {
     var cat = req.body.category;
     var catId;
     var addCat = database.addGroceryCategory(userId, cat).then(function (result) {
-        console.log("add cat response: " + JSON.stringify(result));
-        catId = result["grocerylist_category_id"];
-        res.write(JSON.stringify({ 'userId': userId, 'categoryId': catId, 'category': cat }));
-        res.end();
+        if (result != null) {
+            console.log("add cat response: " + JSON.stringify(result));
+            catId = result["grocerylist_category_id"];
+            res.write(JSON.stringify({ 'error': 'false', 'userId': userId, 'categoryId': catId, 'category': cat }));
+            res.end();
+        }
+        else {
+            res.write(JSON.stringify({ 'error': 'true' }));
+            res.end();
+        }
     });
 });
 router.post('/grocery/cat/del', function (req, res) {
